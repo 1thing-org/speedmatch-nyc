@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from '../styles/HomePage.module.css';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Navbar';
 import HeroWrapper from '../components/HeroWrapper';
 import { FaSquareXTwitter, FaTiktok, FaInstagram, FaSquareFacebook } from 'react-icons/fa6';
 

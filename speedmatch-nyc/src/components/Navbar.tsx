@@ -8,7 +8,7 @@ type NavBarProps = {
 	buttons?: React.ReactNode;
 };
 
-function NavBar({ bgColor = 'blue', buttons }: NavBarProps) {
+function Navbar({ bgColor = 'blue', buttons }: NavBarProps) {
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	return (
@@ -33,4 +33,4 @@ function NavBar({ bgColor = 'blue', buttons }: NavBarProps) {
 	);
 }
 
-export default NavBar;
+export default Navbar;
