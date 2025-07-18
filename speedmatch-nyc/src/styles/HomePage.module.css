@@ -1,6 +1,3 @@
-
-
-
 .coverImageWrapper {
   position: relative;
 	margin-top: 2rem;
@@ -21,8 +18,10 @@
 	margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  align-items: start;
+  gap: 1.5rem;
+  align-items: center;
+	justify-content: center;
+	text-align: center; 
   padding: 1rem;
 }
 
@@ -55,7 +54,7 @@
   padding: 1rem;
   border-radius: 4px;
   border: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .signupButton {
@@ -72,6 +71,7 @@
 .socialMedia {
 	margin-top: 2rem;
 	text-align: center;
+	margin-bottom: 2rem;
 }
 
 .socialMedia p {
@@ -101,42 +101,43 @@
 	.navButton {
   display: inline-block;
   padding: 0.6rem 1.5rem;
-  margin-left: 2rem;
-  border: 1px solid currentColor;
-  color: inherit;
+
+	background-color: white; 
+	color: black; 
+	font-weight: 400;
   text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3 transform 0.2s ease;
 }
 
-.navButton a:hover {
-  background-color: currentColor;
-  color: #ffffff;
+.navButton:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
 }
 	.coverImageWrapper {
-    height: auto; /* let height adapt to image size */
-    margin-top: -15px; /* keep your negative margin if needed */
+    height: auto;
+    margin-top: -15px;
   }
 
   .coverImage {
     width: 100%;
     max-height: 480px;
-    object-fit: contain; /* desktop: don’t crop, contain within 500px height */
+    object-fit: contain;
   }
 
   .headline {
     display: grid;
-    grid-template-columns: 70% 30%; /* side by side on desktop */
+    grid-template-columns: 70% 30%;
     gap: 1rem;
     align-items: center;
   }
 
   .headline p {
-    font-size: 40px; /* bigger text for desktop */
+    font-size: 40px;
+		text-align: left;
   }
 
   .signup {
-    flex-direction: column; /* keep vertical but on the side */
+    flex-direction: column;
     width: 90%;
   }
 
@@ -145,4 +146,27 @@
     height: 3.5rem;
     font-size: 1.2rem;
   }
+
+	@media (min-width: 1024px) {
+  .socialMedia {
+    margin-top: 0; 
+    text-align: right;
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
+		align-items: center;
+  }
+
+	.socialMedia p {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+	.socialIcon svg {
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+}
+}
+
 }

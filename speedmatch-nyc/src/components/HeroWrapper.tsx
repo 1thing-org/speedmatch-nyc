@@ -7,9 +7,7 @@ type HeroWrapperProps = {
 function HeroWrapper({ children }: HeroWrapperProps) {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.borderLine}></div>
       <div className={styles.heroContent}>{children}</div>
-      <div className={styles.borderLine}></div>
     </div>
   );
 }
