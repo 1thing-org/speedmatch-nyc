@@ -19,10 +19,3 @@ body {
   font-size: 1.5rem;
 }
 
-.hamburger {
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}

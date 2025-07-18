@@ -1,7 +1,5 @@
 .wrapper {
   position: relative;
-  z-index: 1;
-  /* background-color: #003cff; */
   color: white;
   padding-top: 80px;
   overflow: visible; 
@@ -12,7 +10,7 @@
   height: 0.5px;
   background-color: white;
   position: relative;
-  z-index: 2; 
+
 }
 
 .heroContent {
@@ -21,6 +19,5 @@
   align-items: flex-start; 
   padding: 0.5rem 1rem;
   position: relative;
-  z-index: 2;
 }
 

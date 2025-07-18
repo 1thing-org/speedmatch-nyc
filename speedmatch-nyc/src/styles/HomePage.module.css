@@ -1,67 +1,36 @@
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #003cff;
-  color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  z-index: 1000;
-}
 
-.navLinks a {
-  display: inline-block;
-  padding: 0.6rem 1.5rem;
-  margin-left: 2rem;
-  border: 1px solid #fff;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.navLinks a:hover {
-  background-color: #fff;
-  color: #003cff; 
-}
 
 
 .coverImageWrapper {
   position: relative;
-  margin-top: -15px; 
-  z-index: 0; 
+	margin-top: 2rem;
   width: 100%;
-  overflow: hidden;
-  height: auto;
+	height: auto;
+  overflow: hidden; 
 }
 
 .coverImage {
+  display: block; 
   width: 100%;
-  max-height: 500px;
-  object-fit: contain;
+  max-height: 300px;
+  object-fit: contain; 
 }
 
+
 .headline {
-  display: grid;              
-  grid-template-columns: 70% 30%;
-	gap: 1rem;
-	align-items: start;
-  max-width: none; 
-  margin: 0;
-  padding: 0 1rem;
+	margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem;
 }
 
 .headline p {
-  font-size: 40px;
-  line-height: 1;
-	color: white;
-	text-align: left;
-	justify-self: start;
-	padding: 0.8rem;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  text-align: left;
+  color: white;
 }
 
 .highlight {
@@ -71,16 +40,15 @@
 
 .signup {
   display: flex;
-	flex-direction: column; 
+  flex-direction: column;
   gap: 0.8rem;
-	padding: 1rem;
-	width: 90%;
+  width: 100%;
 }
 
 .signup input,
-.startButton {
+.signupButton {
   height: 3.5rem; 
-  line-height: 1.2; /* 确保文字垂直居中 */
+  line-height: 1.3;
 }
 
 .signup input {
@@ -90,7 +58,7 @@
   font-size: 1rem;
 }
 
-.startButton {
+.signupButton {
   background-color: #3cff00;
   color: black;
 	font-size: 1.5rem;
@@ -99,4 +67,82 @@
   border-radius: 4px;
   padding: 0.8rem 1.5rem;
   cursor: pointer;
+}
+
+.socialMedia {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+.socialMedia p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.socialIcon {
+	display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.socialIcon svg {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.socialIcon svg:hover {
+  transform: scale(1.2);
+      
+}
+
+
+@media (min-width: 1024px) {
+	.navButton {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  margin-left: 2rem;
+  border: 1px solid currentColor;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navButton a:hover {
+  background-color: currentColor;
+  color: #ffffff;
+}
+	.coverImageWrapper {
+    height: auto; /* let height adapt to image size */
+    margin-top: -15px; /* keep your negative margin if needed */
+  }
+
+  .coverImage {
+    width: 100%;
+    max-height: 480px;
+    object-fit: contain; /* desktop: don’t crop, contain within 500px height */
+  }
+
+  .headline {
+    display: grid;
+    grid-template-columns: 70% 30%; /* side by side on desktop */
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .headline p {
+    font-size: 40px; /* bigger text for desktop */
+  }
+
+  .signup {
+    flex-direction: column; /* keep vertical but on the side */
+    width: 90%;
+  }
+
+  .signup input,
+  .startButton {
+    height: 3.5rem;
+    font-size: 1.2rem;
+  }
 }
