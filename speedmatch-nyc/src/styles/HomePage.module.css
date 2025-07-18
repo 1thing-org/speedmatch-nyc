@@ -147,26 +147,6 @@
     font-size: 1.2rem;
   }
 
-	@media (min-width: 1024px) {
-  .socialMedia {
-    margin-top: 0; 
-    text-align: right;
-		display: flex;
-		flex-direction: row;
-		gap: 0.5rem;
-		align-items: center;
-  }
 
-	.socialMedia p {
-    margin: 0;
-    font-size: 1rem;
-  }
-
-	.socialIcon svg {
-	width: 25px;
-	height: 25px;
-	cursor: pointer;
-}
-}
 
 }

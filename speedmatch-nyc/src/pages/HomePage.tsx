@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from '../styles/HomePage.module.css';
 import NavBar from '../components/Navbar';
 import HeroWrapper from '../components/HeroWrapper';
+import heroStyles from '../styles/HeroWrapper.module.css';
 import { FaSquareXTwitter, FaTiktok, FaInstagram, FaSquareFacebook } from 'react-icons/fa6';
 
 function HomePage() {
@@ -35,9 +36,9 @@ function HomePage() {
 			<HeroWrapper>
 				<p style={{ color: 'white' }}>Updated: July 17, 2025</p>
 				{isDesktop && (
-					<div className={styles.socialMedia}>
+					<div className={heroStyles.socialMedia}>
 						<p>Follow us on</p>
-						<div className={styles.socialIcon}>
+						<div className={heroStyles.socialIcon}>
 							<FaSquareXTwitter />
 							<FaTiktok />
 							<FaInstagram />

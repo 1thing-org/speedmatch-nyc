@@ -1,4 +1,4 @@
-import styles from '../styles/NavBar.module.css';
+import styles from '../styles/Navbar.module.css';
 import logo from '../assets/logo.svg';
 import { useState } from 'react';
 import Menu from './Menu';
