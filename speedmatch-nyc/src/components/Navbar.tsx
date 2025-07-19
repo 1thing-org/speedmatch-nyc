@@ -1,6 +1,6 @@
 import styles from '../styles/Navbar.module.css';
 import logo from '../assets/logo.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Menu from './Menu';
 
 type NavBarProps = {
@@ -10,6 +10,17 @@ type NavBarProps = {
 
 function Navbar({ bgColor = 'blue', buttons }: NavBarProps) {
 	const [menuOpen, setMenuOpen] = useState(false);
+
+	// Close menu when screen size is desktop
+	useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && menuOpen) {
+        setMenuOpen(false);
+      }
+    };
+	window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [menuOpen]); 
 
 	return (
 		<nav className={`${styles.navbar} ${styles[bgColor]}`}>

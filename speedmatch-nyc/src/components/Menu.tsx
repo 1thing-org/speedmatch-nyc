@@ -7,7 +7,6 @@ type MenuProps = {
 const links = [
   { text: 'Explore Candidates', href: '' },
   { text: 'About This Project', href: '' },
-  { text: 'Donate', href: '' },
   { text: 'Contact', href: '' },
 ];
 
