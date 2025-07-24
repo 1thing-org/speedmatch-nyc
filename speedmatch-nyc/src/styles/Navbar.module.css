@@ -1,6 +1,7 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  background-color: #003cff;
   align-items: center;
   padding: 1rem;
   position: fixed;
@@ -16,15 +17,6 @@
   display: none;
 }
 
-.blue {
-  background-color: #003cff;
-  color: white;
-}
-
-.white {
-  background-color: #ffffff;
-  color: #003cff;
-}
 
 .logo img {
   height: 40px;
@@ -36,6 +28,7 @@
   cursor: pointer;
   z-index: 3000;
   position: relative;
+  color: white;
 }
 
 @media (min-width: 1024px) {

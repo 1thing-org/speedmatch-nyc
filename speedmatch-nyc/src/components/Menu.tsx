@@ -7,7 +7,7 @@ type MenuProps = {
 
 const links = [
   { text: 'Explore Candidates', to: '/explore' },
-  { text: 'About This Project', to: '' },
+  { text: 'About This Project', to: '/about' },
   { text: 'Contact', to: '' },
 ];
 

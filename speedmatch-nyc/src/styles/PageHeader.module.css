@@ -4,11 +4,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90px;
+  height: 85px;
   margin-top: 80px;
-  border-top: 0.5px solid white;
-  border-bottom: 0.5px solid white;
+  border-top: 1px solid var(--border-color, white);
+  border-bottom: 1px solid var(--border-color, white);
 }
+
+
 
 .container {
   width: 100%;

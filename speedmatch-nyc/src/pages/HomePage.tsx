@@ -20,13 +20,12 @@ function HomePage() {
 		<div className={styles.homePage}>
 			{/* Navbar */}
 			<NavBar
-				bgColor="blue"
 				buttons={
 					<>
 						<Link to="/explore" className="navButton">
 							Explore Candidates
 						</Link>
-						<Link to="" className="navButton">
+						<Link to="/about" className="navButton">
 							About This Project
 						</Link>
 						<Link to="" className="navButton">

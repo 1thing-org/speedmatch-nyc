@@ -9,13 +9,12 @@ function CandidatesPage() {
 		<div className={styles.candidatesPage}>
 			{/* Navbar */}
 			<Navbar
-				bgColor="blue"
 				buttons={
 					<>
 						<Link to="/" className="navButton">
 							Homepage
 						</Link>
-						<Link to="" className="navButton">
+						<Link to="/about" className="navButton">
 							About This Project
 						</Link>
 						<Link to="" className="navButton">
@@ -25,7 +24,7 @@ function CandidatesPage() {
 				}
 			/>
 
-			<PageHeader title="Explore Candidates" />
+			<PageHeader title="Explore Candidates"/>
 
 			{/* Candidates Grid */}
 				<div className={styles.candidates}>
