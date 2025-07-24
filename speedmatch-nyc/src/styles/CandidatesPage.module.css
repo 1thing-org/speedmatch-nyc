@@ -10,7 +10,7 @@
     display: grid;
     overflow: hidden;
     justify-content: center;
-    grid-template-columns: repeat(2, 216px);
+    grid-template-columns: repeat(auto-fit, minmax(143px, 1fr));
     width: 100%;
     gap: 1rem;
     margin-top: 0.5rem;
@@ -20,46 +20,34 @@
 }
 
 .candidateCard {
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
     margin-top: 1rem;
-
 }
 
 .candidateImage {
-    height: 216px;
+    height: auto;
     width:100%;
-
-    background-color: white;
+    display: block;
 }
 
 .candidateInfo {
     padding-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    padding-left: 0.5rem;
 }
 
 .candidateName {
     font-size: 24px;
     font-weight: 600;
     color: white;
-
     line-height: 87%;
 }
 
 .party {
     font-size: 16px;
-    color:
-        #D9D9D9;
+    color:#D9D9D9;
 
 }
 
 .visitLink {
-    color:
-        #3cff00;
+    color: #3cff00;
     text-align: left;
     font-weight: 500;
     line-height: 87%;
@@ -69,11 +57,14 @@
 
 @media (min-width: 768px) {
     .candidates {
-        grid-template-columns: repeat(3, 216px);
-        /* 3 columns */
+        grid-template-columns: repeat(3, 216px); /* 3 columns */
         gap: 1.5rem;
         padding-left: 40px;
         padding-right: 40px;
+    }
+
+     .candidateImage {
+        background-color: white;
     }
 }
 
@@ -85,6 +76,10 @@
         padding-left: 60px;
         padding-right: 60px;
     }
+
+     .candidateImage {
+        background-color: white;
+    }
 }
 
 /* Large Desktop - 1280px and up */
@@ -92,4 +87,9 @@
     .candidates {
         grid-template-columns: repeat(5, 216px);
     }
+
+     .candidateImage {
+        background-color: white;
+    }
 }
+
