@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import styles from '../styles/Menu.module.css';
 
 type MenuProps = {
@@ -5,9 +6,9 @@ type MenuProps = {
 };
 
 const links = [
-  { text: 'Explore Candidates', href: '' },
-  { text: 'About This Project', href: '' },
-  { text: 'Contact', href: '' },
+  { text: 'Explore Candidates', to: '/explore' },
+  { text: 'About This Project', to: '' },
+  { text: 'Contact', to: '' },
 ];
 
 function Menu({ onClose }: MenuProps) {
@@ -15,9 +16,10 @@ function Menu({ onClose }: MenuProps) {
     <div className={styles.overlay}>
       <div className={styles.menuLinks}>
         {links.map((link, idx) => (
-          <a key={idx} href={link.href} onClick={onClose}>
+          <Link 
+            key={idx} to={link.to} onClick={onClose}>
             {link.text}
-          </a>
+          </Link>
         ))}
       </div>
     </div>

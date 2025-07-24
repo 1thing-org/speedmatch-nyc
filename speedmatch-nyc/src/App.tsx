@@ -1,12 +1,19 @@
-import './App.css'
-import HomePage from './pages/HomePage'
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import HomePage from './pages/HomePage';
+import CandidatesPage from './pages/CandidatesPage';
+
 
 function App() {
 
   return (
-    <>
-      <HomePage />
-    </>
+    
+    <Router>
+      <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/explore" element={<CandidatesPage />} />
+      </Routes>
+    </Router>
   )
 }
 

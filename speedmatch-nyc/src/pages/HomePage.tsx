@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 import styles from '../styles/HomePage.module.css';
 import NavBar from '../components/Navbar';
 import HeroWrapper from '../components/HeroWrapper';
@@ -22,12 +23,15 @@ function HomePage() {
 				bgColor="blue"
 				buttons={
 					<>
-						<a className={styles.navButton} href="">
+						<Link to="/explore" className="navButton">
 							Explore Candidates
-						</a>
-						<a className={styles.navButton} href="">
+						</Link>
+						<Link to="" className="navButton">
 							About This Project
-						</a>
+						</Link>
+						<Link to="" className="navButton">
+							Contact Us
+						</Link>
 					</>
 				}
 			/>
@@ -53,10 +57,10 @@ function HomePage() {
 				<picture>
 					<source
 						media="(min-width: 1024px)"
-						srcSet="/images/candidates/desktop-all-candidates.png"
+						srcSet="/images/key-visual/desktop-all-candidates.png"
 					/>
 					<img
-						src="/images/candidates/mobile-all-candidates.png"
+						src="/images/key-visual/mobile-all-candidates.svg"
 						alt="Homepage Cover"
 						className={styles.coverImage}
 					/>

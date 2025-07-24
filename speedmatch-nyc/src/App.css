@@ -9,9 +9,23 @@
 body {
   font-family: 'Inter', sans-serif;
   line-height: 1.5;
-  background-color: #003cff;
-  color: white; 
   min-height: auto;
 }
 
 
+@media (min-width: 1024px) {
+	.navButton {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+	background-color: white; 
+	color: black; 
+	font-weight: 400;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3 transform 0.2s ease;
+  }
+
+  .navButton:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+  }
+}
