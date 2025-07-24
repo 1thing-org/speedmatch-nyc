@@ -1,0 +1,127 @@
+.contactPage {
+  min-height: 100vh;
+  background-color:
+    white;
+  --border-color: #003cff;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem 1rem;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.leftSection {
+  flex: 1;
+}
+
+
+
+.rightSection {
+  flex: 1;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: -4%;
+  margin-bottom: 2rem;
+  color: black;
+}
+
+.divider {
+  height: 1px;
+  background-color: #D9D9D9;
+  margin: 2rem 0rem 0rem 0rem;
+}
+
+/* Form Styles */
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+  margin-bottom: 0.5rem;
+}
+
+.input,
+.textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #fff;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #003cff;
+  background-color: white;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.sendButton {
+  background-color: #3CFF00; 
+  color: black;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-top: 1rem;
+}
+
+.sendButton:hover {
+  background-color: #00e600;
+  transform: scale(1.02);
+}
+
+/* Desktop Layout */
+@media (min-width: 768px) {
+  .container {
+    padding: 1.5rem 2rem 3rem 2rem;
+  }
+  
+  .contentWrapper {
+    flex-direction: row;
+    gap: 4rem;
+    align-items: flex-start;
+  }
+
+  .divider {
+    display: none;
+  }
+  
+  .description {
+    font-size: 20px;
+    margin-bottom: 2rem;
+  }
+  
+  .sendButton {
+    align-self: flex-start;
+    min-width: 300px;
+  }
+}

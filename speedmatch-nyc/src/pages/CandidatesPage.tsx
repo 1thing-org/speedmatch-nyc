@@ -17,7 +17,7 @@ function CandidatesPage() {
 						<Link to="/about" className="navButton">
 							About This Project
 						</Link>
-						<Link to="" className="navButton">
+						<Link to="/contact" className="navButton">
 							Contact Us
 						</Link>
 					</>

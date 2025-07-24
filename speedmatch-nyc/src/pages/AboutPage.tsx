@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import styles from "../styles/AboutPage.module.css";
 import Navbar from "../components/Navbar";
 import PageHeader from "../components/PageHeader";
-import { FaSquareXTwitter, FaTiktok, FaInstagram, FaSquareFacebook } from 'react-icons/fa6';
+import SocialMedia from '../components/SocialMedia';
 
 function Aboutpage() {
 	return (
@@ -16,7 +16,7 @@ function Aboutpage() {
 						<Link to="/explore" className="navButton">
 							Explore Candidates
 						</Link>
-						<Link to="" className="navButton">
+						<Link to="/contact" className="navButton">
 							Contact Us
 						</Link>
 					</>
@@ -95,28 +95,7 @@ function Aboutpage() {
 					{/* Follow Us On Social Media */}
 					<section className={styles.section}>
 						<h2 className={styles.sectionTitle}>Follow Us On Social Media</h2>
-						<div className={styles.socialMedia}>
-							<div className={styles.socialRow}>
-								<div className={styles.socialItem}>
-									<FaSquareFacebook className={styles.socialIcon} />
-									<span>Account</span>
-								</div>
-								<div className={styles.socialItem}>
-									<FaTiktok className={styles.socialIcon} />
-									<span>Account</span>
-								</div>
-							</div>
-							<div className={styles.socialRow}>
-								<div className={styles.socialItem}>
-									<FaInstagram className={styles.socialIcon} />
-									<span>Account</span>
-								</div>
-								<div className={styles.socialItem}>
-									<FaSquareXTwitter className={styles.socialIcon} />
-									<span>Account</span>
-								</div>
-							</div>
-						</div>
+						<SocialMedia />
 					</section>
 				</div>
 
