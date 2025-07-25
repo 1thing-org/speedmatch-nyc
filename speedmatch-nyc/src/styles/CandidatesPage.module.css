@@ -10,10 +10,10 @@
     display: grid;
     overflow: hidden;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(143px, 1fr));
-    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
+    max-width: 400px;
     gap: 1rem;
-    margin-top: 0.5rem;
+    margin: 0.5rem auto 0;
     padding-bottom: 2rem;
     padding-left: 20px;
     padding-right: 20px;
@@ -21,16 +21,17 @@
 
 .candidateCard {
     margin-top: 1rem;
+    height: 288px;
 }
 
 .candidateImage {
-    height: auto;
+    height: 188px;
     width:100%;
     display: block;
 }
 
 .candidateInfo {
-    padding-top: 1rem;
+    padding-top: clamp(0.7rem, 2vw, 1rem);
 }
 
 .candidateName {
@@ -54,13 +55,34 @@
     font-size: 18px;
 }
 
+@media (min-width: 400px) and (max-width: 559px) {
+    .candidates {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        max-width: 450px;
+    }
+
+    .candidateImage {
+        background-color: white; 
+    }
+}
+
+@media (min-width: 560px) and (max-width: 767px) {
+    .candidates {
+        grid-template-columns: repeat(3, 160px);
+        gap: 1.2rem;
+        max-width: none;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
 
 @media (min-width: 768px) {
     .candidates {
-        grid-template-columns: repeat(3, 216px); /* 3 columns */
+        grid-template-columns: repeat(3, 216px); 
         gap: 1.5rem;
         padding-left: 40px;
         padding-right: 40px;
+        max-width: none;
     }
 
      .candidateImage {
