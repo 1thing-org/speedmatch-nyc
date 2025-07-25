@@ -6,42 +6,48 @@ export const candidates: Candidate[] = [
     name: "Eric Adams",
     image: "/images/candidates-bg/eric-adams.svg",
     website: "https://eric2025.com/",
-    party: "Independent"
+    party: "Independent",
+    altText: "Black and white portrait of Eric Adams, smiling, wearing a light shirt."
   },
   {
     id: 2,
     name: "Andrew Cuomo",
     image: "/images/candidates-bg/andrew-cuomo.svg",
     website: "https://www.andrewcuomo.com/",
-    party: "Independent"
+    party: "Independent",
+    altText: "Black and white portrait of Andrew Cuomo in a suit, hands together, serious expression."
   },
   {
     id: 3,
     name: "Jean Anglade",
     image: "/images/candidates-bg/jean-anglade.svg",
     website: "https://www.anglade4mayorny25.com/",
-    party: "Independent"
+    party: "Independent",
+    altText: "Black and white portrait of Jean Anglade wearing a checkered shirt, slightly smiling."
   },
   {
     id: 4,
     name: "Irene Estrada", 
     image: "/images/candidates-bg/irene-estrada.svg",
     website: "https://www.facebook.com/groups/ireneestrada/about",
-    party: "Conservative Party"
+    party: "Conservative Party",
+    altText: "Black and white portrait of Irene Estrada smiling with long curly hair."
   },
     {
     id: 5,
     name: "Kyle Gutierrez",
     image: "/images/candidates-bg/kyle-gutierrez.svg", 
     website: "https://kyle4mayor.nyc/",
-    party: "Independent"
+    party: "Independent",
+    altText: "Black and white portrait of Kyle Gutierrez with long curly hair, mustache, and suit."
   },
   {
     id: 6,
     name: "Gowri Krishna",
     image: "/images/candidates-bg/coming-soon.svg",
     website: "",
-    party: "Working Families Party"
+    party: "Working Families Party",
+    altText: "White square with blue text that reads 'Coming Soon'."
   },
 
   {
@@ -49,27 +55,31 @@ export const candidates: Candidate[] = [
     name: "Abby Laurel-Smith",
     image: "/images/candidates-bg/abby-laurel-smith.svg",
     website: "https://www.rebuildnewyork.city/",
-    party: "Independent"
+    party: "Independent",
+    altText: "Black and white portrait of Abbey Laurel-Smith wearing a suit and tie, neutral expression."
   },
   {
     id: 8,
     name: "Zohran Mamdani",
     image: "/images/candidates-bg/zohran-mamdani.svg",
     website: "https://www.zohranfornyc.com/",
-    party: "Democrat"
+    party: "Democrat",
+    altText: "Black and white portrait of Zohran Mamdani with a beard, smiling slightly, wearing a light top."
   },
    {
     id: 9,
     name: "Curtis Sliwa",
     image: "/images/candidates-bg/curtis-sliwa.svg",
     website: "https://www.sliwafornyc.com/",
-    party: "Republican"
+    party: "Republican",
+    altText: "Black and white portrait of Curtis Sliwa wearing a beret and checkered jacket."
   },
   {
     id: 10,
     name: "James Walden",
     image: "/images/candidates-bg/james-walden.svg",
     website: "https://jimfornyc.com/",
-    party: "Independent"
+    party: "Independent",
+    altText: "Black and white portrait of James Walden in a suit, smiling."
   }
 ];

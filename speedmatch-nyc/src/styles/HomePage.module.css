@@ -16,7 +16,7 @@
 
 .coverImage {
   display: block; 
-  width: 115%;
+  width: 110%;
   max-height: 300px;
   object-fit: contain;
   margin-left: -5%; 
@@ -33,11 +33,13 @@
   padding: 1rem;
 }
 
-.headline p {
-  font-size: 1.6rem;
-  line-height: 1.2;
+.headline h1 {
+  font-size: 24px;
+  line-height: 100%;
   text-align: left;
   color: white;
+  font-weight: 500;
+  letter-spacing: -4%;
 }
 
 .highlight {
@@ -68,8 +70,8 @@
 .signupButton {
   background-color: #3cff00;
   color: black;
-	font-size: 1.5rem;
-  font-weight: 300;
+	font-size: 24px;
+  font-weight: 600;
   border: none;
   border-radius: 4px;
   padding: 0.8rem 1.5rem;
@@ -85,6 +87,12 @@
 .socialMedia p {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+}
+
+.socialIcon a {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .socialIcon {
@@ -106,21 +114,6 @@
 
 
 @media (min-width: 1024px) {
-	.navButton {
-  display: inline-block;
-  padding: 0.6rem 1.5rem;
-
-	background-color: white; 
-	color: black; 
-	font-weight: 400;
-  text-decoration: none;
-  transition: background-color 0.3s, color 0.3 transform 0.2s ease;
-}
-
-.navButton:hover {
-  background-color: #f0f0f0;
-  transform: scale(1.05);
-}
 	.coverImageWrapper {
     height: auto;
     margin-top: -15px;
@@ -135,14 +128,16 @@
 
   .headline {
     display: grid;
-    grid-template-columns: 70% 30%;
-    gap: 1rem;
+    grid-template-columns: 60% 40%;
+    gap: 3rem;
     align-items: center;
   }
 
-  .headline p {
-    font-size: 40px;
+  .headline h1 {
+    font-size: 36px;
 		text-align: left;
+    letter-spacing: -6%;
+    padding-left: 2rem;
   }
 
   .signup {
@@ -153,6 +148,5 @@
   .signup input,
   .startButton {
     height: 3.5rem;
-    font-size: 1.2rem;
   }
 }

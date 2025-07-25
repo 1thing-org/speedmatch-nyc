@@ -4,4 +4,5 @@ export interface Candidate {
   image: string;
   website: string;
   party: string;
+  altText?: string;
 }

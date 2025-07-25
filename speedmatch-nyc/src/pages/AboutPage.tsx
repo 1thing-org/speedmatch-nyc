@@ -58,10 +58,14 @@ function Aboutpage() {
 							Our team is currently updating the website for the upcoming November General Election. In the
 							meantime, you can view information from the recent Primary Election on our website.
 						</p>
-
-						<button className={styles.githubButton}>
+						<a
+							href="https://speedmatchnyc.github.io/index/index.html"
+							className={styles.githubButton}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							View Our Previous Project On GitHub
-						</button>
+						</a>
 						<div className={styles.divider}></div>
 					</section>
 
@@ -74,9 +78,14 @@ function Aboutpage() {
 							individuals. If you find our project helpful you can support us on GoFundMe.
 						</p>
 
-						<button className={styles.supportButton}>
+						<a
+							href=""
+							className={styles.supportButton}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							Support Us On GoFundMe
-						</button>
+						</a>
 						<div className={styles.divider}></div>
 					</section>
 				</div>

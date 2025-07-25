@@ -45,6 +45,8 @@
   width: 100%;
   display: block;
   margin: 0 auto;
+  text-decoration: none;
+  text-align: center; 
   transition: background-color 0.3s, transform 0.2s ease;
 }
 
