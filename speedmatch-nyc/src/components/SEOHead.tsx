@@ -5,7 +5,11 @@ interface SEOHeadProps {
   description: string;
   keywords?: string;
   canonical?: string;
-  ogImage?: string;
+  ogImages?: {
+    twitter?: string;
+    linkedin?: string;
+    facebook?: string;
+  };
 }
 
 function SEOHead({ 
@@ -13,7 +17,7 @@ function SEOHead({
   description, 
   keywords, 
   canonical, 
-  ogImage = '' 
+  ogImages
 }: SEOHeadProps) {
   const siteTitle = 'Speed Matching NYC';
   const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
@@ -31,15 +35,38 @@ function SEOHead({
       {/* Open Graph Tags */}
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogImage} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={canonical} />
+
+      {/* Facebook Open Graph */}
+      {ogImages?.facebook && (
+        <>
+          <meta property="og:image" content={ogImages.facebook} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+        </>
+      )}
+
+      {/* LinkedIn Open Graph */}
+      {ogImages?.linkedin && (
+        <>
+          <meta property="og:image" content={ogImages.linkedin} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="627" />
+        </>
+      )}
       
-      {/* Twitter Card Tags */}
+      {/* Twitter Open Graph */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage} />
+      {ogImages?.twitter && (
+        <>
+          <meta name="twitter:image" content={ogImages.twitter} />
+          <meta name="twitter:image:width" content="1000" />
+          <meta name="twitter:image:height" content="523" />
+        </>
+      )}
     </Helmet>
   );
 }

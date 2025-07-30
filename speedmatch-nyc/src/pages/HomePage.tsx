@@ -19,140 +19,145 @@ function HomePage() {
 	}, []);
 
 	const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Speed Matching NYC",
-    "alternateName": "NYC Mayoral Candidate Matcher",
-    "url": "https://speedmatching.nyc",
-    "description": "Find your ideal NYC mayoral candidate for the 2025 election. Compare candidate positions and get matched based on your values."
-  };
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"name": "Speed Matching NYC",
+		"alternateName": "NYC Mayoral Candidate Matcher",
+		"url": "https://speedmatching.nyc",
+		"description": "Find your ideal NYC mayoral candidate for the 2025 election. Compare candidate positions and get matched based on your values."
+	};
 
 	const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Speed Matching NYC",
-    "description": "Helping NYC voters find their ideal mayoral candidate through political matching",
-    "url": "https://speedmatching.nyc",
-    "foundingDate": "2025",
-    "areaServed": {
-      "@type": "City",
-      "name": "New York City",
-      "addressRegion": "NY",
-      "addressCountry": "US"
-    }
-  };
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		"name": "Speed Matching NYC",
+		"description": "Helping NYC voters find their ideal mayoral candidate through political matching",
+		"url": "https://speedmatching.nyc",
+		"foundingDate": "2025",
+		"areaServed": {
+			"@type": "City",
+			"name": "New York City",
+			"addressRegion": "NY",
+			"addressCountry": "US"
+		}
+	};
 
 	return (
 		<>
-		<SEOHead
-        title="Speed Matching NYC - Find Your Ideal 2025 Mayoral Candidate"
-        description="Match with your ideal NYC mayoral candidate for the 2025 election. Compare positions on key issues and find candidates who align with your values. Free political matching tool."
-        keywords="NYC mayor 2025, mayoral election, candidate matching, NYC politics, political quiz, voter guide, New York City election"
-        canonical="https://speedmatching.nyc/"
-      />
-      <StructuredData data={websiteSchema} />
-      <StructuredData data={organizationSchema} />
-		<div className={styles.homePage}>
-			{/* Navbar */}
-			<NavBar
-				buttons={
-					<>
-						<Link to="/explore" className="navButton">
-							Explore Candidates
-						</Link>
-						<Link to="/about" className="navButton">
-							About This Project
-						</Link>
-						<Link to="/contact" className="navButton">
-							Contact Us
-						</Link>
-					</>
-				}
+			<SEOHead
+				title="Speed Matching NYC - Find Your Ideal 2025 Mayoral Candidate"
+				description="Match with your ideal NYC mayoral candidate for the 2025 election. Compare positions on key issues and find candidates who align with your values. Free political matching tool."
+				keywords="NYC mayor 2025, mayoral election, candidate matching, NYC politics, political quiz, voter guide, New York City election"
+				canonical="https://speedmatching.nyc/"
+				ogImages={{
+					twitter: "/images/OG/OG_Twitter.jpg",
+					linkedin: "/images/OG/OG_Linkedin.jpg",
+					facebook: "/images/OG/OG_Facebook.jpg"
+				}}
 			/>
+			<StructuredData data={websiteSchema} />
+			<StructuredData data={organizationSchema} />
+			<div className={styles.homePage}>
+				{/* Navbar */}
+				<NavBar
+					buttons={
+						<>
+							<Link to="/explore" className="navButton">
+								Explore Candidates
+							</Link>
+							<Link to="/about" className="navButton">
+								About This Project
+							</Link>
+							<Link to="/contact" className="navButton">
+								Contact Us
+							</Link>
+						</>
+					}
+				/>
 
-			<main>
-          <section aria-label="Hero section">
-			{/* Hero Section */}
-			<HeroWrapper>
-				<p style={{ color: 'white' }}>Updated: July 17, 2025</p>
-				{isDesktop && (
-					<div className={heroStyles.socialMedia}>
-						<p>Follow us on</p>
-						<div className={heroStyles.socialIcon}>
-							<FaSquareXTwitter />
-							<FaTiktok />
-							<FaInstagram />
-							<FaSquareFacebook />
+				<main>
+					<section aria-label="Hero section">
+						{/* Hero Section */}
+						<HeroWrapper>
+							<p style={{ color: 'white' }}>Updated: July 17, 2025</p>
+							{isDesktop && (
+								<div className={heroStyles.socialMedia}>
+									<p>Follow us on</p>
+									<div className={heroStyles.socialIcon}>
+										<FaSquareXTwitter />
+										<FaTiktok />
+										<FaInstagram />
+										<FaSquareFacebook />
+									</div>
+								</div>
+							)}
+						</HeroWrapper>
+					</section>
+
+					{/* Cover image */}
+					<section aria-label="Featured candidates">
+						<div className={styles.coverImageWrapper}>
+							<picture>
+								<source
+									media="(min-width: 1024px)"
+									srcSet="/images/key-visual/desktop-all-candidates.svg"
+								/>
+								<img
+									src="/images/key-visual/mobile-all-candidates.png"
+									alt="Homepage Cover"
+									className={styles.coverImage}
+									loading="eager"
+								/>
+							</picture>
 						</div>
-					</div>
-				)}
-			</HeroWrapper>
-			</section>
+					</section>
 
-			{/* Cover image */}
-			<section aria-label="Featured candidates">
-			<div className={styles.coverImageWrapper}>
-				<picture>
-					<source
-						media="(min-width: 1024px)"
-						srcSet="/images/key-visual/desktop-all-candidates.svg"
-					/>
-					<img
-						src="/images/key-visual/mobile-all-candidates.png"
-						alt="Homepage Cover"
-						className={styles.coverImage}
-						 loading="eager"
-					/>
-				</picture>
+					{/* Headline section */}
+					<section aria-label="Election information and signup">
+						<div className={styles.headline}>
+							<h1>
+								Speed Matching for the <span className={styles.highlight}>2025 NYC Mayoral General Election</span> is coming soon. Join the waitlist to get notified when it's released.
+							</h1>
+							<form className={styles.signup} aria-label="Email signup form">
+								<label htmlFor="email-signup" className="sr-only">
+									Email address for election updates
+								</label>
+								<input
+									id="email-signup"
+									type="email"
+									placeholder="Enter your email..."
+									required
+									aria-describedby="signup-description"
+								/>
+								<button className={styles.signupButton}>Sign Up</button>
+							</form>
+						</div>
+					</section>
+				</main>
+
+				{/* Social media follow */}
+				<footer>
+					{!isDesktop && (
+						<nav aria-label="Social media links">
+							<div className={styles.socialMedia}>
+								<p>Follow us on</p>
+								<div className={styles.socialIcon}>
+									<a href="#" aria-label="Follow Speed Matching NYC on Twitter">
+										<FaSquareXTwitter />
+									</a>
+									<a href="#" aria-label="Follow Speed Matching NYC on TikTok">
+										<FaTiktok />
+									</a>
+									<a href="#" aria-label="Follow Speed Matching NYC on Instagram">
+										<FaInstagram />
+									</a>
+									<FaSquareFacebook />
+								</div>
+							</div>
+						</nav>
+					)}
+				</footer>
 			</div>
-			</section>
-
-			{/* Headline section */}
-			 <section aria-label="Election information and signup">
-			<div className={styles.headline}>
-				<h1>
-					Speed Matching for the <span className={styles.highlight}>2025 NYC Mayoral General Election</span> is coming soon. Join the waitlist to get notified when it's released.
-				</h1>
-				<form className={styles.signup} aria-label="Email signup form">
-					<label htmlFor="email-signup" className="sr-only">
-            Email address for election updates
-          </label>
-					<input
-						id="email-signup"
-						type="email"
-						placeholder="Enter your email..."
-						required
-						aria-describedby="signup-description"
-					/>
-					<button className={styles.signupButton}>Sign Up</button>
-				</form>
-			</div>
-			</section>
-		</main>
-
-			{/* Social media follow */}
-			<footer>
-			{!isDesktop && (
-				<nav aria-label="Social media links">
-				<div className={styles.socialMedia}>
-					<p>Follow us on</p>
-					<div className={styles.socialIcon}>
-						 <a href="#" aria-label="Follow Speed Matching NYC on Twitter">
-						<FaSquareXTwitter />
-						</a>
-						<a href="#" aria-label="Follow Speed Matching NYC on TikTok">
-						<FaTiktok />
-						</a>
-						<a href="#" aria-label="Follow Speed Matching NYC on Instagram">
-						<FaInstagram />
-						</a>
-						<FaSquareFacebook />
-					</div>
-				</div>
-				</nav>
-			)}
-		</footer>
-		</div>
 		</>
 	)
 }
