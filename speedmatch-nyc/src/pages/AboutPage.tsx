@@ -3,10 +3,43 @@ import styles from "../styles/AboutPage.module.css";
 import Navbar from "../components/Navbar";
 import PageHeader from "../components/PageHeader";
 import SocialMedia from '../components/SocialMedia';
+import SEOHead from '../components/SEOHead';
+import StructuredData from '../components/StructuredData';
 
 function Aboutpage() {
+	// Structured data for About page
+	const organizationSchema = {
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		"name": "Speed Matching NYC",
+		"description": "Independent organization helping NYC voters find their ideal mayoral candidate through political matching",
+		"url": "https://speedmatching.nyc",
+		"foundingDate": "2025",
+		"areaServed": {
+			"@type": "City",
+			"name": "New York City",
+			"addressRegion": "NY",
+			"addressCountry": "US"
+		},
+		"mission": "To make civic participation easier and transparent by helping voters quickly understand which local candidates align with their values",
+		"ethicalPolicy": "This website does not endorse any candidate. All candidates are presented equally."
+	};
 	return (
+		<>
+		<SEOHead
+        title="About This Project"
+        description="Learn about Speed Matching NYC, our mission to help voters find their ideal mayoral candidate, and our commitment to political neutrality in the 2025 NYC election."
+        keywords="about speed matching, NYC election project, political neutrality, voter education"
+        canonical="https://speedmatching.nyc/about"
+		ogImages={{
+					twitter: "/images/OG/OG_Twitter.jpg",
+					linkedin: "/images/OG/OG_Linkedin.jpg",
+					facebook: "/images/OG/OG_Facebook.jpg"
+				}}
+      />
+		<StructuredData data={organizationSchema} />
 		<div className={styles.aboutPage}>
+			<header>
 			<Navbar
 				buttons={
 					<>
@@ -24,7 +57,9 @@ function Aboutpage() {
 			/>
 
 			<PageHeader title="About This Project" />
-
+		</header>
+		
+		<main>
 			<div className={styles.container}>
 				<div className={styles.pairedSection}>
 					<section className={styles.section}>
@@ -63,8 +98,9 @@ function Aboutpage() {
 							className={styles.githubButton}
 							target="_blank"
 							rel="noopener noreferrer"
+							aria-label="View Speed Matching NYC's previous project for the primary election"
 						>
-							View Our Previous Project On GitHub
+							View Our Previous Project
 						</a>
 						<div className={styles.divider}></div>
 					</section>
@@ -83,6 +119,7 @@ function Aboutpage() {
 							className={styles.supportButton}
 							target="_blank"
 							rel="noopener noreferrer"
+							aria-label="Support Speed Matching NYC on GoFundMe"
 						>
 							Support Us On GoFundMe
 						</a>
@@ -107,12 +144,10 @@ function Aboutpage() {
 						<SocialMedia />
 					</section>
 				</div>
-
-
-
 			</div>
-
+		</main>
 		</div>
+		</>
 	)
 }
 
