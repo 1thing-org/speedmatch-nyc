@@ -169,6 +169,7 @@
   .headline h1 {
     font-size: 36px;
     letter-spacing: -6%;
+    line-height: 100%;
   }
 
   .signup {
