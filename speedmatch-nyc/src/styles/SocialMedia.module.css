@@ -33,6 +33,26 @@
   color: #003cff;
 }
 
+/* Tablet view: force icons into a single column */
+@media (min-width: 768px) and (max-width: 1023px),
+       (min-width: 1024px) and (orientation: portrait),
+       (min-width: 744px) and (min-height: 900px) {
+
+  .socialMedia {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* uniform spacing */
+  }
+
+  .socialRow {
+    display: contents; 
+  }
+
+  .socialItem:last-child {
+    margin-bottom: 0;
+  }
+}
+
 
 @media (min-width: 941px) {
   .socialMedia {

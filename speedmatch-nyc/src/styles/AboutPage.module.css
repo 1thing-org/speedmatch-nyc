@@ -55,7 +55,44 @@
   background-color: #D9D9D9;
 }
 
-@media (min-width: 941px) {
+/* Tablet breakpoint: 768px - 1023px and portrait iPad widths */
+@media (min-width: 768px) and (max-width: 1023px),
+       (min-width: 1024px) and (orientation: portrait),
+       (min-width: 744px) and (min-height: 900px) {
+
+  .aboutPageTabletWrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(270px, 1fr); 
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  .leftColumn > * {
+    margin-bottom: 2rem; 
+  }
+
+  .rightColumn {
+    align-self: start;
+  }
+
+  .pairedSection {
+    display: block;
+  }
+
+  .ourCommitmentSection .divider {
+    display: none;
+  }
+  
+  .githubButton,
+  .supportButton {
+    width: 80%;
+    align-self: flex-start;
+    margin: 0;
+  }
+}
+
+
+@media (min-width: 1024px) and (orientation: landscape) {
   .container {
     padding: 2rem 2rem 4rem 2rem;
   }
