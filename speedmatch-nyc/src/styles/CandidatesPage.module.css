@@ -39,12 +39,14 @@
 	font-weight: 600;
 	color: white;
 	line-height: 87%;
+	letter-spacing: -4%;
 }
 
 .party {
 	font-size: 16px;
 	color: #D9D9D9;
-
+	line-height: 87%;
+	letter-spacing: -4%;
 }
 
 .visitLink {
@@ -53,6 +55,7 @@
 	font-weight: 500;
 	line-height: 87%;
 	font-size: 18px;
+	letter-spacing: -4%;
 }
 
 @media (min-width: 400px) and (max-width: 559px) {
@@ -86,7 +89,7 @@
 @media (min-width: 1024px) {
 	.candidates {
 		grid-template-columns: repeat(4, 216px);
-		gap: 2rem;
+		gap: 1.5rem;
 		padding-left: 60px;
 		padding-right: 60px;
 	}
