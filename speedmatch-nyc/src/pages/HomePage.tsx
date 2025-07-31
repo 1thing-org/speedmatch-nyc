@@ -12,7 +12,7 @@ function HomePage() {
 	const [isDesktop, setIsDesktop] = useState(false);
 
 	useEffect(() => {
-		const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+		const handleResize = () => setIsDesktop(window.innerWidth >= 768);
 		handleResize();
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
@@ -103,11 +103,19 @@ function HomePage() {
 						<div className={styles.coverImageWrapper}>
 							<picture>
 								<source
-									media="(min-width: 1024px)"
-									srcSet="/images/key-visual/desktop-all-candidates.svg"
+									media="(min-width: 1024px) and (orientation: landscape)"
+									srcSet="/images/key-visual/desktop-all-candidates.webp"
+								/>
+								<source
+									media="(min-width: 768px)"
+									srcSet="/images/key-visual/tablet-all-candidates.webp"
+								/>
+								<source
+									media="(min-width: 744px) and (min-height: 1000px)"
+									srcSet="/images/key-visual/tablet-all-candidates.webp"
 								/>
 								<img
-									src="/images/key-visual/mobile-all-candidates.png"
+									src="/images/key-visual/mobile-all-candidates.webp"
 									alt="Homepage Cover"
 									className={styles.coverImage}
 									loading="eager"
