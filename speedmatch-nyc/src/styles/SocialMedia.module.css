@@ -7,20 +7,21 @@
 
 .socialRow {
   display: flex;
-  gap: 4rem;
+  gap:1rem;
 }
 
 .socialItem {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.2rem;
   color: #666;
   text-decoration: underline;
   cursor: pointer;
 }
 
 .socialItem span {
-  font-size: 18px;
+  font-size: 16px;
+  letter-spacing: -4%;
 }
 
 .socialIcon {

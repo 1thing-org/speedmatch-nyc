@@ -1,5 +1,5 @@
 import styles from '../styles/SocialMedia.module.css';
-import { FaSquareFacebook, FaTiktok, FaInstagram, FaSquareXTwitter } from 'react-icons/fa6';
+import { FaTiktok, FaInstagram, FaSquareXTwitter } from 'react-icons/fa6';
 
 function SocialMedia() {
   return (

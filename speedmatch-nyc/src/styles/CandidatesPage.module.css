@@ -1,117 +1,100 @@
 .candidatesPage {
-    min-height: 100vh;
-    background-color:
-        #003cff;
-    color: white;
-    --border-color: white;
+	min-height: 100vh;
+	background-color:
+		#003cff;
+	color: white;
+	--border-color: white;
 }
 
 .candidates {
-    display: grid;
-    overflow: hidden;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
-    max-width: 400px;
-    gap: 1rem;
-    margin: 0.5rem auto 0;
-    padding-bottom: 2rem;
-    padding-left: 20px;
-    padding-right: 20px;
+	display: grid;
+	overflow: hidden;
+	justify-content: center;
+	grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
+	max-width: 400px;
+	gap: 1rem;
+	margin: 0.5rem auto 0;
+	padding-bottom: 2rem;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .candidateCard {
-    margin-top: 1rem;
-    height: 288px;
+	margin-top: 1rem;
+	height: 288px;
 }
 
 .candidateImage {
-    height: 188px;
-    width:100%;
-    display: block;
+	height: 188px;
+	width: 100%;
+	display: block;
 }
 
 .candidateInfo {
-    padding-top: clamp(0.7rem, 2vw, 1rem);
+	padding-top: clamp(0.7rem, 2vw, 1rem);
 }
 
 .candidateName {
-    font-size: 24px;
-    font-weight: 600;
-    color: white;
-    line-height: 87%;
+	font-size: 24px;
+	font-weight: 600;
+	color: white;
+	line-height: 87%;
 }
 
 .party {
-    font-size: 16px;
-    color:#D9D9D9;
+	font-size: 16px;
+	color: #D9D9D9;
 
 }
 
 .visitLink {
-    color: #3cff00;
-    text-align: left;
-    font-weight: 500;
-    line-height: 87%;
-    font-size: 18px;
+	color: #3cff00;
+	text-align: left;
+	font-weight: 500;
+	line-height: 87%;
+	font-size: 18px;
 }
 
 @media (min-width: 400px) and (max-width: 559px) {
-    .candidates {
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        max-width: 450px;
-    }
-
-    .candidateImage {
-        background-color: white; 
-    }
+	.candidates {
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+		max-width: 450px;
+	}
 }
 
 @media (min-width: 560px) and (max-width: 767px) {
-    .candidates {
-        grid-template-columns: repeat(3, 160px);
-        gap: 1.2rem;
-        max-width: none;
-        padding-left: 30px;
-        padding-right: 30px;
-    }
+	.candidates {
+		grid-template-columns: repeat(auto-fit, minmax(173px, 1fr));
+		gap: 1.2rem;
+		max-width: none;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
 }
 
 @media (min-width: 768px) {
-    .candidates {
-        grid-template-columns: repeat(3, 216px); 
-        gap: 1.5rem;
-        padding-left: 40px;
-        padding-right: 40px;
-        max-width: none;
-    }
-
-     .candidateImage {
-        background-color: white;
-    }
+	.candidates {
+		grid-template-columns: repeat(3, 216px);
+		gap: 1.5rem;
+		padding-left: 40px;
+		padding-right: 40px;
+		max-width: none;
+	}
 }
 
 /* Desktop - 1024px and up */
 @media (min-width: 1024px) {
-    .candidates {
-        grid-template-columns: repeat(4, 216px);
-        gap: 2rem;
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-
-     .candidateImage {
-        background-color: white;
-    }
+	.candidates {
+		grid-template-columns: repeat(4, 216px);
+		gap: 2rem;
+		padding-left: 60px;
+		padding-right: 60px;
+	}
 }
 
 /* Large Desktop - 1280px and up */
 @media (min-width: 1280px) {
-    .candidates {
-        grid-template-columns: repeat(5, 216px);
-    }
-
-     .candidateImage {
-        background-color: white;
-    }
+	.candidates {
+		grid-template-columns: repeat(5, 216px);
+	}
 }
-

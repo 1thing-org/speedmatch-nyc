@@ -6,7 +6,7 @@ import HeroWrapper from '../components/HeroWrapper';
 import heroStyles from '../styles/HeroWrapper.module.css';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
-import { FaSquareXTwitter, FaTiktok, FaInstagram, FaSquareFacebook } from 'react-icons/fa6';
+import { FaSquareXTwitter, FaTiktok, FaInstagram } from 'react-icons/fa6';
 
 function HomePage() {
 	const [isDesktop, setIsDesktop] = useState(false);
@@ -80,10 +80,10 @@ function HomePage() {
 						{/* Hero Section */}
 						<HeroWrapper>
 							<p style={{ color: 'white' }}>Updated: July 25, 2025</p>
-								<div className={heroStyles.socialMedia}>
-									{isDesktop && <p>Follow us on</p>}
-									<div className={heroStyles.socialIcon}>
-										<a href="#" aria-label="Follow Speed Matching NYC on Twitter">
+							<div className={heroStyles.socialMedia}>
+								{isDesktop && <p>Follow us on</p>}
+								<div className={heroStyles.socialIcon}>
+									<a href="#" aria-label="Follow Speed Matching NYC on Twitter">
 										<FaSquareXTwitter />
 									</a>
 									<a href="#" aria-label="Follow Speed Matching NYC on TikTok">
@@ -92,9 +92,9 @@ function HomePage() {
 									<a href="#" aria-label="Follow Speed Matching NYC on Instagram">
 										<FaInstagram />
 									</a>
-										{/* <FaSquareFacebook /> */}
-									</div>
+									{/* <FaSquareFacebook /> */}
 								</div>
+							</div>
 						</HeroWrapper>
 					</section>
 
@@ -128,13 +128,18 @@ function HomePage() {
 					<section aria-label="Election information and signup">
 						<div className={styles.headline}>
 							<div className={styles.headlineText}>
-							<h1>
-								Speed Matching for the <span className={styles.highlight}>2025 NYC Mayoral General Election</span> is coming soon. Join the waitlist to get notified when it's released.
-							</h1>
-							<p className={styles.primaryElectionText}>
-								See our website for the primary election.
-							</p>
-						</div>
+								<h1>
+									Speed Matching for the <span className={styles.highlight}>2025 NYC Mayoral General Election</span> is coming soon. Join the waitlist to get notified when it's released.
+								</h1>
+								<a
+									href="https://speedmatchnyc.github.io/index/index.html"
+									target="_blank"
+									rel="noopener noreferrer"
+									className={styles.primaryElectionText}
+								>
+									See our website for the primary election.
+								</a>
+							</div>
 							<form className={styles.signup} aria-label="Email signup form">
 								<label htmlFor="email-signup" className="sr-only">
 									Email address for election updates
