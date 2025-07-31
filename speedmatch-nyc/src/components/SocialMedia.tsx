@@ -6,22 +6,19 @@ function SocialMedia() {
     <div className={styles.socialMedia}>
       <div className={styles.socialRow}>
         <div className={styles.socialItem}>
-          <FaSquareFacebook className={styles.socialIcon} />
-          <span>Account</span>
-        </div>
-        <div className={styles.socialItem}>
           <FaTiktok className={styles.socialIcon} />
-          <span>Account</span>
+          <span>@speedmatchnyc</span>
         </div>
-      </div>
-      <div className={styles.socialRow}>
+      
         <div className={styles.socialItem}>
           <FaInstagram className={styles.socialIcon} />
-          <span>Account</span>
+          <span>@speedmatchnyc</span>
         </div>
+        </div>
+        <div className={styles.socialRow}>
         <div className={styles.socialItem}>
           <FaSquareXTwitter className={styles.socialIcon} />
-          <span>Account</span>
+          <span>@SpeedMatchElect</span>
         </div>
       </div>
     </div>

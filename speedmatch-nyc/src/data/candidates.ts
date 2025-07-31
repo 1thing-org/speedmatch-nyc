@@ -43,15 +43,6 @@ export const candidates: Candidate[] = [
   },
   {
     id: 6,
-    name: "Gowri Krishna",
-    image: "/images/candidates-bg/coming-soon.svg",
-    website: "",
-    party: "Working Families Party",
-    altText: "White square with blue text that reads 'Coming Soon'."
-  },
-
-  {
-    id: 7,
     name: "Abby Laurel-Smith",
     image: "/images/candidates-bg/abby-laurel-smith.svg",
     website: "https://www.rebuildnewyork.city/",
@@ -59,7 +50,7 @@ export const candidates: Candidate[] = [
     altText: "Black and white portrait of Abbey Laurel-Smith wearing a suit and tie, neutral expression."
   },
   {
-    id: 8,
+    id: 7,
     name: "Zohran Mamdani",
     image: "/images/candidates-bg/zohran-mamdani.svg",
     website: "https://www.zohranfornyc.com/",
@@ -67,7 +58,7 @@ export const candidates: Candidate[] = [
     altText: "Black and white portrait of Zohran Mamdani with a beard, smiling slightly, wearing a light top."
   },
    {
-    id: 9,
+    id: 8,
     name: "Curtis Sliwa",
     image: "/images/candidates-bg/curtis-sliwa.svg",
     website: "https://www.sliwafornyc.com/",
@@ -75,7 +66,7 @@ export const candidates: Candidate[] = [
     altText: "Black and white portrait of Curtis Sliwa wearing a beret and checkered jacket."
   },
   {
-    id: 10,
+    id: 9,
     name: "James Walden",
     image: "/images/candidates-bg/james-walden.svg",
     website: "https://jimfornyc.com/",

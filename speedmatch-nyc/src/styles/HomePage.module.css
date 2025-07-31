@@ -6,7 +6,7 @@
 
 .coverImageWrapper {
   position: relative;
-	margin-top: 1rem;
+	margin-top: 0.5rem;
   width: 100vw; 
 	height: auto;
   margin-left: calc(50% - 50vw);
@@ -26,11 +26,18 @@
 .headline {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.4rem;
   align-items: center;
 	justify-content: center;
 	text-align: center; 
   padding: 1rem;
+}
+
+.primaryElectionText {
+  color: #3cff00;
+  font-size: 16px;
+  text-decoration: underline;
+  text-align: left;
 }
 
 .headline h1 {
@@ -38,7 +45,7 @@
   line-height: 100%;
   text-align: left;
   color: white;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -4%;
 }
 
@@ -83,40 +90,6 @@
   background-color: #2EB800;
 }
 
-.socialMedia {
-	margin-top: 2rem;
-	text-align: center;
-	padding-bottom: 2rem;
-}
-
-.socialMedia p {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.socialIcon a {
-  color: white;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.socialIcon {
-	display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.socialIcon svg {
-	width: 30px;
-	height: 30px;
-	cursor: pointer;
-}
-
-.socialIcon svg:hover {
-  transform: scale(1.2);  
-}
-
-
 @media (min-width: 1024px) {
 	.coverImageWrapper {
     height: auto;
@@ -137,11 +110,15 @@
     align-items: center;
   }
 
-  .headline h1 {
-    font-size: 36px;
-		text-align: left;
+  .headlineText {
+    text-align: left;
     letter-spacing: -6%;
     padding-left: 2rem;
+  }
+
+  .headline h1 {
+    font-size: 36px;
+		
   }
 
   .signup {

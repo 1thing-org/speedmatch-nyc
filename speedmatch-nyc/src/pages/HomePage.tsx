@@ -79,18 +79,22 @@ function HomePage() {
 					<section aria-label="Hero section">
 						{/* Hero Section */}
 						<HeroWrapper>
-							<p style={{ color: 'white' }}>Updated: July 17, 2025</p>
-							{isDesktop && (
+							<p style={{ color: 'white' }}>Updated: July 25, 2025</p>
 								<div className={heroStyles.socialMedia}>
-									<p>Follow us on</p>
+									{isDesktop && <p>Follow us on</p>}
 									<div className={heroStyles.socialIcon}>
+										<a href="#" aria-label="Follow Speed Matching NYC on Twitter">
 										<FaSquareXTwitter />
+									</a>
+									<a href="#" aria-label="Follow Speed Matching NYC on TikTok">
 										<FaTiktok />
+									</a>
+									<a href="#" aria-label="Follow Speed Matching NYC on Instagram">
 										<FaInstagram />
-										<FaSquareFacebook />
+									</a>
+										{/* <FaSquareFacebook /> */}
 									</div>
 								</div>
-							)}
 						</HeroWrapper>
 					</section>
 
@@ -115,9 +119,14 @@ function HomePage() {
 					{/* Headline section */}
 					<section aria-label="Election information and signup">
 						<div className={styles.headline}>
+							<div className={styles.headlineText}>
 							<h1>
 								Speed Matching for the <span className={styles.highlight}>2025 NYC Mayoral General Election</span> is coming soon. Join the waitlist to get notified when it's released.
 							</h1>
+							<p className={styles.primaryElectionText}>
+								See our website for the primary election.
+							</p>
+						</div>
 							<form className={styles.signup} aria-label="Email signup form">
 								<label htmlFor="email-signup" className="sr-only">
 									Email address for election updates
@@ -136,27 +145,7 @@ function HomePage() {
 				</main>
 
 				{/* Social media follow */}
-				<footer>
-					{!isDesktop && (
-						<nav aria-label="Social media links">
-							<div className={styles.socialMedia}>
-								<p>Follow us on</p>
-								<div className={styles.socialIcon}>
-									<a href="#" aria-label="Follow Speed Matching NYC on Twitter">
-										<FaSquareXTwitter />
-									</a>
-									<a href="#" aria-label="Follow Speed Matching NYC on TikTok">
-										<FaTiktok />
-									</a>
-									<a href="#" aria-label="Follow Speed Matching NYC on Instagram">
-										<FaInstagram />
-									</a>
-									<FaSquareFacebook />
-								</div>
-							</div>
-						</nav>
-					)}
-				</footer>
+				<footer></footer>
 			</div>
 		</>
 	)
