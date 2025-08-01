@@ -15,7 +15,7 @@
 .coverImage {
   display: block;
   width: 110%;
-  max-height: 42vh;
+  max-height: 300px;
   object-fit: contain;
   margin-left: -5%;
 }
@@ -128,14 +128,19 @@
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .coverImage {
-    max-height: 60vh;
+    max-height: 55vh;
   }
 }
 
-@media (min-width: 1024px) and (orientation: portrait),
-(min-width: 744px) and (min-height: 900px) {
+@media (min-width: 744px) and (min-height: 900px) {
   .coverImage {
-    max-height: 62vh;
+    max-height: 56vh;
+  }
+}
+
+@media (min-width: 1024px) and (orientation: portrait){
+  .coverImage {
+    max-height: 63vh;
   }
 }
 
