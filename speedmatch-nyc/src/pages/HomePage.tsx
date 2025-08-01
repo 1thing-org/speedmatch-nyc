@@ -83,13 +83,13 @@ function HomePage() {
 							<div className={heroStyles.socialMedia}>
 								{isDesktop && <p>Follow us on</p>}
 								<div className={heroStyles.socialIcon}>
-									<a href="#" aria-label="Follow Speed Matching NYC on Twitter">
+									<a href="https://x.com/speedmatchelect" aria-label="Follow Speed Matching NYC on Twitter">
 										<FaSquareXTwitter />
 									</a>
-									<a href="#" aria-label="Follow Speed Matching NYC on TikTok">
+									<a href="https://www.tiktok.com/@speedmatchnyc" aria-label="Follow Speed Matching NYC on TikTok">
 										<FaTiktok />
 									</a>
-									<a href="#" aria-label="Follow Speed Matching NYC on Instagram">
+									<a href="https://www.instagram.com/speedmatchnyc" aria-label="Follow Speed Matching NYC on Instagram">
 										<FaInstagram />
 									</a>
 									{/* <FaSquareFacebook /> */}

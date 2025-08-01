@@ -19,9 +19,12 @@
   cursor: pointer;
 }
 
-.socialItem span {
+.socialItem .socialLink {
   font-size: 16px;
   letter-spacing: -4%;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
 }
 
 .socialIcon {
@@ -64,7 +67,7 @@
     gap: 7em;
   }
 
-  .socialItem span {
+  .socialItem .socialLink {
     font-size: 20px;
   }
 }

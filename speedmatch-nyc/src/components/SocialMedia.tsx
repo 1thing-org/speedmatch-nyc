@@ -7,18 +7,38 @@ function SocialMedia() {
       <div className={styles.socialRow}>
         <div className={styles.socialItem}>
           <FaTiktok className={styles.socialIcon} />
-          <span>@speedmatchnyc</span>
+          <a 
+            href="https://www.tiktok.com/@speedmatchnyc" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={styles.socialLink}
+          >
+            @speedmatchnyc
+          </a>
         </div>
       
         <div className={styles.socialItem}>
           <FaInstagram className={styles.socialIcon} />
-          <span>@speedmatchnyc</span>
+          <a 
+            href="https://www.instagram.com/speedmatchnyc" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={styles.socialLink}
+          >
+            @speedmatchnyc
+          </a>
         </div>
         </div>
         <div className={styles.socialRow}>
         <div className={styles.socialItem}>
           <FaSquareXTwitter className={styles.socialIcon} />
-          <span>@SpeedMatchElect</span>
+          <a 
+            href="https://x.com/speedmatchelect" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={styles.socialLink}
+          >@SpeedMatchElect
+          </a>
         </div>
       </div>
     </div>
