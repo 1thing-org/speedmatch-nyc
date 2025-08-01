@@ -77,7 +77,7 @@
   background-color: #3cff00;
   color: black;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   border: none;
   border-radius: 4px;
   padding: 0.8rem 1.5rem;
@@ -173,7 +173,7 @@
 
   .headline h1 {
     font-size: 36px;
-    letter-spacing: -6%;
+    letter-spacing: -0.8px;
     line-height: 100%;
   }
 
