@@ -13,6 +13,7 @@ function CandidatesPage() {
 		"@type": "ItemList",
 		"name": "2025 NYC Mayoral Candidates",
 		"description": "Complete list of candidates running for NYC Mayor in 2025",
+		"url": "https://speedmatching.nyc/explore",
 		"numberOfItems": candidates.length,
 		"itemListElement": candidates.map((candidate, index) => ({
 			"@type": "ListItem",
@@ -20,13 +21,19 @@ function CandidatesPage() {
 			"item": {
 				"@type": "Person",
 				"name": candidate.name,
-				"description": `${candidate.party} candidate for NYC Mayor 2025`,
+				"description": candidate.altText || `${candidate.party} candidate for NYC Mayor 2025`,
 				"url": candidate.website,
 				"image": `https://speedmatching.nyc${candidate.image}`,
+				"jobTitle": "Mayoral Candidate",
+        "memberOf": {
+          "@type": "PoliticalParty",
+          "name": candidate.party
+				},
 				"affiliation": {
-					"@type": "Organization",
-					"name": candidate.party
-				}
+        "@type": "PoliticalParty",
+        "name": candidate.party
+      },
+      "sameAs": candidate.website
 			}
 		}))
 	};
