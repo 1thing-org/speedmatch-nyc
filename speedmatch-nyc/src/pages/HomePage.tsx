@@ -108,11 +108,11 @@ function HomePage() {
 								/>
 								<source
 									media="(min-width: 768px)"
-									srcSet="/images/key-visual/tablet-all-candidates.webp"
+									srcSet="/images/key-visual/tablet-key-visual.webp"
 								/>
 								<source
 									media="(min-width: 744px) and (min-height: 1000px)"
-									srcSet="/images/key-visual/tablet-all-candidates.webp"
+									srcSet="/images/key-visual/tablet-key-visual.webp"
 								/>
 								<img
 									src="/images/key-visual/mobile-all-candidates.webp"
