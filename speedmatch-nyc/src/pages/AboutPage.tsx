@@ -137,7 +137,8 @@ function Aboutpage() {
 								{/* Follow Us On Social Media */}
 								<section className={`${styles.section} ${styles.followSection}`}>
 									<h2 className={styles.sectionTitle}>Follow Us On Social Media</h2>
-									<SocialMedia />
+									<SocialMedia
+										variant="about" />
 								</section>
 
 							</div>

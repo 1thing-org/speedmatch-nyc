@@ -30,7 +30,7 @@ function ContactPage() {
 			// Show success state
 			setIsSuccess(true);
 			setIsSubmitting(false);
-			
+
 			// Clear the form
 			form.reset();
 
@@ -119,7 +119,8 @@ function ContactPage() {
 									we'd love to hear from you.
 								</p>
 
-								<SocialMedia />
+								<SocialMedia
+									variant="about" />
 								<div className={styles.divider}></div>
 							</section>
 
@@ -130,12 +131,12 @@ function ContactPage() {
 									method="post"
 									className={styles.contactForm}
 									onSubmit={handleFormSubmit}
-									>
+								>
 									{/* Hidden fields for Mailchimp */}
 									<div hidden={true}>
 										<input type="hidden" name="tags" value="1498581" />
 									</div>
-									
+
 									<div aria-hidden={true} style={{ position: 'absolute', left: '-5000px' }}>
 										<input type="text" name="b_9f86caf1fafffd2860920ac8f_3b7590f171" tabIndex={-1} defaultValue="" />
 									</div>
@@ -196,7 +197,7 @@ function ContactPage() {
 									<button
 										type="submit"
 										name="subscribe"
-										id="mc-embedded-subscribe" 
+										id="mc-embedded-subscribe"
 										className={`${styles.sendButton} ${isSuccess ? styles.successButton : ''}`}
 										aria-label="Send message to Speed Matching NYC team"
 										disabled={isSubmitting}

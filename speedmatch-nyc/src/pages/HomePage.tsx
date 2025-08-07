@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import styles from '../styles/HomePage.module.css';
 import NavBar from '../components/Navbar';
+import SocialMedia from '../components/SocialMedia';
 import HeroWrapper from '../components/HeroWrapper';
-import heroStyles from '../styles/HeroWrapper.module.css';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
-import { FaSquareXTwitter, FaTiktok, FaInstagram, FaSquareFacebook, FaRegCircleCheck } from 'react-icons/fa6';
+import { FaRegCircleCheck } from 'react-icons/fa6';
 
 function HomePage() {
 	const [isDesktop, setIsDesktop] = useState(false);
@@ -30,7 +30,7 @@ function HomePage() {
 
 			// Show success state
 			setIsSuccess(true);
-			
+
 			// Clear the form
 			const emailInput = form.querySelector('#mce-EMAIL') as HTMLInputElement;
 			if (emailInput) emailInput.value = '';
@@ -117,23 +117,11 @@ function HomePage() {
 						{/* Hero Section */}
 						<HeroWrapper>
 							<p style={{ color: 'white' }}>Updated: July 25, 2025</p>
-							<div className={heroStyles.socialMedia}>
-								{isDesktop && <p>Follow us on</p>}
-								<div className={heroStyles.socialIcon}>
-									<a href="https://x.com/speedmatchelect" aria-label="Follow Speed Matching NYC on Twitter">
-										<FaSquareXTwitter />
-									</a>
-									<a href="https://www.tiktok.com/@speedmatchnyc" aria-label="Follow Speed Matching NYC on TikTok">
-										<FaTiktok />
-									</a>
-									<a href="https://www.instagram.com/speedmatchnyc" aria-label="Follow Speed Matching NYC on Instagram">
-										<FaInstagram />
-									</a>
-									<a href="https://www.facebook.com/people/Speed-Match-NYC/61578917033976/" aria-label="Follow Speed Matching NYC on Instagram">
-										<FaSquareFacebook />
-									</a>
-								</div>
-							</div>
+							<SocialMedia
+								variant="hero"
+								showLabel={true}
+								isDesktop={isDesktop}
+							/>
 						</HeroWrapper>
 					</section>
 
@@ -180,10 +168,10 @@ function HomePage() {
 								</a>
 							</div>
 							<form
-								action="https://nyc.us15.list-manage.com/subscribe/post?u=9f86caf1fafffd2860920ac8f&amp;id=3b7590f171&amp;f_id=00fba6e1f0" 
+								action="https://nyc.us15.list-manage.com/subscribe/post?u=9f86caf1fafffd2860920ac8f&amp;id=3b7590f171&amp;f_id=00fba6e1f0"
 								method="post"
-								id="mc-embedded-subscribe-form" 
-								name="mc-embedded-subscribe-form" 
+								id="mc-embedded-subscribe-form"
+								name="mc-embedded-subscribe-form"
 								className={styles.signup}
 								onSubmit={handleFormSubmit}
 								aria-label="Email signup form">
@@ -202,30 +190,30 @@ function HomePage() {
 								<div hidden={true}>
 									<input type="hidden" name="tags" value="1498578" />
 								</div>
-								
+
 								{/* Response messages container - simplified */}
 								<div id="mce-responses" style={{ display: 'none' }}>
 									<div id="mce-error-response"></div>
 									<div id="mce-success-response"></div>
 								</div>
-								
+
 								{/* Honeypot field - EXACT from your Mailchimp code */}
 								<div aria-hidden={true} style={{ position: 'absolute', left: '-5000px' }}>
 									<input type="text" name="b_9f86caf1fafffd2860920ac8f_3b7590f171" tabIndex={-1} defaultValue="" />
 								</div>
-								<button 
+								<button
 									type="submit"
 									name="subscribe"
-									id="mc-embedded-subscribe" 
+									id="mc-embedded-subscribe"
 									className={`${styles.signupButton} ${isSuccess ? styles.successButton : ''}`}
 									disabled={isSubmitting}
-									>
+								>
 									{isSubmitting ? 'Signing Up...' : isSuccess ? (
-									<>
-									You're In! <FaRegCircleCheck style={{ marginLeft: '8px' }} />
-									</>
+										<>
+											You're In! <FaRegCircleCheck style={{ marginLeft: '8px' }} />
+										</>
 									) : 'Sign Up'}
-									</button>
+								</button>
 							</form>
 						</div>
 					</section>
