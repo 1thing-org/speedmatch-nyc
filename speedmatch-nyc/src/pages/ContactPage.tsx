@@ -21,7 +21,7 @@ function ContactPage() {
 
 		try {
 			// Submit to Mailchimp contact form
-			const response = await fetch(form.action, {
+			await fetch(form.action, {
 				method: 'POST',
 				body: formData,
 				mode: 'no-cors'

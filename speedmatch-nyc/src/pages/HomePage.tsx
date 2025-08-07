@@ -22,7 +22,7 @@ function HomePage() {
 
 		try {
 			// Submit to Mailchimp using fetch
-			const response = await fetch(form.action, {
+			await fetch(form.action, {
 				method: 'POST',
 				body: formData,
 				mode: 'no-cors' // Required for Mailchimp
