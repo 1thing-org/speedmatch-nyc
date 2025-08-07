@@ -67,8 +67,8 @@ export const candidates: Candidate[] = [
   },
   {
     id: 9,
-    name: "James Walden",
-    image: "/images/candidates/james-walden.webp",
+    name: "Jim Walden",
+    image: "/images/candidates/jim-walden.webp",
     website: "https://jimfornyc.com/",
     party: "Independent",
     altText: "Black and white portrait of James Walden in a suit, smiling."

@@ -90,13 +90,31 @@
   font-size: 24px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
   margin-top: 1rem;
 }
 
-.sendButton:hover {
-  background-color: #00e600;
-  transform: scale(1.02);
+.successButton {
+  background-color: #003cff; 
+  color: #3cff00;
+  font-size: 24px;
+  font-weight: 500;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.sendButton:disabled {
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .sendButton:hover:not(.successButton) {
+    background-color: #2EB800;
+  }
 }
 
 /* Desktop Layout */

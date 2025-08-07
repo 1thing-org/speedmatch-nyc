@@ -50,10 +50,13 @@
   transition: background-color 0.3s, transform 0.2s ease;
 }
 
+@media (hover: hover) {
 .githubButton:hover,
 .supportButton:hover {
   background-color: #D9D9D9;
 }
+}
+
 
 /* Tablet breakpoint: 768px - 1023px and portrait iPad widths */
 @media (min-width: 768px) and (max-width: 1023px),

@@ -6,7 +6,7 @@ import HeroWrapper from '../components/HeroWrapper';
 import heroStyles from '../styles/HeroWrapper.module.css';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
-import { FaSquareXTwitter, FaTiktok, FaInstagram, FaRegCircleCheck } from 'react-icons/fa6';
+import { FaSquareXTwitter, FaTiktok, FaInstagram, FaSquareFacebook, FaRegCircleCheck } from 'react-icons/fa6';
 
 function HomePage() {
 	const [isDesktop, setIsDesktop] = useState(false);
@@ -129,7 +129,9 @@ function HomePage() {
 									<a href="https://www.instagram.com/speedmatchnyc" aria-label="Follow Speed Matching NYC on Instagram">
 										<FaInstagram />
 									</a>
-									{/* <FaSquareFacebook /> */}
+									<a href="https://www.facebook.com/people/Speed-Match-NYC/61578917033976/" aria-label="Follow Speed Matching NYC on Instagram">
+										<FaSquareFacebook />
+									</a>
 								</div>
 							</div>
 						</HeroWrapper>
@@ -145,11 +147,11 @@ function HomePage() {
 								/>
 								<source
 									media="(min-width: 768px)"
-									srcSet="/images/key-visual/tablet-key-visual.webp"
+									srcSet="/images/key-visual/key-visual-tablet2.webp"
 								/>
 								<source
 									media="(min-width: 744px) and (min-height: 1000px)"
-									srcSet="/images/key-visual/tablet-key-visual.webp"
+									srcSet="/images/key-visual/key-visual-tablet2.webp"
 								/>
 								<img
 									src="/images/key-visual/mobile-all-candidates.webp"
