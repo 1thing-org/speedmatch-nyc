@@ -6,10 +6,47 @@ import HeroWrapper from '../components/HeroWrapper';
 import heroStyles from '../styles/HeroWrapper.module.css';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
-import { FaSquareXTwitter, FaTiktok, FaInstagram } from 'react-icons/fa6';
+import { FaSquareXTwitter, FaTiktok, FaInstagram, FaRegCircleCheck } from 'react-icons/fa6';
 
 function HomePage() {
 	const [isDesktop, setIsDesktop] = useState(false);
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+
+	const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		setIsSubmitting(true);
+
+		const form = e.currentTarget;
+		const formData = new FormData(form);
+
+		try {
+			// Submit to Mailchimp using fetch
+			const response = await fetch(form.action, {
+				method: 'POST',
+				body: formData,
+				mode: 'no-cors' // Required for Mailchimp
+			});
+
+			// Show success state
+			setIsSuccess(true);
+			
+			// Clear the form
+			const emailInput = form.querySelector('#mce-EMAIL') as HTMLInputElement;
+			if (emailInput) emailInput.value = '';
+
+			// Reset button after 5 seconds
+			setTimeout(() => {
+				setIsSuccess(false);
+			}, 5000);
+
+		} catch (error) {
+			console.error('Submission error:', error);
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
+
 
 	useEffect(() => {
 		const handleResize = () => setIsDesktop(window.innerWidth >= 768);
@@ -140,18 +177,53 @@ function HomePage() {
 									See our website for the primary election.
 								</a>
 							</div>
-							<form className={styles.signup} aria-label="Email signup form">
+							<form
+								action="https://nyc.us15.list-manage.com/subscribe/post?u=9f86caf1fafffd2860920ac8f&amp;id=3b7590f171&amp;f_id=00fba6e1f0" 
+								method="post"
+								id="mc-embedded-subscribe-form" 
+								name="mc-embedded-subscribe-form" 
+								className={styles.signup}
+								onSubmit={handleFormSubmit}
+								aria-label="Email signup form">
 								<label htmlFor="email-signup" className="sr-only">
 									Email address for election updates
 								</label>
 								<input
-									id="email-signup"
+									id="mce-EMAIL"
+									name="EMAIL"
 									type="email"
 									placeholder="Enter your email..."
 									required
+									defaultValue=""
 									aria-describedby="signup-description"
 								/>
-								<button className={styles.signupButton}>Sign Up</button>
+								<div hidden={true}>
+									<input type="hidden" name="tags" value="1498578" />
+								</div>
+								
+								{/* Response messages container - simplified */}
+								<div id="mce-responses" style={{ display: 'none' }}>
+									<div id="mce-error-response"></div>
+									<div id="mce-success-response"></div>
+								</div>
+								
+								{/* Honeypot field - EXACT from your Mailchimp code */}
+								<div aria-hidden={true} style={{ position: 'absolute', left: '-5000px' }}>
+									<input type="text" name="b_9f86caf1fafffd2860920ac8f_3b7590f171" tabIndex={-1} defaultValue="" />
+								</div>
+								<button 
+									type="submit"
+									name="subscribe"
+									id="mc-embedded-subscribe" 
+									className={`${styles.signupButton} ${isSuccess ? styles.successButton : ''}`}
+									disabled={isSubmitting}
+									>
+									{isSubmitting ? 'Signing Up...' : isSuccess ? (
+									<>
+									You're In! <FaRegCircleCheck style={{ marginLeft: '8px' }} />
+									</>
+									) : 'Sign Up'}
+									</button>
 							</form>
 						</div>
 					</section>

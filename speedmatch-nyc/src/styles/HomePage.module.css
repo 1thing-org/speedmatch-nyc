@@ -82,11 +82,43 @@
   border-radius: 4px;
   padding: 0.8rem 1.5rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-.signupButton:hover {
-  background-color: #2EB800;
+.signup .signupButton.successButton {
+  border: 2px solid #3cff00 !important; 
+  background-color: transparent !important; 
+  color: #3cff00;
+  font-size: 24px;
+  font-weight: 500;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.signupButton:disabled {
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .signupButton:hover {
+    background-color: #2EB800;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Tablet styles */
@@ -95,7 +127,7 @@
 (min-width: 744px) and (min-height: 900px) {
   .coverImageWrapper {
     height: auto;
-    margin-top: -15px;
+    margin-top: -20px;
     text-align: center;
   }
   .coverImage {
