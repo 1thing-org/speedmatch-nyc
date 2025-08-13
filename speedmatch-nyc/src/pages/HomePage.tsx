@@ -35,10 +35,10 @@ function HomePage() {
 			const emailInput = form.querySelector('#mce-EMAIL') as HTMLInputElement;
 			if (emailInput) emailInput.value = '';
 
-			// Reset button after 5 seconds
+			// Reset button after 3 seconds
 			setTimeout(() => {
 				setIsSuccess(false);
-			}, 5000);
+			}, 3000);
 
 		} catch (error) {
 			console.error('Submission error:', error);

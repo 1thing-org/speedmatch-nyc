@@ -69,8 +69,18 @@
   border-radius: 4px;
   border: none;
   font-size: 1.2rem;
-  outline: none; 
+  outline: none;
+
+  .signup input:-webkit-autofill,
+  .signup input:-webkit-autofill:hover,
+  .signup input:-webkit-autofill:focus,
+  .signup input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: black !important;
+  }
 }
+
+
 
 .signupButton {
   background-color: #3cff00;
@@ -85,8 +95,8 @@
 }
 
 .signup .signupButton.successButton {
-  border: 2px solid #3cff00 !important; 
-  background-color: transparent !important; 
+  border: 2px solid #3cff00 !important;
+  background-color: transparent !important;
   color: #3cff00;
   font-size: 24px;
   font-weight: 500;
@@ -121,20 +131,21 @@
 }
 
 /* Tablet styles */
-@media (min-width: 744px) and (max-width: 1366px) and (min-height: 900px) and (orientation: portrait)  {
+@media (min-width: 744px) and (max-width: 1366px) and (min-height: 900px) and (orientation: portrait) {
   .coverImageWrapper {
     height: auto;
     margin-top: 5px;
     text-align: center;
-    margin-left: calc(-50vw + 50%); 
+    margin-left: calc(-50vw + 50%);
     width: 100vw;
   }
+
   .coverImage {
     width: 100vw;
     height: auto;
     margin-left: 0;
     display: inline-block;
-    max-height:none;
+    max-height: none;
   }
 
   .headline h1 {

@@ -29,10 +29,6 @@
   cursor: pointer;
 }
 
-.socialIcon svg:hover {
-  transform: scale(1.2);
-}
-
 .label {
   margin: 0;
   color: white;
@@ -59,17 +55,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
 }
 
 .aboutIcon svg {
   width: 27px;
   height: 27px;
-}
-
-@media (hover: hover) {
-  .aboutIcon a:hover {
-    background: #ffffff;
-    transform: translateY(-2px);
-  }
 }

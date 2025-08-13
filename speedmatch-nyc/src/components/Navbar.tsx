@@ -24,10 +24,16 @@ function Navbar({ buttons }: NavBarProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, [menuOpen]); 
 
+  	const handleLogoClick = () => {
+		if (menuOpen) {
+			setMenuOpen(false);
+		}
+	};
+
 	return (
 		<nav className={`${styles.navbar}`}>
 			<div className={styles.logo}>
-				<Link to="/">
+				<Link to="/" onClick={handleLogoClick}>
 				<img src={logo} alt="Speed Matching logo" height={40} />
 				</Link>
 			</div>
