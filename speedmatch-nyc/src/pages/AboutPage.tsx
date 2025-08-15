@@ -108,7 +108,7 @@ function Aboutpage() {
 									<h2 className={styles.sectionTitle}>How To Support Us</h2>
 									<p className={styles.sectionText}>
 										To maintain neutrality, this project does not receive financial support from any parties or
-										individuals. If you find our project helpful you can support us on GoFundMe.
+										individuals. If you find our project helpful you can support us on Zeffy.
 									</p>
 
 									<a
@@ -116,9 +116,9 @@ function Aboutpage() {
 										className={styles.supportButton}
 										target="_blank"
 										rel="noopener noreferrer"
-										aria-label="Support Speed Matching NYC on GoFundMe"
+										aria-label="Support Speed Matching NYC on Zeffy"
 									>
-										Support Us On GoFundMe
+										Support Us On Zeffy
 									</a>
 									<div className={styles.divider}></div>
 								</section>
