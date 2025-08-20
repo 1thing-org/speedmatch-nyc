@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router';
 import HomePage from './pages/HomePage';
 import CandidatesPage from './pages/CandidatesPage';
 import Aboutpage from './pages/AboutPage';
@@ -16,6 +16,10 @@ function App() {
       <Route path="/explore" element={<CandidatesPage />} />
       <Route path="/about" element={<Aboutpage />} />
       <Route path="/contact" element={<ContactPage />} />
+
+      <Route path="/about/index.html" element={<Navigate to="/about" replace />} />
+      <Route path="/explore/index.html" element={<Navigate to="/explore" replace />} />
+      <Route path="/contact/index.html" element={<Navigate to="/contact" replace />} />
       </Routes>
     </Router>
   )

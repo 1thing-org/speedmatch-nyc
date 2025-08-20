@@ -186,7 +186,7 @@
 
   .headline {
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 70% 30%;
     gap: 2rem;
     align-items: center;
     padding: 1rem 0 0 0;
@@ -209,6 +209,8 @@
     flex-direction: column;
     width: 100%;
     max-width: 400px;
+    justify-self: right;
+    padding-right: 2rem;
   }
 
   .signup input,
