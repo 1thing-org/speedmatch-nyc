@@ -27,6 +27,8 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .primaryElectionText {
@@ -177,17 +179,18 @@
   }
 
   .coverImage {
-    width: 100%;
+    width: 98%;
     max-height: 65vh;
     object-fit: contain;
-    margin-left: 0;
   }
 
   .headline {
     display: grid;
     grid-template-columns: 60% 40%;
-    gap: 3rem;
+    gap: 2rem;
     align-items: center;
+    padding: 1rem 0 0 0;
+
   }
 
   .headlineText {
@@ -204,11 +207,43 @@
 
   .signup {
     flex-direction: column;
-    width: 90%;
+    width: 100%;
+    max-width: 400px;
   }
 
   .signup input,
   .startButton {
     height: 3.5rem;
+  }
+}
+
+@media (min-width: 1280px) and (orientation: landscape) {
+  .headline {
+    grid-template-columns: 820px 400px;
+    justify-content: center;
+  }
+
+
+.coverImageWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+
+  .coverImage {
+    max-width: 1280px;
+    width: 1280px;
+    object-fit: contain;
+  }
+
+  .headlineText {
+    padding-left: 0;
+    width: 820px;
+  }
+
+  .headline h1 {
+    width: 100%;
+    max-width: none;
   }
 }
