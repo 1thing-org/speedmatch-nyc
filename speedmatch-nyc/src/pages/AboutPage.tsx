@@ -108,17 +108,17 @@ function Aboutpage() {
 									<h2 className={styles.sectionTitle}>How To Support Us</h2>
 									<p className={styles.sectionText}>
 										To maintain neutrality, this project does not receive financial support from any parties or
-										individuals. If you find our project helpful you can support us on Zeffy.
+										individuals. If you find our project helpful you can support us on GoFundMe.
 									</p>
 
 									<a
-										href="https://www.zeffy.com/en-US/donation-form/support-candidate-speed-matching-project"
+										href="https://gofund.me/d433391c"
 										className={styles.supportButton}
 										target="_blank"
 										rel="noopener noreferrer"
-										aria-label="Support Speed Matching NYC on Zeffy"
+										aria-label="Support Speed Matching NYC on GoFundMe"
 									>
-										Support Us On Zeffy
+										Support Us On GoFundMe
 									</a>
 									<div className={styles.divider}></div>
 								</section>
