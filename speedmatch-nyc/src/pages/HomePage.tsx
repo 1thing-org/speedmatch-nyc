@@ -82,7 +82,7 @@ function HomePage() {
 	return (
 		<>
 			<SEOHead
-				title="Speed Matching NYC - Find Your Ideal 2025 Mayoral Candidate"
+				title="Speed Match NYC - Find Your Ideal 2025 Mayoral Candidate"
 				description="Take Speed Match NYC's 8 minute quiz to find the 2025 Mayoral Candidate you align with."
 				keywords="NYC mayor 2025, mayoral election, candidate matching, NYC politics, political quiz, voter guide, New York City election"
 				canonical="https://speedmatch.nyc/"
@@ -131,15 +131,15 @@ function HomePage() {
 							<picture>
 								<source
 									media="(min-width: 1024px) and (orientation: landscape)"
-									srcSet="/images/key-visual/desktop-key-visual.webp"
+									srcSet="/images/key-visual/desktop-all-candidates.webp"
 								/>
 								<source
 									media="(min-width: 768px)"
-									srcSet="/images/key-visual/tablets-all.webp"
+									srcSet="/images/key-visual/key-visual-tablet2.webp"
 								/>
 								<source
 									media="(min-width: 744px) and (min-height: 1000px)"
-									srcSet="/images/key-visual/tablets-all.webp"
+									srcSet="/images/key-visual/key-visual-tablet2.webp"
 								/>
 								<img
 									src="/images/key-visual/mobile-all-candidates.webp"

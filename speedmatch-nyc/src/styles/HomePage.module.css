@@ -175,12 +175,12 @@
 @media (min-width: 1024px) and (orientation: landscape) {
   .coverImageWrapper {
     height: auto;
-    margin-top: -15px;
+    margin-top: 0px;
   }
 
   .coverImage {
     width: 98%;
-    max-height: 65vh;
+    max-height: 62vh;
     object-fit: contain;
   }
 
