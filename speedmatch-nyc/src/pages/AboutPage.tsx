@@ -13,7 +13,7 @@ function Aboutpage() {
 		"@type": "Organization",
 		"name": "Speed Matching NYC",
 		"description": "Independent organization helping NYC voters find their ideal mayoral candidate through political matching",
-		"url": "https://speedmatching.nyc",
+		"url": "https://speedmatch.nyc/about",
 		"foundingDate": "2025",
 		"areaServed": {
 			"@type": "City",
@@ -29,8 +29,8 @@ function Aboutpage() {
 			<SEOHead
 				title="About This Project"
 				description="Learn about Speed Matching NYC, our mission to help voters find their ideal mayoral candidate, and our commitment to political neutrality in the 2025 NYC election."
-				keywords="about speed matching, NYC election project, political neutrality, voter education"
-				canonical="https://speedmatching.nyc/about"
+				keywords="about speed match, NYC election project, political neutrality, voter education"
+				canonical="https://speedmatch.nyc/about"
 				ogImages={{
 					twitter: "/images/OG/OG_Twitter.jpg",
 					linkedin: "/images/OG/OG_Linkedin.jpg",

@@ -11,12 +11,12 @@ function ContactPage() {
 	const contactSchema = {
 		"@context": "https://schema.org",
 		"@type": "ContactPage",
-		"name": "Contact Speed Matching NYC",
+		"name": "Contact Speed Match NYC",
 		"description": "Get in touch with the Speed Matching NYC team for collaboration, support, or outreach opportunities",
-		"url": "https://speedmatching.nyc/contact",
+		"url": "https://speedmatch.nyc/contact",
 		"mainEntity": {
 			"@type": "Organization",
-			"name": "Speed Matching NYC",
+			"name": "Speed Match NYC",
 			"description": "Grassroots group dedicated to making civic participation more accessible and inclusive",
 			"areaServed": {
 				"@type": "City",
@@ -36,9 +36,9 @@ function ContactPage() {
 		<>
 			<SEOHead
 				title="Contact Us"
-				description="Get in touch with the Speed Matching NYC team. We're a grassroots group dedicated to making civic participation more accessible and inclusive. Contact us for collaboration opportunities."
-				keywords="contact speed matching, NYC election contact, civic participation, grassroots organization, voter education contact"
-				canonical="https://speedmatching.nyc/contact"
+				description="Get in touch with the Speed Match NYC team."
+				keywords="contact speed match, NYC election contact, voter education contact"
+				canonical="https://speedmatch.nyc/contact"
 				ogImages={{
 					twitter: "/images/OG/OG_Twitter.jpg",
 					linkedin: "/images/OG/OG_Linkedin.jpg",

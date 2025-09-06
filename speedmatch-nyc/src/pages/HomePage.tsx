@@ -60,16 +60,16 @@ function HomePage() {
 		"@type": "WebSite",
 		"name": "Speed Matching NYC",
 		"alternateName": "NYC Mayoral Candidate Matcher",
-		"url": "https://speedmatching.nyc",
-		"description": "Find your ideal NYC mayoral candidate for the 2025 election. Compare candidate positions and get matched based on your values."
+		"url": "https://speedmatch.nyc",
+		"description": "Take Speed Match NYC's 8 minute quiz to find the 2025 Mayoral Candidate you align with."
 	};
 
 	const organizationSchema = {
 		"@context": "https://schema.org",
 		"@type": "Organization",
 		"name": "Speed Matching NYC",
-		"description": "Helping NYC voters find their ideal mayoral candidate through political matching",
-		"url": "https://speedmatching.nyc",
+		"description": "Take Speed Match NYC's 8 minute quiz to find the 2025 Mayoral Candidate you align with.",
+		"url": "https://speedmatch.nyc",
 		"foundingDate": "2025",
 		"areaServed": {
 			"@type": "City",
@@ -83,9 +83,9 @@ function HomePage() {
 		<>
 			<SEOHead
 				title="Speed Matching NYC - Find Your Ideal 2025 Mayoral Candidate"
-				description="Match with your ideal NYC mayoral candidate for the 2025 election. Compare positions on key issues and find candidates who align with your values. Free political matching tool."
+				description="Take Speed Match NYC's 8 minute quiz to find the 2025 Mayoral Candidate you align with."
 				keywords="NYC mayor 2025, mayoral election, candidate matching, NYC politics, political quiz, voter guide, New York City election"
-				canonical="https://speedmatching.nyc/"
+				canonical="https://speedmatch.nyc/"
 				ogImages={{
 					twitter: "/images/OG/OG_Twitter.jpg",
 					linkedin: "/images/OG/OG_Linkedin.jpg",
@@ -131,15 +131,15 @@ function HomePage() {
 							<picture>
 								<source
 									media="(min-width: 1024px) and (orientation: landscape)"
-									srcSet="/images/key-visual/desktop-all-candidates.webp"
+									srcSet="/images/key-visual/desktop-key-visual.webp"
 								/>
 								<source
 									media="(min-width: 768px)"
-									srcSet="/images/key-visual/key-visual-tablet2.webp"
+									srcSet="/images/key-visual/tablets-all.webp"
 								/>
 								<source
 									media="(min-width: 744px) and (min-height: 1000px)"
-									srcSet="/images/key-visual/key-visual-tablet2.webp"
+									srcSet="/images/key-visual/tablets-all.webp"
 								/>
 								<img
 									src="/images/key-visual/mobile-all-candidates.webp"

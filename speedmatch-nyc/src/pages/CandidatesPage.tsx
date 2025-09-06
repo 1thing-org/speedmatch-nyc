@@ -13,7 +13,7 @@ function CandidatesPage() {
 		"@type": "ItemList",
 		"name": "2025 NYC Mayoral Candidates",
 		"description": "Complete list of candidates running for NYC Mayor in 2025",
-		"url": "https://speedmatching.nyc/explore",
+		"url": "https://speedmatch.nyc/explore",
 		"numberOfItems": candidates.length,
 		"itemListElement": candidates.map((candidate, index) => ({
 			"@type": "ListItem",
@@ -23,7 +23,7 @@ function CandidatesPage() {
 				"name": candidate.name,
 				"description": candidate.altText || `${candidate.party} candidate for NYC Mayor 2025`,
 				"url": candidate.website,
-				"image": `https://speedmatching.nyc${candidate.image}`,
+				"image": `https://speedmatch.nyc${candidate.image}`,
 				"jobTitle": "Mayoral Candidate",
         "memberOf": {
           "@type": "PoliticalParty",
@@ -42,9 +42,9 @@ function CandidatesPage() {
 		<>
 			<SEOHead
 				title="2025 NYC Mayoral Candidates - Complete Guide"
-				description="Explore all candidates running for NYC Mayor in 2025. View profiles, party affiliations, and official websites for Eric Adams, Andrew Cuomo, and other mayoral candidates."
+				description="Explore all candidates running for NYC Mayor in 2025. View profiles, party affiliations, and official websites for mayoral candidates."
 				keywords="NYC mayoral candidates 2025, Eric Adams, Andrew Cuomo, Jean Anglade, Irene Estrada, NYC election candidates, mayoral race"
-				canonical="https://speedmatching.nyc/explore"
+				canonical="https://speedmatch.nyc/explore"
 				ogImages={{
 					twitter: "/images/OG/OG_Twitter.jpg",
 					linkedin: "/images/OG/OG_Linkedin.jpg",

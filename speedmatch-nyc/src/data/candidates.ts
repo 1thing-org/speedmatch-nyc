@@ -41,8 +41,16 @@ export const candidates: Candidate[] = [
     party: "Independent",
     altText: "Black and white portrait of Kyle Gutierrez with long curly hair, mustache, and suit."
   },
-  {
+    {
     id: 6,
+    name: "Joseph Hernandez",
+    image: "/images/candidates/joseph-hernandez.webp", 
+    website: "https://www.hernandezfornyc.com/",
+    party: "Independent",
+    altText: "Black and white portrait of Joseph Hernandez smiling with a hat and suit."
+  },
+  {
+    id: 7,
     name: "Abby Laurel-Smith",
     image: "/images/candidates/abby-laurel-smith.webp",
     website: "https://www.rebuildnewyork.city/",
@@ -50,7 +58,7 @@ export const candidates: Candidate[] = [
     altText: "Black and white portrait of Abbey Laurel-Smith wearing a suit and tie, neutral expression."
   },
   {
-    id: 7,
+    id: 8,
     name: "Zohran Mamdani",
     image: "/images/candidates/zohran-mamdani.webp",
     website: "https://www.zohranfornyc.com/",
@@ -64,13 +72,5 @@ export const candidates: Candidate[] = [
     website: "https://www.sliwafornyc.com/",
     party: "Republican",
     altText: "Black and white portrait of Curtis Sliwa wearing a beret and checkered jacket."
-  },
-  {
-    id: 9,
-    name: "Jim Walden",
-    image: "/images/candidates/jim-walden.webp",
-    website: "https://jimfornyc.com/",
-    party: "Independent",
-    altText: "Black and white portrait of James Walden in a suit, smiling."
   }
 ];

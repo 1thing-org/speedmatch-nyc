@@ -19,7 +19,7 @@ function SEOHead({
   canonical, 
   ogImages
 }: SEOHeadProps) {
-  const siteTitle = 'Speed Matching NYC';
+  const siteTitle = 'Speed Match NYC';
   const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 
   return (

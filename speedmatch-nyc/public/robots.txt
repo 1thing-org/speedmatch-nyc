@@ -4,4 +4,4 @@ Allow: /
 # Disallow admin or private pages if any
 # Disallow: /admin/
 
-Sitemap: https://speedmatching.nyc/sitemap.xml
+Sitemap: https://speedmatch.nyc/sitemap.xml
