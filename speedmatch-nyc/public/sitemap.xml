@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://speedmatching.nyc/</loc>
+    <loc>https://speedmatch.nyc/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <lastmod>2025-07-31</lastmod>
   </url>
   <url>
-    <loc>https://speedmatching.nyc/explore</loc>
+    <loc>https://speedmatch.nyc/explore</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <lastmod>2025-07-31</lastmod>
   </url>
   <url>
-    <loc>https://speedmatching.nyc/about</loc>
+    <loc>https://speedmatch.nyc/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <lastmod>2025-07-31</lastmod>
   </url>
   <url>
-    <loc>https://speedmatching.nyc/contact</loc>
+    <loc>https://speedmatch.nyc/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <lastmod>2025-07-31</lastmod>
