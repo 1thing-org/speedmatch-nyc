@@ -6,6 +6,10 @@
 	--border-color: white;
 }
 
+.candidatesPage footer {
+	border-top: 0.5px solid white; 
+}
+
 .candidates {
 	display: grid;
 	overflow: hidden;

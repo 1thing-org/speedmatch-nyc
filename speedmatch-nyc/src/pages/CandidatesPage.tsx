@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 import styles from "../styles/CandidatesPage.module.css";
 import Navbar from "../components/Navbar";
 import PageHeader from "../components/PageHeader";
+import Footer from '../components/Footer';
 import { candidates } from "../data/candidates";
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
@@ -112,6 +113,10 @@ function CandidatesPage() {
 						</div>
 					</section>
 				</main>
+
+				<footer>
+					<Footer />
+				</footer>
 			</div>
 		</>
 	)

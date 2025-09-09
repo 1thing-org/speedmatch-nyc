@@ -2,9 +2,10 @@ import styles from "../styles/Footer.module.css";
 import logo from '../assets/logo.svg';
 import SocialMedia from "./SocialMedia";
 
+
 function Footer() {
     return (
-        <div className={styles.footer}>
+        <footer className={styles.footer}>
             <div className={styles.footerContainer}>
             <div className={styles.footerLeft}>
             <div className={styles.logo}>
@@ -20,7 +21,7 @@ function Footer() {
         <SocialMedia variant="footer" />
         </div>
             </div>
-        </div>
+        </footer>
     )
 }
 

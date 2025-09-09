@@ -5,6 +5,7 @@ import PageHeader from "../components/PageHeader";
 import SocialMedia from '../components/SocialMedia';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
+import Footer from '../components/Footer';
 
 function Aboutpage() {
 	// Structured data for About page
@@ -145,6 +146,9 @@ function Aboutpage() {
 						</div>
 					</div>
 				</main>
+				<footer>
+					<Footer />
+				</footer>
 			</div>
 		</>
 	)

@@ -3,7 +3,11 @@
   background-color:
     white;
   --border-color: #003cff;
+   display: grid;
+  grid-template-rows: auto 1fr auto;
 }
+
+
 
 .container {
   margin: 0 auto;

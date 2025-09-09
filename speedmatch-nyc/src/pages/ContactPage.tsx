@@ -3,6 +3,7 @@ import styles from "../styles/ContactPage.module.css";
 import Navbar from "../components/Navbar";
 import PageHeader from "../components/PageHeader";
 import SocialMedia from '../components/SocialMedia';
+import Footer from '../components/Footer';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
 
@@ -93,6 +94,10 @@ function ContactPage() {
 						</div>
 					</div>
 				</main>
+
+				<footer>
+					<Footer />
+				</footer>
 			</div>
 		</>
 	)
