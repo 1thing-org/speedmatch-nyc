@@ -54,7 +54,6 @@
 
 .takeQuiz {
   width: 100%;
-
 }
 
 .takeQuizButton {
@@ -151,15 +150,14 @@
     grid-template-columns: 70% 30%;
     gap: 2rem;
     align-items: start;
-    padding: 1rem 0 0 0;
+    padding: 1rem 0 3rem 0;
     margin-top: 1rem;
-
   }
 
   .headlineText {
     text-align: left;
     letter-spacing: -6%;
-    padding-left: 1.5rem;
+    padding-left: 2rem;
   }
 
   .headline h1 {

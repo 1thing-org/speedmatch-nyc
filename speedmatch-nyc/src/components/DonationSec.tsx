@@ -9,7 +9,7 @@ function DonationSec() {
                 Speed Matching is a <u>volunteer-run</u> project created by a team of designers and engineers working to make <u>civic participation 
                 more accessible</u> through technology. If you love what we're doing, you can support us on <u>GoFundMe</u>.
             </p>
-
+            <div className={styles.supportButtonWrapper}>
             <a
                 href="https://gofund.me/d433391c"
                 className={styles.supportButton}
@@ -17,9 +17,11 @@ function DonationSec() {
                 rel="noopener noreferrer"
                 aria-label="Support Speed Match NYC on GoFundMe"
             >
-                Support Us On GoFundMe <img src={logo} alt="donation_logo" />
+                <span className={styles.fullText}>Support Us On GoFundMe</span>
+                <span className={styles.shortText}>Support Us</span>
+                <img src={logo} alt="donation_logo" />
             </a>
-
+            </div>
         </section>
         </div>
     )
