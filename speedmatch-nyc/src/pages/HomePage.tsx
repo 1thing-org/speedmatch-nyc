@@ -7,6 +7,7 @@ import HeroWrapper from '../components/HeroWrapper';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
 import DonationSec from '../components/DonationSec';
+import Footer from '../components/Footer';
 
 function HomePage() {
 	const [isDesktop, setIsDesktop] = useState(false);
@@ -134,7 +135,9 @@ function HomePage() {
 				<DonationSec />
 
 	
-				<footer></footer>
+				<footer>
+					<Footer />
+				</footer>
 			</div>
 		</>
 	)

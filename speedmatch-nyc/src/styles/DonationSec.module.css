@@ -1,6 +1,6 @@
 .donationSec {
     background-color: white;
-    height: 349px;
+    height: 338px;
     width: 100%;
 }
 
@@ -9,7 +9,7 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
+	gap: 2.2rem;
 	align-items: center;
 	justify-content: center;
 }
@@ -59,6 +59,9 @@
 
 /* Tablet styles */
 @media (min-width: 744px) and (max-width: 1366px) and (min-height: 900px) and (orientation: portrait) {
+  .donationSec {
+    height: 300px;
+  }
 	.supportButtonWrapper {
 	width: 60%;
 	max-width: 600px;
@@ -72,6 +75,10 @@
 
 /* Desktop styles */
 @media (min-width: 1024px) and (orientation: landscape) {
+  .donationSec {
+    height: 300px;
+  }
+
 	.section {
 		display: grid;
     grid-template-columns: 70% 30%;
@@ -106,6 +113,10 @@
 }
 
 @media (min-width: 1280px) and (orientation: landscape) {
+  .donationSec {
+    height: 260px;
+  }
+
   .section {
     grid-template-columns: 820px 400px;
     justify-content: center;
