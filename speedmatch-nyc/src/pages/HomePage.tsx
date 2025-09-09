@@ -6,6 +6,7 @@ import SocialMedia from '../components/SocialMedia';
 import HeroWrapper from '../components/HeroWrapper';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
+import DonationSec from '../components/DonationSec';
 
 function HomePage() {
 	const [isDesktop, setIsDesktop] = useState(false);
@@ -130,8 +131,9 @@ function HomePage() {
 						</div>
 					</section>
 				</main>
+				<DonationSec />
 
-				{/* Social media follow */}
+	
 				<footer></footer>
 			</div>
 		</>

@@ -1,0 +1,51 @@
+.donationSec {
+    background-color: white;
+    height: 349px;
+    width: 100%;
+}
+
+.section {
+    padding: 2.2rem 1.3rem 1rem 1.3rem;
+}
+
+.sectionText {
+    color: #003CFF;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: -6%;
+    padding-bottom: 2.2rem;
+}
+
+.supportButton {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 0.75rem 2rem;
+  font-size: 24px;
+  font-weight: 550;
+  cursor: pointer;
+  align-self: center;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  text-decoration: none;
+  text-align: center; 
+  transition: background-color 0.3s, transform 0.2s ease;
+
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  gap: 0.5rem;     
+}
+
+/* .supportButton img {
+  padding-top: 10px;
+  height: 1.1em;
+} */
+
+@media (hover: hover) {
+.supportButton:hover {
+  background-color: #D9D9D9;
+}
+}
