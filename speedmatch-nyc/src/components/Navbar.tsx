@@ -6,23 +6,23 @@ import { Link } from 'react-router';
 import Menu from './Menu';
 
 type NavBarProps = {
-
 	buttons?: React.ReactNode;
+	forceHamburger?:boolean;
 };
 
-function Navbar({ buttons }: NavBarProps) {
+function Navbar({ buttons, forceHamburger = false }: NavBarProps) {
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	// Close menu when screen size is desktop
 	useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024 && menuOpen) {
+      if (!forceHamburger && window.innerWidth >= 1024 && menuOpen) {
         setMenuOpen(false);
       }
     };
 	window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [menuOpen]); 
+  }, [menuOpen, forceHamburger]); 
 
   	const handleLogoClick = () => {
 		if (menuOpen) {
@@ -38,12 +38,12 @@ function Navbar({ buttons }: NavBarProps) {
 				</Link>
 			</div>
 
-			{/* Right buttons are visible on desktop (hidden on mobile via CSS) */}
-			<div className={styles.rightButtons}>{buttons}</div>
+			{/* Hidden on quiz pages; visible on desktop elsewhere */}
+      		{!forceHamburger && <div className={styles.rightButtons}>{buttons}</div>}
 
 			{/* Hamburger menu */}
 			<div
-				className={styles.menuToggle}
+				className={`${styles.menuToggle} ${forceHamburger ? styles.menuAlways : ''}`}
 				onClick={() => setMenuOpen(!menuOpen)}
 			>
 				☰

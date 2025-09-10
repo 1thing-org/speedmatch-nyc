@@ -31,6 +31,8 @@
   color: white;
 }
 
+.menuAlways { display: block !important; }
+
 @media (min-width: 1024px) {
   .menuToggle {
     display: none;
