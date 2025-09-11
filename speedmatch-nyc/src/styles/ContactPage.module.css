@@ -1,0 +1,72 @@
+.contactPage {
+  min-height: 100vh;
+  background-color:
+    white;
+  --border-bottom-color: #003cff; 
+   display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+
+
+.container {
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem 1rem;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.leftSection {
+  flex: 1;
+}
+
+
+.description {
+  font-size: 18px;
+  line-height: 120%;
+  letter-spacing: -4%;
+  margin-bottom: 1.5rem;
+  color: black;
+}
+
+.emailContainer {
+  margin-bottom: 1.5rem;
+}
+
+.emailLink {
+  font-size: 18px;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+/* Desktop Layout */
+@media (min-width: 768px) {
+  .container {
+    padding: 1.5rem 2rem 3rem 2rem;
+  }
+
+  .leftSection {
+    max-width: 50%;
+  }
+  
+  .contentWrapper {
+    flex-direction: row;
+    gap: 4rem;
+    align-items: flex-start;
+  }
+
+  
+  .description {
+    font-size: 20px;
+    margin-bottom: 2rem;
+  }
+
+  .emailLink {
+  font-size: 20px;
+  }
+  
+}
