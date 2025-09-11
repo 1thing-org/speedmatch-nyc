@@ -1,5 +1,5 @@
 import PageHeader from "../../../components/PageHeader";
-import styles from "../../../styles/quiz/QuizMobile.module.css"
+import styles from "../../styles/QuizMobile.module.css";
 import { Link } from "react-router";
 
 function QuizStart() {

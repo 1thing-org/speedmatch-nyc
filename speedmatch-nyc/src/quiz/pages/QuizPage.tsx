@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
-import PageHeader from "../../components/PageHeader";
-import QuizSidebar from '../../components/quiz/QuizSidebar';
-import SEOHead from '../../components/SEOHead';
-import StructuredData from '../../components/StructuredData';
 import QuizMobileRoutes from "./QuizMobileRoutes";
 import QuizDesktop from "./QuizDesktop";
-import styles from "../../styles/quiz/QuizPage.module.css";
+import styles from "../styles/QuizPage.module.css";
 
 
 

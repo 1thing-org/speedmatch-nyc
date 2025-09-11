@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import CandidatesPage from './pages/CandidatesPage';
 import Aboutpage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import QuizPage from './pages/quiz/QuizPage';
+import QuizPage from './quiz/pages/QuizPage';
 
 
 function App() {
