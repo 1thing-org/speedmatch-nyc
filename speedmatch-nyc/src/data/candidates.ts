@@ -66,7 +66,7 @@ export const candidates: Candidate[] = [
     altText: "Black and white portrait of Zohran Mamdani with a beard, smiling slightly, wearing a light top."
   },
    {
-    id: 8,
+    id: 9,
     name: "Curtis Sliwa",
     image: "/images/candidates/curtis-sliwa.webp",
     website: "https://www.sliwafornyc.com/",
@@ -74,3 +74,13 @@ export const candidates: Candidate[] = [
     altText: "Black and white portrait of Curtis Sliwa wearing a beret and checkered jacket."
   }
 ];
+
+export const candidateIds = candidates.map(c => c.id);
+
+export const candidateById = Object.fromEntries(
+  candidates.map(c => [c.id, c] as const)
+) as Record<Candidate['id'], Candidate>;
+
+export function getCandidateName(id: Candidate['id']) {
+  return candidateById[id]?.name ?? String(id);
+}
