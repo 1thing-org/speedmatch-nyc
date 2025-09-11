@@ -6,8 +6,8 @@
   justify-content: center;
   height: 85px;
   margin-top: 80px;
-  border-top: 1px solid var(--border-color, white);
-  border-bottom: 1px solid var(--border-color, white);
+  border-top: 1px solid var(--border-top-color, var(--border-color, white));
+  border-bottom: 1px solid var(--border-bottom-color, var(--border-color, white));
 }
 
 

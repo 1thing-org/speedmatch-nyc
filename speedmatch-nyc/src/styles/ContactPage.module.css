@@ -2,7 +2,7 @@
   min-height: 100vh;
   background-color:
     white;
-  --border-color: #003cff;
+  --border-bottom-color: #003cff; 
    display: grid;
   grid-template-rows: auto 1fr auto;
 }

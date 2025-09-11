@@ -17,7 +17,7 @@ function App() {
       <Route path="/explore" element={<CandidatesPage />} />
       <Route path="/about" element={<Aboutpage />} />
       <Route path="/contact" element={<ContactPage />} />
-      <Route path="/quiz" element={<QuizPage />} />
+      <Route path="/quiz/*" element={<QuizPage />} />
 
 
       <Route path="/about/index.html" element={<Navigate to="/about" replace />} />

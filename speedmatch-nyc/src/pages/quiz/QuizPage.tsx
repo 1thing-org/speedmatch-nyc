@@ -4,7 +4,7 @@ import PageHeader from "../../components/PageHeader";
 import QuizSidebar from '../../components/quiz/QuizSidebar';
 import SEOHead from '../../components/SEOHead';
 import StructuredData from '../../components/StructuredData';
-import QuizMobile from "./QuizMobile";
+import QuizMobileRoutes from "./QuizMobileRoutes";
 import QuizDesktop from "./QuizDesktop";
 import styles from "../../styles/quiz/QuizPage.module.css";
 
@@ -13,13 +13,13 @@ import styles from "../../styles/quiz/QuizPage.module.css";
 function QuizPage() {
     const isLargeScreen = useIsLargeScreen();
     return (
-        <div className={styles.QuizPage}>
+        <div className={styles.quizPage}>
             <header>
                 <Navbar forceHamburger />
             </header>
             <main>
                 <div className={styles.container}>
-                    {isLargeScreen ? <QuizDesktop /> : <QuizMobile />}
+                    {isLargeScreen ? <QuizDesktop /> : <QuizMobileRoutes />}
                 </div>
             </main>
         </div>
