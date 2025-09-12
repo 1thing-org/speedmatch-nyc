@@ -3,11 +3,11 @@ export const PRIORITIES = [
   { id: 'accountability', label: 'Government Accountability' },
   { id: 'safety',         label: 'Safety' },
   { id: 'housing',        label: 'Affordable Housing' },
-  { id: 'transport',      label: 'Public Transportation' },
   { id: 'education',      label: 'Education' },
   { id: 'childcare',      label: 'Childcare' },
-  { id: 'sustainability', label: 'Sustainability' },
+  { id: 'transport',      label: 'Public Transportation' },
   { id: 'rights',         label: 'Human Rights' },
+  { id: 'sustainability', label: 'Sustainability' },
   { id: 'prek',           label: 'Pre-K' },
 ] as const;
 
