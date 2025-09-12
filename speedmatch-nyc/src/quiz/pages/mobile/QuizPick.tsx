@@ -1,12 +1,16 @@
 import PageHeader from "../../../components/PageHeader";
 import styles from "../../styles/QuizMobile.module.css"
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { PRIORITIES } from "../../content/priorities";
 import type { PriorityId } from "../../scoring/priorities";
 import { useState } from "react";
 
 function QuizPick() {
-    const [selected, setSelected] = useState<PriorityId[]>([]);
+    const location = useLocation() as any;
+    const [selected, setSelected] = useState<PriorityId[]>(() => {
+        const incoming = location?.state?.selected;
+        return Array.isArray(incoming) ? (incoming as PriorityId[]) : [];
+    });
 
     function toggle(id: PriorityId) {
         const isSelected = selected.includes(id);
@@ -50,6 +54,7 @@ function QuizPick() {
             <div className={styles.pickActions}>
                 <Link
                     to="/quiz/rank"
+                    state={{ selected }}
                     className={`${styles.pickNextButton} ${!isReady ? styles.buttonDisabled : ''}`}
                     aria-disabled={!isReady}
                     onClick={(e) => { if (!isReady) e.preventDefault(); }}

@@ -96,7 +96,7 @@ function QuizRank() {
                 >
                     Submit And See Result
                 </Link>
-                <Link to="/quiz/pick" className={styles.pickBackButton}>Back</Link>
+                <Link to="/quiz/pick" state={{ selected: order }} className={styles.pickBackButton}>Back</Link>
             </div>
         </div>
     )
