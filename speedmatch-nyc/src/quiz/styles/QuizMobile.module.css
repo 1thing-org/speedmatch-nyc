@@ -63,16 +63,16 @@
 .pickChipList {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; 
+  gap: 10px;
 }
 
 .pickChip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 56px; 
-  min-width: 90px; 
-  padding: 0 20px; 
+  height: 56px;
+  min-width: 90px;
+  padding: 0 20px;
   border-radius: 67px;
   border: 1px solid #D9D9D9;
   background: #fff;
@@ -137,4 +137,65 @@
   .pickBackButton:hover {
     background-color: #D9D9D9;
   }
+}
+
+/* ---- QuizPick--- */
+.rankContent {
+  padding: 1.5rem 1.2rem;
+}
+
+.rankHint {
+  margin: 0 0 40px 0;
+  font-size: 18px;
+  letter-spacing: -4%;
+  line-height: 120%;
+}
+
+.rankList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.rankItem {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.rankBadge {
+  width: 56px;
+  height: 56px;
+  background: #003CFF;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.rankCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+  height: 56px;
+  padding: 0 16px;
+}
+
+.rankHandle {
+  font-size: 24px;
+  color: #000;
+}
+
+.rankLabel {
+  font-size: 18px;
+  letter-spacing: -4%;
 }
