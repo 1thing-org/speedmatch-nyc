@@ -1,0 +1,152 @@
+.aboutPage {
+  min-height: 100vh;
+  background-color:
+    white;
+  --border-color: #003cff;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem 1rem;
+}
+
+.divider {
+  height: 1px;
+  background-color: #D9D9D9;
+  margin: 2rem 0;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #003cff;
+  margin-bottom: 1rem;
+  line-height: 120%;
+}
+
+.sectionText {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: -4%;
+  margin-bottom: 1rem;
+}
+
+.githubButton,
+.supportButton {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  align-self: center;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  text-decoration: none;
+  text-align: center; 
+  transition: background-color 0.3s, transform 0.2s ease;
+}
+
+@media (hover: hover) {
+.githubButton:hover,
+.supportButton:hover {
+  background-color: #D9D9D9;
+}
+}
+
+
+/* Tablet breakpoint: 768px - 1023px and portrait iPad widths */
+@media (min-width: 768px) and (max-width: 1023px),
+       (min-width: 1024px) and (orientation: portrait),
+       (min-width: 744px) and (min-height: 900px) {
+
+  .aboutPageTabletWrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(270px, 1fr); 
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  .leftColumn > * {
+    margin-bottom: 2rem; 
+  }
+
+  .rightColumn {
+    align-self: start;
+  }
+
+  .neutralSection .divider {
+    display: none;
+  }
+  
+  .githubButton,
+  .supportButton {
+    width: 80%;
+    align-self: flex-start;
+    margin: 0;
+  }
+}
+
+
+/* Desktop layout: ≥1024px landscape */
+@media (min-width: 1024px) and (orientation: landscape) {
+  .aboutPageTabletWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "why who"
+      "thanks support"
+      "neutral follow";
+    gap: 4rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+  }
+
+  /* Assign each section a named area */
+  .whySection { grid-area: why; }
+  .whoSection { grid-area: who; }
+  .thanksSection { grid-area: thanks; }
+  .supportSection { grid-area: support; }
+  .neutralSection { grid-area: neutral; }
+  .followSection { grid-area: follow; }
+
+  .leftColumn,
+  .rightColumn {
+    display: contents; 
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    margin-top: -1rem;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+  }
+
+  .sectionText {
+    font-size: 20px;
+    margin-bottom: 1.5rem;
+  }
+
+  .divider {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+
+  .neutralSection .divider,
+  .followSection .divider {
+    display: none;
+  }
+
+  .githubButton,
+  .supportButton {
+    width: auto;
+    min-width: 400px;
+    margin: 0 0 2rem 0;
+    align-self: flex-start;
+  }
+}

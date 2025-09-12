@@ -1,0 +1,63 @@
+/* Hero variant */
+.socialMedia {
+  margin-top: 0;
+  text-align: right;
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  align-items: center;
+  height: 100%;
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.socialIcon a {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.socialIcon svg {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.label {
+  margin: 0;
+  color: white;
+  font-weight: 500;
+}
+
+/* About and contact variant */
+.about {
+  margin-top: 0.5rem;
+  text-align: left;
+  flex-direction: column;
+  align-items: flex-start;
+  height: auto;
+}
+
+.aboutIcon {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.aboutIcon a {
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aboutIcon svg {
+  width: 27px;
+  height: 27px;
+}

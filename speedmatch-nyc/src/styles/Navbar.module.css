@@ -1,0 +1,44 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #003cff;
+  align-items: center;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.rightButtons {
+  display: none;
+}
+
+
+.logo img {
+  height: 40px;
+}
+
+.menuToggle {
+  display: block;
+  font-size: 2.5rem;
+  cursor: pointer;
+  z-index: 3000;
+  position: relative;
+  color: white;
+}
+
+@media (min-width: 1024px) {
+  .menuToggle {
+    display: none;
+  }
+
+  .rightButtons {
+    display: flex; 
+    gap: 1rem;
+  }
+  
+}
