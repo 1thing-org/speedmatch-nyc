@@ -1,0 +1,103 @@
+.candidatesPage {
+	min-height: 100vh;
+	background-color:
+		#003cff;
+	color: white;
+	--border-color: white;
+}
+
+.candidates {
+	display: grid;
+	overflow: hidden;
+	justify-content: center;
+	grid-template-columns: repeat(auto-fit, minmax(144px, 1fr));
+	gap: 0.5rem;
+	margin: 0.5rem auto 0;
+	padding-bottom: 2rem;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.candidateCard {
+	margin-top: 1rem;
+	height: 288px;
+	margin-bottom: 0.5rem;
+}
+
+.candidateImage {
+	height: 188px;
+	width: 100%;
+	display: block;
+	object-fit: cover;
+    object-position: center top; 
+}
+
+.candidateInfo {
+	padding-top: clamp(0.7rem, 2vw, 1rem);
+}
+
+.candidateName {
+	font-size: 24px;
+	font-weight: 500;
+	color: white;
+	line-height: 87%;
+	letter-spacing: -4%;
+}
+
+.party {
+	font-size: 16px;
+	color: #D9D9D9;
+	line-height: 87%;
+	letter-spacing: -4%;
+	margin-top: 0.3rem;
+	margin-bottom: 0.1rem;
+}
+
+.visitLink {
+	color: #3cff00;
+	text-align: left;
+	font-weight: 500;
+	line-height: 87%;
+	font-size: 18px;
+	letter-spacing: -4%;
+}
+
+@media (min-width: 400px) and (max-width: 559px) {
+	.candidates {
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	}
+}
+
+@media (min-width: 560px) and (max-width: 767px) {
+	.candidates {
+		grid-template-columns: repeat(2, 216px);
+		padding-left: 0;
+		padding-right: 0;
+
+	}
+}
+
+@media (min-width: 768px) {
+	.candidates {
+		grid-template-columns: repeat(3, 216px);
+		padding-left: 40px;
+		padding-right: 40px;
+	
+	}
+}
+
+/* Desktop - 1024px and up */
+@media (min-width: 1024px) {
+	.candidates {
+		grid-template-columns: repeat(4, 216px);
+		padding-left: 60px;
+		padding-right: 60px;
+	}
+}
+
+/* Large Desktop - 1280px and up */
+@media (min-width: 1280px) {
+	.candidates {
+		grid-template-columns: repeat(5, 216px);
+	}
+}
