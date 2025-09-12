@@ -6,6 +6,7 @@ type MenuProps = {
 };
 
 const links = [
+  { text: 'Take Quiz', to: '/quiz' },
   { text: 'Explore Candidates', to: '/explore' },
   { text: 'About This Project', to: '/about' },
   { text: 'Contact', to: '/contact' },

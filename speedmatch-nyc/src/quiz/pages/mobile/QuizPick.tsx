@@ -62,7 +62,7 @@ function QuizPick() {
                     Next: Rank Your Priorities
                 </Link>
 
-                <Link to="/quiz" className={styles.pickBackButton}>Back</Link>
+                <Link to="/quiz/questions" className={styles.pickBackButton}>Back</Link>
             </div>
         </div>
     )

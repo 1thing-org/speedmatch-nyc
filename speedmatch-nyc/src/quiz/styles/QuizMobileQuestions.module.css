@@ -1,0 +1,113 @@
+.page {
+  margin-top: 80px;
+
+}
+
+.qSection {
+  padding: 1rem 1.5rem 2rem 1.5rem;
+  border-bottom: 26px solid #0a46ff;
+  width: 100%
+  ;scroll-margin-top: 96px; /* leave space for fixed navbar so the section is fully visible */
+}
+
+.qMeta {
+  color: #000;
+  font-size: 16px;
+  margin: 0 0 1px 0;
+}
+
+.qTitle {
+  font-size: 24px;
+  line-height: 120%;
+  letter-spacing: -4%;
+  font-weight: 500;
+
+}
+
+.qSub {
+  color: #666;
+  font-size: 14px;
+  padding-left: 0.5rem;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  font-weight: 300;
+  letter-spacing: -4%;
+  line-height: 100%;
+}
+
+.options {
+  list-style: none;
+  padding: 0;
+  /* margin: 12px 0 12px 0; */
+  display: grid;
+  gap: 0;
+
+}
+
+/* Divider line between rows */
+.options li+li {
+  border-top: 1px solid #e5e5e5;
+
+}
+
+.option {
+  width: 100%;
+  text-align: left;
+  border: none;
+  padding: 12px 0;
+  background: transparent;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.optionSelected {
+  background: #c7d3ff;
+}
+
+.optIndex {
+  display: inline-block;
+  padding-left: 1rem;
+}
+
+.optIndex,
+.optLabel {
+  color: #000;
+  font-size: 16px;
+  letter-spacing: -4%;
+  line-height: 130%;
+  font-weight: 400;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.actionsStack {
+  grid-template-columns: 1fr;
+}
+
+.btnPrimary {
+  height: 60px;
+  background: #3cff00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #000;
+  font-size: 24px;
+  border: none;
+  font-weight: 500;
+}
+
+.btnSecondary {
+  height: 56px;
+  background: #fff;
+  border: 1px solid #000;
+  font-size: 24px;
+  font-weight: 500;
+  color: #000;
+}
