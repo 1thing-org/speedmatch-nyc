@@ -1,12 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # Dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# Testing
-/coverage
+node_modules
 
 # Production
 /build
@@ -104,21 +99,8 @@ web_modules/
 
 # Vite build output
 dist
-dist-ssr
-*.local
 .vite
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-.vercel
 # IDE files
 .idea/
 .vscode/
