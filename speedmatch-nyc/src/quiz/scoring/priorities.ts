@@ -5,16 +5,16 @@ export type { PriorityId } from '../content/priorities';
 export type PrioritiesToCandidates = Record<PriorityId, CandidateId[]>;
 
 export const PrioritiesMap: PrioritiesToCandidates = {
-  economy: [1, 3] as CandidateId[],
-  accountability: [],
-  safety: [2] as CandidateId[],
-  housing: [],
+  affordability: [1, 3] as CandidateId[],
+  efficiency: [],
+  equity: [2] as CandidateId[],
+  economic: [],
+  health: [],
+  antisemitism: [],
   transport: [],
+  safety: [],
+  environment: [],
   education: [],
-  childcare: [],
-  sustainability: [],
-  rights: [],
-  prek: [],
 };
 
 export type RankWeights = Record<1 | 2 | 3 | 4 | 5, number>;

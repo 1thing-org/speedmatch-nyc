@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar";
 import QuizMobileRoutes from "./QuizMobileRoutes";
 import QuizDesktop from "./QuizDesktop";
 import styles from "../styles/QuizPage.module.css";
+import { QuizProvider } from "../state/QuizContext";
 
 
 
@@ -15,7 +16,11 @@ function QuizPage() {
             </header>
             <main>
                 <div className={styles.container}>
-                    {isLargeScreen ? <QuizDesktop /> : <QuizMobileRoutes />}
+                    {isLargeScreen ? <QuizDesktop /> : (
+                        <QuizProvider>
+                            <QuizMobileRoutes />
+                        </QuizProvider>
+                    )}
                 </div>
             </main>
         </div>

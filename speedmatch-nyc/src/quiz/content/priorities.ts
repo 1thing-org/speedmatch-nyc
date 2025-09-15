@@ -1,14 +1,14 @@
 export const PRIORITIES = [
-  { id: 'economy',        label: 'Economy' },
-  { id: 'accountability', label: 'Government Accountability' },
-  { id: 'safety',         label: 'Safety' },
-  { id: 'housing',        label: 'Affordable Housing' },
-  { id: 'education',      label: 'Education' },
-  { id: 'childcare',      label: 'Childcare' },
+  { id: 'affordability',        label: 'Affordability' },
+  { id: 'efficiency', label: 'Government Efficiency' },
+  { id: 'equity',         label: 'Equity' },
+  { id: 'economic',        label: 'Economic Development' },
+  { id: 'health',      label: 'Health & Well-Being' },
+  { id: 'antisemitism',      label: 'Antisemitism' },
   { id: 'transport',      label: 'Public Transportation' },
-  { id: 'rights',         label: 'Human Rights' },
-  { id: 'sustainability', label: 'Sustainability' },
-  { id: 'prek',           label: 'Pre-K' },
+  { id: 'safety',         label: 'Public Safety' },
+  { id: 'environment', label: 'Environment & Infrastructure' },
+  { id: 'education',      label: 'Education & Childcare' },
 ] as const;
 
 export type PriorityId = typeof PRIORITIES[number]['id'];

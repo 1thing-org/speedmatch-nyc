@@ -3,14 +3,25 @@ import styles from "../../styles/QuizMobile.module.css"
 import { Link, useLocation } from "react-router";
 import { PRIORITIES } from "../../content/priorities";
 import type { PriorityId } from "../../scoring/priorities";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useQuizActions, useQuizState } from "../../state/QuizContext";
 
 function QuizPick() {
     const location = useLocation() as any;
+    const { selectedPriorities } = useQuizState();
+    const { setSelectedPriorities } = useQuizActions();
     const [selected, setSelected] = useState<PriorityId[]>(() => {
         const incoming = location?.state?.selected;
-        return Array.isArray(incoming) ? (incoming as PriorityId[]) : [];
+        if (Array.isArray(incoming)) return incoming as PriorityId[];
+        return selectedPriorities as PriorityId[];
     });
+    const [showNotice, setShowNotice] = useState(false);
+
+    useEffect(() => {
+        // keep context in sync when navigating back
+        setSelectedPriorities(selected);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selected]);
 
     function toggle(id: PriorityId) {
         const isSelected = selected.includes(id);
@@ -52,12 +63,22 @@ function QuizPick() {
             </section>
 
             <div className={styles.pickActions}>
+                {showNotice && (
+                    <div className={styles.notice}>Choose 5 priorities to proceed.</div>
+                )}
                 <Link
                     to="/quiz/rank"
                     state={{ selected }}
-                    className={`${styles.pickNextButton} ${!isReady ? styles.buttonDisabled : ''}`}
-                    aria-disabled={!isReady}
-                    onClick={(e) => { if (!isReady) e.preventDefault(); }}
+                    className={styles.pickNextButton}
+                    onClick={(e) => {
+                        if (!isReady) {
+                            e.preventDefault();
+                            setShowNotice(true);
+                            setTimeout(() => setShowNotice(false), 3000);
+                        } else {
+                            setSelectedPriorities(selected);
+                        }
+                    }}
                 >
                     Next: Rank Your Priorities
                 </Link>

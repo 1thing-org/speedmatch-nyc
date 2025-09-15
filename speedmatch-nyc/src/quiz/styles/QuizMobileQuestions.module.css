@@ -110,4 +110,28 @@
   font-size: 24px;
   font-weight: 500;
   color: #000;
+  text-decoration: none;
+  display: flex;            /* ensure anchor behaves like the button */
+  width: 100%;              /* fill the grid cell */
+  align-items: center;
+  justify-content: center;
+}
+
+@media (hover: hover) {
+  .btnPrimary:hover {
+    background-color: #2EB800;
+  }
+}
+
+@media (hover: hover) {
+.btnSecondary:hover{
+  background-color: #D9D9D9;
+}
+}
+
+.notice {
+  color: #949494;
+  text-align: center;
+  margin-bottom: 4px;
+  font-size: 14px;
 }
