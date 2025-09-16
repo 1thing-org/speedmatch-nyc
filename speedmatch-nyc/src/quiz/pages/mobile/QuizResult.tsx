@@ -6,8 +6,8 @@ import { useLocation } from "react-router";
 import { useMemo } from "react";
 import { useQuizState } from "../../state/QuizContext";
 import { FixedQuestions } from "../../content/questions";
-import { PrioritiesMap, DefaultRankWeights } from "../../scoring/priorities";
-import { addPointsFromAnswers, addWeightedPriorityScoresWithBaseline, rankScores } from "../../scoring/scoreEngine";
+import { DefaultRankWeights } from "../../scoring/priorities";
+import { addPointsFromAnswers, addPriorityScoresFromAnswersByRank, rankScores } from "../../scoring/scoreEngine";
 import type { PriorityId } from "../../scoring/priorities";
 import { candidateById } from "../../../data/candidates";
 
@@ -20,11 +20,11 @@ function QuizResult() {
 		const base = addPointsFromAnswers(FixedQuestions as any, answers as any);
 		const baseSnapshot: Record<string, number> = { ...base } as any;
 
-		addWeightedPriorityScoresWithBaseline(
+		addPriorityScoresFromAnswersByRank(
 			base,
-			PrioritiesMap,
-			Array.isArray(rankedFive) ? rankedFive.slice(0, 5) : [],
+			FixedQuestions as any,
 			answers as any,
+			Array.isArray(rankedFive) ? rankedFive.slice(0, 5) : [],
 			DefaultRankWeights,
 		);
 

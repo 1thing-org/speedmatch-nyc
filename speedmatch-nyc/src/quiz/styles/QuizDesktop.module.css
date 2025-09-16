@@ -1,0 +1,51 @@
+.desktopPage {
+	min-height: 100vh;
+	background: #fff;
+	color: #000;
+}
+
+.pageHeaderBar {
+	position: sticky;
+	top: 0;
+	z-index: 3;
+	--border-bottom-color: #003cff;  
+	/* Tune this to your actual PageHeader height */
+	--page-header-offset: 120px;
+}
+
+.columns {
+	display: grid;
+	grid-template-columns: 241px 1fr;
+	gap: 24px;
+	width: 100%;
+	min-height: calc(100vh - var(--page-header-offset));
+}
+
+.sidebar {
+	position: sticky;
+	top: var(--page-header-offset);
+	/* height: calc(100vh - var(--page-header-offset)); */
+    height: 100vh;
+	/* overflow: auto;  */
+	border-right: 1px solid #eee;
+	background: #003cff;
+	color: #fff;
+}
+
+.main {
+	min-height: calc(100vh - var(--page-header-offset));
+}
+
+.section {
+	padding: 16px 16px 16px 24px;
+}
+
+.placeholder {
+	margin: 0 0 8px 0;
+	font-size: 24px;
+}
+
+.placeholderText {
+	margin: 0;
+	
+}
