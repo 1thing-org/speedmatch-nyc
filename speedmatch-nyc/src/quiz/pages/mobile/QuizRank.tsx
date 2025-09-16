@@ -2,7 +2,7 @@ import PageHeader from "../../../components/PageHeader";
 import styles from "../../styles/QuizMobile.module.css"
 import { Link, useLocation } from "react-router";
 import { useMemo, useState } from "react";
-import { PRIORITIES, PRIORITY_LABEL_BY_ID } from "../../content/priorities";
+import { PRIORITIES } from "../../content/priorities";
 import type { PriorityId } from "../../scoring/priorities";
 
 // dnd-kit
@@ -10,15 +10,32 @@ import { DndContext, closestCenter, DragOverlay, MouseSensor, TouchSensor, useSe
 import { SortableContext, useSortable, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis, restrictToParentElement } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
+import { useQuizState } from "../../state/QuizContext";
+import { FixedQuestions } from "../../content/questions";
 
 function QuizRank() {
     const location = useLocation() as any;
     const passed: PriorityId[] | undefined = location?.state?.selected;
+    const { answers } = useQuizState();
+
+    // Filter priorities based on special Q8 selection
+    const filteredPriorities = useMemo(() => {
+        const specialIds = new Set<PriorityId>(['antisemitism','equity','efficiency'] as unknown as PriorityId[]);
+        let chosenSpecial: PriorityId | undefined;
+        const q8 = FixedQuestions.find(q => q.id === 'Q8');
+        const chosenOptId = (answers as any)['Q8'];
+        if (q8 && chosenOptId) {
+            const opt: any = q8.options.find((o: any) => o.id === chosenOptId);
+            chosenSpecial = opt?.priorityId as PriorityId | undefined;
+        }
+        return PRIORITIES.filter(p => !specialIds.has(p.id as PriorityId) || p.id === chosenSpecial);
+    }, [answers]);
 
     const initialOrder = useMemo<PriorityId[]>(() => {
+        const defaults = filteredPriorities.map(p => p.id as PriorityId);
         if (Array.isArray(passed) && passed.length === 5) return passed as PriorityId[];
-        return PRIORITIES.slice(0, 5).map(p => p.id as PriorityId);
-    }, [passed]);
+        return defaults.slice(0, 5);
+    }, [passed, filteredPriorities]);
 
     const [order, setOrder] = useState<PriorityId[]>(initialOrder);
     const [activeId, setActiveId] = useState<PriorityId | null>(null);
@@ -30,7 +47,6 @@ function QuizRank() {
 
     function handleDragStart(event: any) {
         setActiveId(event.active.id as PriorityId);
-        // Lock page scroll during drag to avoid accidental scroll on mobile
         document.body.style.overflow = 'hidden';
         document.body.style.touchAction = 'none';
     }
@@ -74,14 +90,14 @@ function QuizRank() {
                     <SortableContext items={order} strategy={verticalListSortingStrategy}>
                         <ul className={styles.rankList}>
                             {order.map((id, idx) => (
-                                <SortableRow key={id} id={id} index={idx} label={PRIORITY_LABEL_BY_ID[id]} />
+                                <SortableRow key={id} id={id} index={idx} label={filteredPriorities.find(p => p.id === id)?.label || ''} />
                             ))}
                         </ul>
                     </SortableContext>
 
                     <DragOverlay>
                         {activeId ? (
-                            <DraggedPreview index={order.indexOf(activeId)} label={PRIORITY_LABEL_BY_ID[activeId]} />
+                            <DraggedPreview index={order.indexOf(activeId)} label={filteredPriorities.find(p => p.id === activeId)?.label || ''} />
                         ) : null}
                     </DragOverlay>
                 </DndContext>

@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { FixedQuestions } from "../../content/questions";
 import styles from "../../styles/QuizMobileQuestions.module.css";
 import { useQuizActions, useQuizState } from "../../state/QuizContext";
+import { candidates } from '../../../data/candidates';
 
 function shuffleArray<T>(input: readonly T[]): T[] {
   const arr = input.slice() as T[];
@@ -55,16 +56,23 @@ function QuizQuestions() {
         const selected = answers[q.id];
         const isLast = idx === total - 1;
         const order = orders[idx];
+
+        const declared = new Set<number>();
+        q.options.forEach(o => (o.candidateIds ?? []).forEach(id => declared.add(id)));
+        const undeclared = Math.max(0, candidates.length - declared.size);
+
         return (
           <div key={q.id} ref={setRef(idx)} id={`q-${current}`} className={styles.qSection}>
             <div className={styles.qMeta}>Question {current}/{total}</div>
             <h2 className={styles.qTitle}>{q.prompt}</h2>
             
-            <div className={styles.qSub}>(2 candidates have not declared a stance on this issue.)</div>
+            <div className={styles.qSub}>
+              ({undeclared} candidates have not declared a stance on this issue.)
+            </div>
 
             <ul className={styles.options}>
               {order.map((optIndex, displayIndex) => {
-                const opt = q.options[optIndex];
+                const opt = q.options[optIndex] as any;
                 const isSelected = selected === opt.id;
                 return (
                   <li key={opt.id}>
@@ -97,6 +105,7 @@ function QuizQuestions() {
                         setTimeout(() => setShowNotice(false), 3000);
                       }
                     }}
+                    state={{ fromSpecialPriorityOption: answers['Q8'] }}
                   >
                     Next: Pick Your Priorities
                   </Link>

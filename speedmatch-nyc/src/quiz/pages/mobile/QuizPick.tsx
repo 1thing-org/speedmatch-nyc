@@ -3,12 +3,13 @@ import styles from "../../styles/QuizMobile.module.css"
 import { Link, useLocation } from "react-router";
 import { PRIORITIES } from "../../content/priorities";
 import type { PriorityId } from "../../scoring/priorities";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useQuizActions, useQuizState } from "../../state/QuizContext";
+import { FixedQuestions } from "../../content/questions";
 
 function QuizPick() {
     const location = useLocation() as any;
-    const { selectedPriorities } = useQuizState();
+    const { selectedPriorities, answers } = useQuizState();
     const { setSelectedPriorities } = useQuizActions();
     const [selected, setSelected] = useState<PriorityId[]>(() => {
         const incoming = location?.state?.selected;
@@ -16,6 +17,33 @@ function QuizPick() {
         return selectedPriorities as PriorityId[];
     });
     const [showNotice, setShowNotice] = useState(false);
+    const [noticeText, setNoticeText] = useState<string>('');
+
+    // Determine special choice from Q8
+    const filteredPriorities = useMemo(() => {
+        const specialIds = new Set<PriorityId>(['antisemitism','equity','efficiency'] as unknown as PriorityId[]);
+        let chosenSpecial: PriorityId | undefined;
+        const q8 = FixedQuestions.find(q => q.id === 'Q8');
+        const chosenOptId = (answers as any)['Q8'];
+        if (q8 && chosenOptId) {
+            const opt: any = q8.options.find((o: any) => o.id === chosenOptId);
+            chosenSpecial = opt?.priorityId as PriorityId | undefined;
+        }
+        return PRIORITIES.filter(p => !specialIds.has(p.id as PriorityId) || p.id === chosenSpecial);
+    }, [answers]);
+
+    // Reconcile selection when allowed priorities change (e.g., user changed Q8)
+    useEffect(() => {
+        const allowed = new Set(filteredPriorities.map(p => p.id as PriorityId));
+        const reconciled = selected.filter(id => allowed.has(id));
+        if (reconciled.length !== selected.length) {
+            setSelected(reconciled);
+            setNoticeText('One priority was removed because your last answer changed. Pick another to continue.');
+            setShowNotice(true);
+            const t = setTimeout(() => setShowNotice(false), 3000);
+            return () => clearTimeout(t);
+        }
+    }, [filteredPriorities]);
 
     useEffect(() => {
         // keep context in sync when navigating back
@@ -43,7 +71,7 @@ function QuizPick() {
                 <p className={styles.pickHint}>Pick The 5 Topics That Matter Most To You.</p>
 
                 <div className={styles.pickChipList}>
-                    {PRIORITIES.map(p => {
+                    {filteredPriorities.map(p => {
                         const active = selected.includes(p.id as PriorityId);
                         const reachedCap = !active && selected.length >= 5;
                         return (
@@ -64,7 +92,7 @@ function QuizPick() {
 
             <div className={styles.pickActions}>
                 {showNotice && (
-                    <div className={styles.notice}>Choose 5 priorities to proceed.</div>
+                    <div className={styles.notice}>{noticeText || 'Choose 5 priorities to proceed.'}</div>
                 )}
                 <Link
                     to="/quiz/rank"
@@ -73,6 +101,7 @@ function QuizPick() {
                     onClick={(e) => {
                         if (!isReady) {
                             e.preventDefault();
+                            setNoticeText('Pick 5 to proceed');
                             setShowNotice(true);
                             setTimeout(() => setShowNotice(false), 3000);
                         } else {

@@ -98,10 +98,11 @@ export const FixedQuestions = [
     id: 'Q8',
     title: 'Others',
     prompt: 'Some candidates also pledged to focus on Equity, Antisemitism, and Government Accountability. Which should New York prioritize?',
+    kind: 'special',
     options: [
-      { id: '1', label: 'Ensure that those who threaten, harass, or destroy property in the name of antisemitism are held accountable. Adopt the International Holocaust Remembrance Association (IHRA) definition of antisemitism.', candidateIds: [2] },
-      { id: '2', label: 'Strengthen sanctuary city policies to defend immigrants, safeguard reproductive and worker rights, and ensure full protections for LGBTQIA+ New Yorkers by expanding gender-affirming care, creating an Office of LGBTQIA+ Affairs, and combating discrimination.', candidateIds: [8] },
-      { id: '3', label: 'Overhaul city government by cutting waste, ending corruption, auditing agencies, and modernizing operations with tech-savvy, data-driven, transparent, and efficient services.', candidateIds: [9] },
+      { id: '1', label: 'Ensure that those who threaten, harass, or destroy property in the name of antisemitism are held accountable. Adopt the International Holocaust Remembrance Association (IHRA) definition of antisemitism.', candidateIds: [2], priorityId: 'antisemitism' },
+      { id: '2', label: 'Strengthen sanctuary city policies to defend immigrants, safeguard reproductive and worker rights, and ensure full protections for LGBTQIA+ New Yorkers by expanding gender-affirming care, creating an Office of LGBTQIA+ Affairs, and combating discrimination.', candidateIds: [8], priorityId: 'equity' },
+      { id: '3', label: 'Overhaul city government by cutting waste, ending corruption, auditing agencies, and modernizing operations with tech-savvy, data-driven, transparent, and efficient services.', candidateIds: [9], priorityId: 'efficiency' },
     ],
   },
 
