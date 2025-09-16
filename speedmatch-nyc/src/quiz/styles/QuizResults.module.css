@@ -23,13 +23,17 @@
 }
 
 .resultCard {
+	border-bottom: 1px solid #fff;
+	padding-bottom: 32px;
+}
+
+.resultCandidate {
 	display: grid;
 	grid-template-columns: 160px 1fr;
-	gap: 0.8rem;
+	gap: 1rem;
 	align-items: start;
 	background: transparent;
-	border-bottom: 1px solid #fff;
-	padding: 16px 0 32px 0;
+	padding: 16px 0 8px 0;
 }
 
 .resultPhoto {
@@ -64,9 +68,52 @@
 
 .resultScore {
 	margin-top: 2px;
-	font-size: 48px;
+	font-size: 32px;
 	font-weight: 400;
 	color: #3cff00;
     line-height: 100%;
     letter-spacing: -8%;
+}
+
+
+
+/* Aligned issues chips */
+.issuesHeading {
+	margin-top: 14px;
+	margin-bottom: 8px;
+	font-size: 18px;
+	color: #3cff00;
+	letter-spacing: -4%;
+}
+
+.issueChips {
+	display: grid;
+	grid-template-columns: repeat(2, max-content);
+	justify-content: start;
+	row-gap: 12px;
+	column-gap: 14px;
+	width: 100%;
+}
+
+.issueChip {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 26px;
+	padding: 0 14px;
+	border-radius: 999px;
+	background: #fff;
+	color: #003CFF;
+	border: 2px solid #fff;
+	font-size: 12px;
+	white-space: nowrap;
+	letter-spacing: -4%;
+	line-height: 150%;
+    font-weight: 500;
+}
+
+.issueChipSelected {
+	background: #3cff00;
+	color: #003CFF;
+	border-color: #3cff00;
 }
