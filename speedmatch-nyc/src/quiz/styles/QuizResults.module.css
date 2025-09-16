@@ -1,0 +1,7 @@
+.resultWrapper {
+    min-height: 100vh;
+	background-color:
+		#003cff;
+	color: white;
+	--border-color: white;
+}

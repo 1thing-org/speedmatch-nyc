@@ -9,8 +9,8 @@ import { FixedQuestions } from "../../content/questions";
 
 function QuizPick() {
     const location = useLocation() as any;
-    const { selectedPriorities, answers } = useQuizState();
-    const { setSelectedPriorities } = useQuizActions();
+    const { selectedPriorities, answers, lastQ8OptionId, q8UsedForPriorities } = useQuizState();
+    const { setSelectedPriorities, setQ8UsedForPriorities } = useQuizActions();
     const [selected, setSelected] = useState<PriorityId[]>(() => {
         const incoming = location?.state?.selected;
         if (Array.isArray(incoming)) return incoming as PriorityId[];
@@ -32,23 +32,27 @@ function QuizPick() {
         return PRIORITIES.filter(p => !specialIds.has(p.id as PriorityId) || p.id === chosenSpecial);
     }, [answers]);
 
-    // Reconcile selection when allowed priorities change (e.g., user changed Q8)
+    // Capture baseline Q8 on first visit; reset all selections if Q8 changed afterwards
     useEffect(() => {
-        const allowed = new Set(filteredPriorities.map(p => p.id as PriorityId));
-        const reconciled = selected.filter(id => allowed.has(id));
-        if (reconciled.length !== selected.length) {
-            setSelected(reconciled);
-            setNoticeText('One priority was removed because your last answer changed. Pick another to continue.');
+        const currentQ8 = lastQ8OptionId as any;
+        const usedQ8 = q8UsedForPriorities as any;
+        if (!usedQ8 && currentQ8) {
+            setQ8UsedForPriorities(currentQ8);
+            return;
+        }
+        if (currentQ8 && usedQ8 && currentQ8 !== usedQ8) {
+            setSelected([]);
+            setSelectedPriorities([]);
+            setQ8UsedForPriorities(currentQ8);
+            setNoticeText('Your last answer changed. Please pick 5 priorities again.');
             setShowNotice(true);
             const t = setTimeout(() => setShowNotice(false), 3000);
             return () => clearTimeout(t);
         }
-    }, [filteredPriorities]);
+    }, [lastQ8OptionId, q8UsedForPriorities]);
 
     useEffect(() => {
-        // keep context in sync when navigating back
         setSelectedPriorities(selected);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selected]);
 
     function toggle(id: PriorityId) {
@@ -57,7 +61,7 @@ function QuizPick() {
             setSelected(prev => prev.filter(x => x !== id));
             return;
         }
-        if (selected.length >= 5) return; // hard cap
+        if (selected.length >= 5) return;
         setSelected(prev => [...prev, id]);
     }
 
@@ -106,6 +110,7 @@ function QuizPick() {
                             setTimeout(() => setShowNotice(false), 3000);
                         } else {
                             setSelectedPriorities(selected);
+                            setQ8UsedForPriorities(lastQ8OptionId as any);
                         }
                     }}
                 >

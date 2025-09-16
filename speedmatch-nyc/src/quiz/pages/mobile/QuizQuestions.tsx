@@ -19,7 +19,7 @@ function QuizQuestions() {
   const total = questions.length;
   const sectionRefs = useRef<HTMLDivElement[]>([]);
   const { answers: persisted } = useQuizState();
-  const { setAnswer } = useQuizActions();
+  const { setAnswer, setLastQ8OptionId } = useQuizActions();
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showNotice, setShowNotice] = useState(false);
 
@@ -40,6 +40,7 @@ function QuizQuestions() {
   function onSelect(qid: string, oid: string) {
     setAnswers(prev => ({ ...prev, [qid]: oid }));
     setAnswer(qid as any, oid as any);
+    if (qid === 'Q8') setLastQ8OptionId(oid as any);
   }
 
   function scrollToIdx(idx: number) {
@@ -58,7 +59,7 @@ function QuizQuestions() {
         const order = orders[idx];
 
         const declared = new Set<number>();
-        q.options.forEach(o => (o.candidateIds ?? []).forEach(id => declared.add(id)));
+        q.options.forEach(o => declared.add((o as any).candidateId));
         const undeclared = Math.max(0, candidates.length - declared.size);
 
         return (

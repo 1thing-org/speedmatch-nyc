@@ -7,11 +7,15 @@ export type Answers = Record<QuestionId, OptionId>;
 type QuizState = {
   answers: Answers;
   selectedPriorities: PriorityId[];
+  lastQ8OptionId?: OptionId;
+  q8UsedForPriorities?: OptionId;
 };
 
 type QuizActions = {
   setAnswer: (q: QuestionId, option: OptionId) => void;
   setSelectedPriorities: (p: PriorityId[]) => void;
+  setLastQ8OptionId: (opt?: OptionId) => void;
+  setQ8UsedForPriorities: (opt?: OptionId) => void;
   reset: () => void;
 };
 
@@ -21,6 +25,8 @@ const ActionsCtx = createContext<QuizActions | undefined>(undefined);
 export function QuizProvider({ children }: { children: React.ReactNode }) {
   const [answers, setAnswers] = useState<Answers>({} as Answers);
   const [selectedPriorities, setSelectedPriorities] = useState<PriorityId[]>([]);
+  const [lastQ8OptionId, setLastQ8OptionId] = useState<OptionId | undefined>(undefined);
+  const [q8UsedForPriorities, setQ8UsedForPriorities] = useState<OptionId | undefined>(undefined);
 
   const actions = useMemo<QuizActions>(() => ({
     setAnswer(q, option) {
@@ -29,14 +35,22 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
     setSelectedPriorities(p) {
       setSelectedPriorities(p);
     },
+    setLastQ8OptionId(opt) {
+      setLastQ8OptionId(opt);
+    },
+    setQ8UsedForPriorities(opt) {
+      setQ8UsedForPriorities(opt);
+    },
     reset() {
       setAnswers({} as Answers);
       setSelectedPriorities([]);
+      setLastQ8OptionId(undefined);
+      setQ8UsedForPriorities(undefined);
     },
   }), []);
 
   return (
-    <StateCtx.Provider value={{ answers, selectedPriorities }}>
+    <StateCtx.Provider value={{ answers, selectedPriorities, lastQ8OptionId, q8UsedForPriorities }}>
       <ActionsCtx.Provider value={actions}>{children}</ActionsCtx.Provider>
     </StateCtx.Provider>
   );

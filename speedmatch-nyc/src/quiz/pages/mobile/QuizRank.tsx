@@ -1,7 +1,7 @@
 import PageHeader from "../../../components/PageHeader";
 import styles from "../../styles/QuizMobile.module.css"
 import { Link, useLocation } from "react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { PRIORITIES } from "../../content/priorities";
 import type { PriorityId } from "../../scoring/priorities";
 
@@ -38,6 +38,18 @@ function QuizRank() {
     }, [passed, filteredPriorities]);
 
     const [order, setOrder] = useState<PriorityId[]>(initialOrder);
+
+    // Keep order in sync if user changed picks and returned from Pick
+    useEffect(() => {
+        setOrder(prev => {
+            // If arrays differ, replace with new initialOrder
+            if (prev.length !== initialOrder.length || prev.some((v, i) => v !== initialOrder[i])) {
+                return initialOrder;
+            }
+            return prev;
+        });
+    }, [initialOrder]);
+
     const [activeId, setActiveId] = useState<PriorityId | null>(null);
 
     const sensors = useSensors(
@@ -109,6 +121,7 @@ function QuizRank() {
                     className={`${styles.pickNextButton} ${!isReady ? styles.buttonDisabled : ''}`}
                     aria-disabled={!isReady}
                     onClick={(e) => { if (!isReady) e.preventDefault(); }}
+                    state={{ rankedFive: order }}
                 >
                     Submit And See Result
                 </Link>
