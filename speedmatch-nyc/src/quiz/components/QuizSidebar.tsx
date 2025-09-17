@@ -1,5 +1,5 @@
 import styles from "../styles/QuizSidebar.module.css";
-import { FixedQuestions } from "../content/questions";
+import { fixedQuestions } from "../content/questions";
 
 function QuizSidebar({ includeStart = true }: { includeStart?: boolean }) {
     function scrollToId(id: string) {
@@ -16,7 +16,7 @@ function QuizSidebar({ includeStart = true }: { includeStart?: boolean }) {
             )}
 
             <ul className={styles.list}>
-                {FixedQuestions.map((q, idx) => (
+                {fixedQuestions.map((q, idx) => (
                     <li key={q.id}>
                         <button className={styles.item} onClick={() => scrollToId(`q-${idx + 1}`)}>
                             <span className={styles.qNumber}>Question {idx + 1}</span>

@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import { Link } from "react-router";
-import { FixedQuestions } from "../../content/questions";
+import { fixedQuestions } from "../../content/questions";
 import styles from "../../styles/QuizMobileQuestions.module.css";
 import { useQuizActions, useQuizState } from "../../state/QuizContext";
 import { candidates } from '../../../data/candidates';
@@ -15,7 +15,7 @@ function shuffleArray<T>(input: readonly T[]): T[] {
 }
 
 function QuizQuestions() {
-  const questions = FixedQuestions;
+  const questions = fixedQuestions;
   const total = questions.length;
   const sectionRefs = useRef<HTMLDivElement[]>([]);
   const { answers: persisted } = useQuizState();

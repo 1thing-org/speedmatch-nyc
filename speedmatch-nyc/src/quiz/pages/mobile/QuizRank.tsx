@@ -2,8 +2,8 @@ import PageHeader from "../../../components/PageHeader";
 import styles from "../../styles/QuizMobile.module.css"
 import { Link, useLocation } from "react-router";
 import { useMemo, useState, useEffect } from "react";
-import { PRIORITIES } from "../../content/priorities";
-import type { PriorityId } from "../../scoring/priorities";
+import { PRIORITIES, type PriorityId } from "../../content/priorities";
+
 
 // dnd-kit
 import { DndContext, closestCenter, DragOverlay, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
@@ -11,7 +11,7 @@ import { SortableContext, useSortable, arrayMove, verticalListSortingStrategy } 
 import { restrictToVerticalAxis, restrictToParentElement } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
 import { useQuizState } from "../../state/QuizContext";
-import { FixedQuestions } from "../../content/questions";
+import { fixedQuestions } from "../../content/questions";
 
 function QuizRank() {
     const location = useLocation() as any;
@@ -22,7 +22,7 @@ function QuizRank() {
     const filteredPriorities = useMemo(() => {
         const specialIds = new Set<PriorityId>(['antisemitism','equity','efficiency'] as unknown as PriorityId[]);
         let chosenSpecial: PriorityId | undefined;
-        const q8 = FixedQuestions.find(q => q.id === 'Q8');
+        const q8 = fixedQuestions.find(q => q.id === 'Q8');
         const chosenOptId = (answers as any)['Q8'];
         if (q8 && chosenOptId) {
             const opt: any = q8.options.find((o: any) => o.id === chosenOptId);

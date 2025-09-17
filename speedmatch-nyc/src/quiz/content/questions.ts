@@ -1,4 +1,4 @@
-export const FixedQuestions = [
+export const fixedQuestions = [
   {
     id: 'Q1',
     title: 'Affordability',
@@ -114,7 +114,7 @@ export const FixedQuestions = [
   
 ] as const;
 
-export type FixedQuestion = typeof FixedQuestions[number];
+export type FixedQuestion = typeof fixedQuestions[number];
 export type QuestionId = FixedQuestion['id'];
 export type QuestionOption = FixedQuestion['options'][number];
 export type OptionId = QuestionOption['id']; 

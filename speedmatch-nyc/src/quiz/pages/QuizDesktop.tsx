@@ -2,7 +2,7 @@ import PageHeader from "../../components/PageHeader";
 import { QuizProvider } from "../state/QuizContext";
 import styles from "../styles/QuizDesktop.module.css";
 import QuizSidebar from "../components/QuizSidebar";
-import { FixedQuestions } from "../content/questions";
+import { fixedQuestions } from "../content/questions";
 import dqStyles from "../styles/QuizMobileQuestions.module.css";
 import dqDesktop from "../styles/QuizDesktopQuestions.module.css";
 import { useEffect, useRef, useState, useMemo } from "react";
@@ -23,7 +23,7 @@ function DesktopQuiz() {
     const headerRef = useRef<HTMLDivElement | null>(null);
     const [qHeaderHeight, setQHeaderHeight] = useState<number>(120);
 
-    const questions = FixedQuestions as readonly any[];
+    const questions = fixedQuestions as readonly any[];
     const total = questions.length;
     const { answers: persisted } = useQuizState();
     const { setAnswer, setLastQ8OptionId } = useQuizActions();

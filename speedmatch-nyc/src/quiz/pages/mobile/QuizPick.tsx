@@ -1,11 +1,10 @@
 import PageHeader from "../../../components/PageHeader";
 import styles from "../../styles/QuizMobile.module.css"
 import { Link, useLocation } from "react-router";
-import { PRIORITIES } from "../../content/priorities";
-import type { PriorityId } from "../../scoring/priorities";
+import { PRIORITIES, type PriorityId } from "../../content/priorities";
 import { useState, useEffect, useMemo } from "react";
 import { useQuizActions, useQuizState } from "../../state/QuizContext";
-import { FixedQuestions } from "../../content/questions";
+import { fixedQuestions } from "../../content/questions";
 
 function QuizPick() {
     const location = useLocation() as any;
@@ -23,7 +22,7 @@ function QuizPick() {
     const filteredPriorities = useMemo(() => {
         const specialIds = new Set<PriorityId>(['antisemitism','equity','efficiency'] as unknown as PriorityId[]);
         let chosenSpecial: PriorityId | undefined;
-        const q8 = FixedQuestions.find(q => q.id === 'Q8');
+        const q8 = fixedQuestions.find(q => q.id === 'Q8');
         const chosenOptId = (answers as any)['Q8'];
         if (q8 && chosenOptId) {
             const opt: any = q8.options.find((o: any) => o.id === chosenOptId);

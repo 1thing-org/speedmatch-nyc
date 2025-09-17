@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react';
-import type { QuestionId, OptionId } from '../scoring/questions';
-import type { PriorityId } from '../scoring/priorities';
+import type { OptionId, QuestionId } from '../content/questions';
+import type { PriorityId } from '../content/priorities';
 
 export type Answers = Record<QuestionId, OptionId>;
 

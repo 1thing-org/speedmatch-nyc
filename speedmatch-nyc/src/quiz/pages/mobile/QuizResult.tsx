@@ -5,12 +5,10 @@ import styles from "../../styles/QuizResults.module.css";
 import { useLocation } from "react-router";
 import { useMemo } from "react";
 import { useQuizState } from "../../state/QuizContext";
-import { FixedQuestions } from "../../content/questions";
-import { DefaultRankWeights } from "../../scoring/priorities";
-import { addPointsFromAnswers, addPriorityScoresFromAnswersByRank, rankScores } from "../../scoring/scoreEngine";
-import type { PriorityId } from "../../scoring/priorities";
+import { fixedQuestions } from "../../content/questions";
+import { addPointsFromAnswers, addPriorityScoresFromAnswersByRank, rankScores, DefaultRankWeights } from "../../scoring/scoreEngine";
 import { candidateById } from "../../../data/candidates";
-import { PRIORITY_LABEL_BY_ID } from "../../content/priorities";
+import { PRIORITY_LABEL_BY_ID, type PriorityId } from "../../content/priorities";
 
 function QuizResult() {
 	const location = useLocation() as any;
@@ -18,12 +16,11 @@ function QuizResult() {
 	const { answers } = useQuizState();
 
 	const results = useMemo(() => {
-		const base = addPointsFromAnswers(FixedQuestions as any, answers as any);
+		const base = addPointsFromAnswers(answers as any);
 		const baseSnapshot: Record<string, number> = { ...base } as any;
 
 		addPriorityScoresFromAnswersByRank(
 			base,
-			FixedQuestions as any,
 			answers as any,
 			Array.isArray(rankedFive) ? rankedFive.slice(0, 5) : [],
 			DefaultRankWeights,
@@ -59,7 +56,7 @@ function QuizResult() {
 
 	function getMatchesForCandidate(candidateId: number) {
 		const out: { label: string; pid?: PriorityId }[] = [];
-		(FixedQuestions as readonly unknown[]).forEach((qUnknown: unknown) => {
+		(fixedQuestions as readonly unknown[]).forEach((qUnknown: unknown) => {
 			const q = qUnknown as any;
 			const oid = (answers as any)[q.id];
 			if (!oid) return;
