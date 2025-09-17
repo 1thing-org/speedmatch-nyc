@@ -1,14 +1,13 @@
 import { PRIORITIES, type PriorityId } from '../content/priorities';
 import { FixedQuestions } from '../content/questions';
-import type { CandidateId } from './candidates';
 
 export type { PriorityId } from '../content/priorities';
 
-export type PrioritiesToCandidates = Record<PriorityId, CandidateId[]>;
+export type PrioritiesToCandidates = Record<PriorityId, number[]>;
 
 export function buildPrioritiesMap(): PrioritiesToCandidates {
   const base = Object.fromEntries(
-    PRIORITIES.map(p => [p.id, [] as CandidateId[]])
+    PRIORITIES.map(p => [p.id, [] as number[]])
   ) as PrioritiesToCandidates;
 
   for (const q of FixedQuestions) {
@@ -19,7 +18,7 @@ export function buildPrioritiesMap(): PrioritiesToCandidates {
       const bag = new Set(base[pid]);
       // Cast to readonly then iterate, keeping TS happy about immutability
       for (const opt of (q.options as readonly any[])) {
-        bag.add(opt.candidateId as CandidateId);
+        bag.add(opt.candidateId as number);
       }
       base[pid] = Array.from(bag);
       continue;
@@ -30,7 +29,7 @@ export function buildPrioritiesMap(): PrioritiesToCandidates {
       const pid = (opt as any).priorityId as PriorityId | undefined;
       if (!pid) continue;
       const bag = new Set(base[pid]);
-      bag.add((opt as any).candidateId as CandidateId);
+      bag.add((opt as any).candidateId as number);
       base[pid] = Array.from(bag);
     }
   }

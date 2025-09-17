@@ -1,26 +1,34 @@
-import type { CandidateId, CandidateScoreMap } from './candidates';
-import { createEmptyScores, addPoints } from './candidates';
-import type { FixedQuestion, QuestionId, OptionId } from './questions';
 import type { PrioritiesToCandidates, RankWeights } from './priorities';
 import { candidateIds } from '../../data/candidates';
 import { PRIORITIES, type PriorityId } from '../content/priorities';
-import { FixedQuestions } from '../content/questions';
+import { FixedQuestions, type FixedQuestion, type QuestionId, type OptionId  } from '../content/questions';
 
 export type AnswersMap = Record<QuestionId, OptionId>;
+export type CandidateScoreMap = Record<number, number>;
+
+export function addPoints(
+  scores: CandidateScoreMap,
+  candidateIds: readonly number[],
+  points: number = 1,
+) {
+  for (const id of candidateIds) {
+    scores[id] = (scores[id] ?? 0) + points;
+  }
+}
 
 export function addPointsFromAnswers(
   questions: FixedQuestion[],
-  answers: AnswersMap,
-  allCandidateIds: CandidateId[] = candidateIds as unknown as CandidateId[],
+  answers: AnswersMap
 ): CandidateScoreMap {
-  const scores = createEmptyScores(allCandidateIds);
+  const scores = {} as CandidateScoreMap;
+  for (const id of candidateIds) {
+    scores[id] = 0;
+  }
   for (const q of questions) {
-    const chosenOptionId = answers[q.id];
-    if (!chosenOptionId) continue;
-    const option = q.options.find(o => o.id === chosenOptionId) as any;
-    if (!option) continue;
-    const cid = option.candidateId as CandidateId | undefined;
-    if (cid !== undefined) addPoints(scores, [cid] as const, 1);
+    const option = q.options.find(o => o.id === answers[q.id]);
+    if (option) {
+      addPoints(scores, [option.candidateId], 1);
+    }
   }
   return scores;
 }
@@ -38,7 +46,7 @@ export function addPointsFromPriorityPicks(
 export type RankEntry = {
   priority: string;
   position: 1 | 2 | 3 | 4 | 5;
-  candidates: CandidateId[];
+  candidates: number[];
 };
 
 export function addPointsFromPriorityRanks(
@@ -100,8 +108,8 @@ export function addWeightedPriorityScoresWithBaseline(
 function buildPriorityToChosenCandidate(
   questions: FixedQuestion[],
   answers: AnswersMap,
-): Partial<Record<PriorityId, CandidateId>> {
-  const map: Partial<Record<PriorityId, CandidateId>> = {};
+): Partial<Record<PriorityId, number>> {
+  const map: Partial<Record<PriorityId, number>> = {};
   for (const q of questions as any) {
     const chosen = answers[q.id as QuestionId];
     if (!chosen) continue;
@@ -109,13 +117,13 @@ function buildPriorityToChosenCandidate(
     if ((q as any).kind === 'special') {
       const opt = (q.options as readonly any[]).find(o => (o as any).id === chosen) as any;
       const pid = opt?.priorityId as PriorityId | undefined;
-      const cid = opt?.candidateId as CandidateId | undefined;
+      const cid = opt?.candidateId as number | undefined;
       if (pid !== undefined && cid !== undefined) map[pid] = cid;
       continue;
     }
     const pid = (q as any).priorityId as PriorityId | undefined;
     const opt = (q.options as readonly any[]).find(o => (o as any).id === chosen) as any;
-    const cid = opt?.candidateId as CandidateId | undefined;
+    const cid = opt?.candidateId as number | undefined;
     if (pid !== undefined && cid !== undefined) map[pid] = cid;
   }
   return map;
@@ -141,7 +149,7 @@ export function addPriorityScoresFromAnswersByRank(
   });
 
   // Baseline +1 for unranked priorities that the user answered
-  for (const [pid, cid] of Object.entries(chosenByPriority) as Array<[PriorityId, CandidateId]>) {
+  for (const [pid, cid] of Object.entries(chosenByPriority) as Array<[PriorityId, number]>) {
     if (selectedSet.has(pid)) continue;
     addPoints(scores, [cid] as const, 1);
   }
@@ -150,15 +158,15 @@ export function addPriorityScoresFromAnswersByRank(
 export function mergeScores(a: CandidateScoreMap, b: CandidateScoreMap): CandidateScoreMap {
   const out: CandidateScoreMap = { ...a } as CandidateScoreMap;
   for (const [id, value] of Object.entries(b)) {
-    const cid = Number(id) as CandidateId;
+    const cid = Number(id) as number;
     const pts = value as number;
     out[cid] = (out[cid] ?? 0) + pts;
   }
   return out;
 }
 
-export function rankScores(scores: CandidateScoreMap): Array<{ id: CandidateId; score: number }> {
+export function rankScores(scores: CandidateScoreMap): Array<{ id: number; score: number }> {
   return Object.entries(scores)
-    .map(([id, score]) => ({ id: Number(id) as CandidateId, score: score as number }))
+    .map(([id, score]) => ({ id: Number(id) as number, score: score as number }))
     .sort((a, b) => b.score - a.score);
 }
