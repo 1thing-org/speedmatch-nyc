@@ -90,6 +90,11 @@
   grid-template-columns: 1fr;
 }
 
+/* single column for first question: Next only */
+.actionsSingle {
+  grid-template-columns: 1fr;
+}
+
 .btnPrimary {
   height: 60px;
   background: #3cff00;

@@ -62,6 +62,8 @@ function QuizQuestions() {
         q.options.forEach(o => declared.add((o as any).candidateId));
         const undeclared = Math.max(0, candidates.length - declared.size);
 
+        const actionsClass = `${styles.actions} ${isLast ? styles.actionsStack : ''} ${idx === 0 ? styles.actionsSingle : ''}`;
+
         return (
           <div key={q.id} ref={setRef(idx)} id={`q-${current}`} className={styles.qSection}>
             <div className={styles.qMeta}>Question {current}/{total}</div>
@@ -90,7 +92,7 @@ function QuizQuestions() {
               })}
             </ul>
 
-            <div className={`${styles.actions} ${isLast ? styles.actionsStack : ""}`}>
+            <div className={actionsClass}>
               {isLast ? (
                 <>
                   {showNotice && (
@@ -112,17 +114,13 @@ function QuizQuestions() {
                   </Link>
                   {idx > 0 ? (
                     <button className={styles.btnSecondary} onClick={() => scrollToIdx(idx - 1)}>Back</button>
-                  ) : (
-                    <Link to="/quiz" className={styles.btnSecondary}>Back</Link>
-                  )}
+                  ) : null}
                 </>
               ) : (
                 <>
                   {idx > 0 ? (
                     <button className={styles.btnSecondary} onClick={() => scrollToIdx(idx - 1)}>Back</button>
-                  ) : (
-                    <Link to="/quiz" className={styles.btnSecondary}>Back</Link>
-                  )}
+                  ) : null}
                   <button className={styles.btnPrimary} onClick={() => scrollToIdx(idx + 1)}>Next</button>
                 </>
               )}
