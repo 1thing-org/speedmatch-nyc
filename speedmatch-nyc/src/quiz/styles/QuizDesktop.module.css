@@ -59,6 +59,7 @@
 	align-self: flex-end;
 	margin-top: 3rem;
     margin-right: 1rem;
+	color: #000;
 }
 
 @media (hover: hover) {
