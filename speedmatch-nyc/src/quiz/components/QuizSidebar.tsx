@@ -1,7 +1,7 @@
 import styles from "../styles/QuizSidebar.module.css";
 import { FixedQuestions } from "../content/questions";
 
-function QuizSidebar() {
+function QuizSidebar({ includeStart = true }: { includeStart?: boolean }) {
     function scrollToId(id: string) {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -9,9 +9,11 @@ function QuizSidebar() {
 
     return (
         <nav className={styles.sidebarNav} aria-label="Quiz navigation">
-            <button className={`${styles.item} ${styles.sectionHeader}`} onClick={() => scrollToId('before-start')}>
-                Before You Start
-            </button>
+            {includeStart && (
+                <button className={`${styles.item} ${styles.sectionHeader}`} onClick={() => scrollToId('before-start')}>
+                    Before You Start
+                </button>
+            )}
 
             <ul className={styles.list}>
                 {FixedQuestions.map((q, idx) => (
