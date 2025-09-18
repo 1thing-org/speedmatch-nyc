@@ -5,9 +5,11 @@ type QuizSidebarProps = {
     includeStart?: boolean;
     activeQuestion?: number;
     completedQuestions?: Set<number>;
+    onPickClick?: () => void;
+    onRankClick?: () => void;
 };
 
-function QuizSidebar({ includeStart = true, activeQuestion, completedQuestions }: QuizSidebarProps) {
+function QuizSidebar({ includeStart = true, activeQuestion, completedQuestions, onPickClick, onRankClick }: QuizSidebarProps) {
     function scrollToId(id: string) {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -50,6 +52,26 @@ function QuizSidebar({ includeStart = true, activeQuestion, completedQuestions }
                         </li>
                     );
                 })}
+
+                {/* Desktop-only sections after questions */}
+                <li>
+                    <button
+                        className={`${styles.item} ${activeQuestion === 100 ? styles.itemActive : ''}`}
+                        onClick={() => (onPickClick ? onPickClick() : scrollToId('pick-header'))}
+                        aria-current={activeQuestion === 100 ? 'location' : undefined}
+                    >
+                        <span className={styles.qTitle}>Pick Your Priorities</span>
+                    </button>
+                </li>
+                <li>
+                    <button
+                        className={`${styles.item} ${activeQuestion === 101 ? styles.itemActive : ''}`}
+                        onClick={() => (onRankClick ? onRankClick() : scrollToId('rank-header'))}
+                        aria-current={activeQuestion === 101 ? 'location' : undefined}
+                    >
+                        <span className={styles.qTitle}>Rank Your Priorities</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     );
