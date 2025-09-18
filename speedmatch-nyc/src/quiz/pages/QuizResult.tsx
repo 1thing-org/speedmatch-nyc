@@ -1,14 +1,14 @@
-import PageHeader from "../../../components/PageHeader";
-import Footer from "../../../components/Footer";
+import PageHeader from "../../components/PageHeader";
+import Footer from "../../components/Footer";
 import styles from "../styles/QuizResults.module.css";
 
 import { useLocation } from "react-router";
 import { useMemo } from "react";
-import { useQuizState } from "../../state/QuizContext";
-import { fixedQuestions } from "../../content/questions";
-import { addPointsFromAnswers, addPriorityScoresFromAnswersByRank, rankScores, DefaultRankWeights } from "../../scoring/scoreEngine";
-import { candidateById } from "../../../data/candidates";
-import { PRIORITY_LABEL_BY_ID, type PriorityId } from "../../content/priorities";
+import { useQuizState } from "../state/QuizContext";
+import { fixedQuestions } from "../content/questions";
+import { addPointsFromAnswers, addPriorityScoresFromAnswersByRank, rankScores, DefaultRankWeights } from "../scoring/scoreEngine";
+import { candidateById } from "../../data/candidates";
+import { PRIORITY_LABEL_BY_ID, type PriorityId } from "../content/priorities";
 
 function QuizResult() {
 	const location = useLocation() as any;
@@ -44,7 +44,9 @@ function QuizResult() {
 		return rankScores(base);
 	}, [answers, rankedFive]);
 
-	const topFive = results.slice(0, 5);
+	// Only show candidates with positive final score; do not force 5
+	const positive = results.filter(r => (r.score ?? 0) > 0);
+	const list = positive.slice(0, 5);
 
 	function getRankLabel(index: number) {
 		if (index === 0) return 'Top Match';
@@ -52,6 +54,13 @@ function QuizResult() {
 		if (index === 2) return '3rd Match';
 		if (index === 3) return '4th Match';
 		return '5th Match';
+	}
+
+	function splitName(full?: string): { first: string; last: string } {
+		if (!full) return { first: '', last: '' };
+		const parts = full.trim().split(/\s+/);
+		if (parts.length <= 1) return { first: full, last: '' };
+		return { first: parts[0], last: parts.slice(1).join(' ') };
 	}
 
 	function getMatchesForCandidate(candidateId: number) {
@@ -78,10 +87,11 @@ function QuizResult() {
 			<PageHeader title="Your Matching Results" />
 			<section className={styles.resultContent}>
 				<ul className={styles.resultList}>
-					{topFive.map((r, idx) => {
+					{list.map((r, idx) => {
 						const c = candidateById[r.id];
 						const label = getRankLabel(idx);
 						const matches = getMatchesForCandidate(r.id);
+						const name = splitName(c?.name);
 						return (
 							<li key={r.id} className={styles.resultItem}>
 								<div className={styles.resultCard}>
@@ -89,7 +99,9 @@ function QuizResult() {
 										<img className={styles.resultPhoto} src={c?.image} alt={c?.name} />
 										<div className={styles.resultMeta}>
 											<div className={styles.resultScore}>{label}</div>
-											<div className={styles.resultName}>{c?.name}</div>
+											<div className={styles.resultName}>
+												<span className={styles.nameFirst}>{name.first}</span>{name.last ? ' ' : ''}<span className={styles.nameLast}>{name.last}</span>
+											</div>
 											<div className={styles.resultParty}>{c?.party}</div>
 
 										</div>

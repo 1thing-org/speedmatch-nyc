@@ -4,11 +4,15 @@ import QuizMobileRoutes from "./QuizMobileRoutes";
 import QuizDesktop from "./QuizDesktop";
 import styles from "../styles/QuizPage.module.css";
 import { QuizProvider } from "../state/QuizContext";
+import { useLocation } from "react-router";
+import QuizResult from "./QuizResult";
 
 
 
 function QuizPage() {
     const isLargeScreen = useIsLargeScreen();
+    const location = useLocation();
+    const inResult = location.pathname.endsWith("/quiz/result");
     return (
         <div className={styles.quizPage}>
             <header>
@@ -17,7 +21,11 @@ function QuizPage() {
             <main>
                 <div className={styles.container}>
                     <QuizProvider>
-                        {isLargeScreen ? <QuizDesktop /> : <QuizMobileRoutes />}
+                        {inResult ? (
+                            <QuizResult />
+                        ) : (
+                            isLargeScreen ? <QuizDesktop /> : <QuizMobileRoutes />
+                        )}
                     </QuizProvider>
                 </div>
             </main>

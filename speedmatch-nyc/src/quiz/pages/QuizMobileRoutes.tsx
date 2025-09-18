@@ -3,7 +3,7 @@ import QuizStart from "./mobile/QuizStart";
 import QuizQuestions from "./mobile/QuizQuestions";
 import QuizPick from "./mobile/QuizPick";
 import QuizRank from "./mobile/QuizRank";
-import QuizResult from "./mobile/QuizResult";
+import QuizResult from "./QuizResult";
 
 function QuizMobileRoutes() {
   return (
