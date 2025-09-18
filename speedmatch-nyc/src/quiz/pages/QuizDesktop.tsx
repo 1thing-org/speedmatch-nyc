@@ -1,5 +1,4 @@
 import PageHeader from "../../components/PageHeader";
-import { QuizProvider } from "../state/QuizContext";
 import styles from "../styles/QuizDesktop.module.css";
 import QuizSidebar from "../components/QuizSidebar";
 import { fixedQuestions } from "../content/questions";
@@ -25,8 +24,8 @@ function DesktopQuiz() {
 
     const questions = fixedQuestions as readonly any[];
     const total = questions.length;
-    const { answers: persisted } = useQuizState();
-    const { setAnswer, setLastQ8OptionId } = useQuizActions();
+    const { answers: persisted, optionOrders } = useQuizState();
+    const { setAnswer, setLastQ8OptionId, setOptionOrder } = useQuizActions();
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [showNotice, setShowNotice] = useState(false);
 
@@ -34,9 +33,16 @@ function DesktopQuiz() {
         setAnswers(persisted as Record<string, string>);
     }, [persisted]);
 
+    // Stable order per question stored in context
     const orders = useMemo(() => {
-        return questions.map(q => shuffleArray((q.options as readonly any[]).map((_: any, i: number) => i)));
-    }, [questions]);
+        return questions.map(q => {
+            const existing = (optionOrders as any)[q.id] as number[] | undefined;
+            if (existing && existing.length === (q.options as any[]).length) return existing;
+            const order = shuffleArray((q.options as readonly any[]).map((_: any, i: number) => i));
+            setOptionOrder(q.id as any, order);
+            return order;
+        });
+    }, [questions, optionOrders, setOptionOrder]);
 
     function onSelect(qid: string, oid: string) {
         setAnswers(prev => ({ ...prev, [qid]: oid }));
@@ -150,14 +156,16 @@ function DesktopQuiz() {
                                         })}
                                     </ul>
 
+                                    {/* Notice above actions for last question */}
+                                    {isLast && showNotice ? (
+                                        <div className={`${dqStyles.notice} ${dqDesktop.notice}`}>You must finish all questions to proceed</div>
+                                    ) : null}
+
                                     <div className={`${dqStyles.actions} ${dqDesktop.actions}`} >
                                         {isLast ? (
                                             <>
                                                 {/* Back first on last question */}
                                                 <button className={`${dqStyles.btnSecondary} ${dqDesktop.btnSecondary}`} onClick={() => scrollToHeader(idx - 1)}>Back</button>
-                                                {showNotice && (
-                                                    <div className={dqStyles.notice}>You must finish all questions to proceed</div>
-                                                )}
                                                 <Link
                                                     to="/quiz/pick"
                                                     className={`${dqStyles.btnPrimary} ${dqDesktop.btnPrimary} ${dqDesktop.btnWide}`}
@@ -175,7 +183,10 @@ function DesktopQuiz() {
                                             </>
                                         ) : (
                                             <>
-                                                {/* No Back on non-last questions */}
+                                                {/* Show Back on non-first questions */}
+                                                {idx > 0 ? (
+                                                    <button className={`${dqStyles.btnSecondary} ${dqDesktop.btnSecondary}`} onClick={() => scrollToHeader(idx - 1)}>Back</button>
+                                                ) : null}
                                                 <button className={`${dqStyles.btnPrimary} ${dqDesktop.btnPrimary}`} onClick={() => scrollToHeader(idx + 1)}>Next</button>
                                             </>
                                         )}
@@ -190,12 +201,4 @@ function DesktopQuiz() {
     );
 }
 
-function QuizDesktop() {
-    return (
-        <QuizProvider>
-            <DesktopQuiz />
-        </QuizProvider>
-    );
-}
-
-export default QuizDesktop
+export default DesktopQuiz

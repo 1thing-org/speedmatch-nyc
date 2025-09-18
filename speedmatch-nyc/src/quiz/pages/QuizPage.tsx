@@ -16,11 +16,9 @@ function QuizPage() {
             </header>
             <main>
                 <div className={styles.container}>
-                    {isLargeScreen ? <QuizDesktop /> : (
-                        <QuizProvider>
-                            <QuizMobileRoutes />
-                        </QuizProvider>
-                    )}
+                    <QuizProvider>
+                        {isLargeScreen ? <QuizDesktop /> : <QuizMobileRoutes />}
+                    </QuizProvider>
                 </div>
             </main>
         </div>

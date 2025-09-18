@@ -18,7 +18,7 @@ function QuizSidebar({ includeStart = true }: { includeStart?: boolean }) {
             <ul className={styles.list}>
                 {fixedQuestions.map((q, idx) => (
                     <li key={q.id}>
-                        <button className={styles.item} onClick={() => scrollToId(`q-${idx + 1}`)}>
+                        <button className={styles.item} onClick={() => scrollToId(`q-header-${idx + 1}`)}>
                             <span className={styles.qNumber}>Question {idx + 1}</span>
                             <span className={styles.qTitle}>{q.title}</span>
                         </button>

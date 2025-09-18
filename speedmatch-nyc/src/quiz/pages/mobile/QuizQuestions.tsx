@@ -18,8 +18,8 @@ function QuizQuestions() {
   const questions = fixedQuestions;
   const total = questions.length;
   const sectionRefs = useRef<HTMLDivElement[]>([]);
-  const { answers: persisted } = useQuizState();
-  const { setAnswer, setLastQ8OptionId } = useQuizActions();
+  const { answers: persisted, optionOrders } = useQuizState();
+  const { setAnswer, setLastQ8OptionId, setOptionOrder } = useQuizActions();
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showNotice, setShowNotice] = useState(false);
 
@@ -27,10 +27,16 @@ function QuizQuestions() {
     setAnswers(persisted as Record<string, string>);
   }, [persisted]);
 
-  // For each question, compute a shuffled array of option indices once
+  // Stable order per question stored in context
   const orders = useMemo(() => {
-    return questions.map(q => shuffleArray(q.options.map((_, i) => i)));
-  }, [questions]);
+    return questions.map(q => {
+      const existing = (optionOrders as any)[q.id] as number[] | undefined;
+      if (existing && existing.length === q.options.length) return existing;
+      const order = shuffleArray(q.options.map((_, i) => i));
+      setOptionOrder(q.id as any, order);
+      return order;
+    });
+  }, [questions, optionOrders, setOptionOrder]);
 
   const setRef = (idx: number) => (el: HTMLDivElement | null) => {
     if (!el) return;

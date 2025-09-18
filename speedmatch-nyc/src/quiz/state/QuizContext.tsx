@@ -3,12 +3,14 @@ import type { OptionId, QuestionId } from '../content/questions';
 import type { PriorityId } from '../content/priorities';
 
 export type Answers = Record<QuestionId, OptionId>;
+export type OptionOrders = Partial<Record<QuestionId, number[]>>;
 
 type QuizState = {
   answers: Answers;
   selectedPriorities: PriorityId[];
   lastQ8OptionId?: OptionId;
   q8UsedForPriorities?: OptionId;
+  optionOrders: OptionOrders;
 };
 
 type QuizActions = {
@@ -16,6 +18,7 @@ type QuizActions = {
   setSelectedPriorities: (p: PriorityId[]) => void;
   setLastQ8OptionId: (opt?: OptionId) => void;
   setQ8UsedForPriorities: (opt?: OptionId) => void;
+  setOptionOrder: (q: QuestionId, order: number[]) => void;
   reset: () => void;
 };
 
@@ -27,6 +30,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
   const [selectedPriorities, setSelectedPriorities] = useState<PriorityId[]>([]);
   const [lastQ8OptionId, setLastQ8OptionId] = useState<OptionId | undefined>(undefined);
   const [q8UsedForPriorities, setQ8UsedForPriorities] = useState<OptionId | undefined>(undefined);
+  const [optionOrders, setOptionOrders] = useState<OptionOrders>({});
 
   const actions = useMemo<QuizActions>(() => ({
     setAnswer(q, option) {
@@ -41,16 +45,20 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
     setQ8UsedForPriorities(opt) {
       setQ8UsedForPriorities(opt);
     },
+    setOptionOrder(q, order) {
+      setOptionOrders(prev => ({ ...prev, [q]: order }));
+    },
     reset() {
       setAnswers({} as Answers);
       setSelectedPriorities([]);
       setLastQ8OptionId(undefined);
       setQ8UsedForPriorities(undefined);
+      setOptionOrders({});
     },
   }), []);
 
   return (
-    <StateCtx.Provider value={{ answers, selectedPriorities, lastQ8OptionId, q8UsedForPriorities }}>
+    <StateCtx.Provider value={{ answers, selectedPriorities, lastQ8OptionId, q8UsedForPriorities, optionOrders }}>
       <ActionsCtx.Provider value={actions}>{children}</ActionsCtx.Provider>
     </StateCtx.Provider>
   );
