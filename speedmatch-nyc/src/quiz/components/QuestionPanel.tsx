@@ -104,12 +104,21 @@ export default function QuestionPanel({
       {noticeText ? <div className={C.notice}>{noticeText}</div> : null}
 
       <div className={C.actions}>
-        {!isFirst && (
-          <button className={C.btnSec} onClick={onBack}>Back</button>
+        {variant === "mobile" && isLast ? (
+          <>
+            <button className={priClass} onClick={onNext}>{nextLabel}</button>
+            {!isFirst && (
+              <button className={C.btnSec} onClick={onBack}>Back</button>
+            )}
+          </>
+        ) : (
+          <>
+            {!isFirst && (
+              <button className={C.btnSec} onClick={onBack}>Back</button>
+            )}
+            <button className={priClass} onClick={onNext}>{nextLabel}</button>
+          </>
         )}
-        <button className={priClass} onClick={onNext}>
-          {nextLabel}
-        </button>
       </div>
     </div>
   );

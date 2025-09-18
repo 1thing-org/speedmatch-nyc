@@ -15,6 +15,7 @@ import QuestionPanel from "../components/QuestionPanel";
 import { useQuestionVM } from "../hooks/useQuestionVM";
 import RankPanel from "../components/RankPanel";
 import { useRankVM } from "../hooks/useRankVM";
+import BeforeStartContent from "../components/BeforeStartContent";
 
 function shuffleArray<T>(input: readonly T[]): T[] {
     const arr = input.slice() as T[];
@@ -260,27 +261,7 @@ function DesktopQuiz() {
             {/* Before Start section (no sidebar) */}
             <section id="before-start" className={styles.startContainer}>
                 <div className={styles.startContent}>
-                    <h2 className={styles.startHeading}>A Quick Note Before The Quiz.</h2>
-                    <ul>
-                        <li>
-                            This quiz consists of <strong>8</strong> questions and takes approximately <strong>5–8</strong> minutes to complete.
-                        </li>
-                        <li>
-                            Each answer option is drawn directly from a candidate’s official campaign proposals. Please select the option you most agree with.
-                        </li>
-                        <li>
-                            The quiz uses only <strong>candidates’ official campaign websites</strong> its source of information.
-                        </li>
-                        <li>
-                            The following candidates are not included:
-                            <ul>
-                                <li>Candidates without a campaign website or without published policy positions on their website.</li>
-                                <li>Candidates with non-functional websites.</li>
-                                <li>Candidates whose names will not appear on the ballot (e.g., write-in candidates).</li>
-                                <li>Candidates who have withdrawn from the race.</li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <BeforeStartContent />
                     <button className={styles.startButton} onClick={goToQ1}>Next: Question 1</button>
                 </div>
             </section>
