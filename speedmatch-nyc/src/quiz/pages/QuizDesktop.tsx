@@ -10,12 +10,13 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import { useQuizActions, useQuizState } from "../state/QuizContext";
 import { candidates } from "../../data/candidates";
 import { Link } from "react-router";
-import { PRIORITIES, type PriorityId } from "../content/priorities";
 import QuestionPanel from "../components/QuestionPanel";
 import { useQuestionVM } from "../hooks/useQuestionVM";
 import RankPanel from "../components/RankPanel";
 import { useRankVM } from "../hooks/useRankVM";
 import BeforeStartContent from "../components/BeforeStartContent";
+import PickPanel from "../components/PickPanel";
+import { usePickVM } from "../hooks/usePickVM";
 
 function shuffleArray<T>(input: readonly T[]): T[] {
     const arr = input.slice() as T[];
@@ -33,7 +34,7 @@ function DesktopQuiz() {
     const questions = fixedQuestions as readonly any[];
     const total = questions.length;
     const { answers: persisted, optionOrders } = useQuizState();
-    const { setOptionOrder, setSelectedPriorities, setQ8UsedForPriorities } = useQuizActions();
+    const { setOptionOrder, setSelectedPriorities } = useQuizActions();
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [showNotice, setShowNotice] = useState(false);
     const [noticeAt, setNoticeAt] = useState<number | null>(null);
@@ -47,61 +48,29 @@ function DesktopQuiz() {
         return set;
     }, [answers, questions]);
 
-    // ----- Pick Your Priorities state (desktop inline) -----
-    const { selectedPriorities, lastQ8OptionId, q8UsedForPriorities } = useQuizState();
-    const [selected, setSelected] = useState<PriorityId[]>(() => selectedPriorities as PriorityId[]);
-    const [pickNotice, setPickNotice] = useState<string>("");
-    const [showPickNotice, setShowPickNotice] = useState(false);
+    // ----- Pick Your Priorities state -----
+    const { selectedPriorities } = useQuizState();
     const [pickVisible, setPickVisible] = useState(false);
     const [rankVisible, setRankVisible] = useState(false);
 
-    const filteredPriorities = useMemo(() => {
-        const specialIds = new Set<PriorityId>(['antisemitism','equity','efficiency'] as unknown as PriorityId[]);
-        let chosenSpecial: PriorityId | undefined;
-        const q8 = (fixedQuestions).find(q => q.id === 'Q8');
-        const chosenOptId = (answers as any)['Q8'];
-        if (q8 && chosenOptId) {
-            const opt: any = (q8.options).find((o: any) => o.id === chosenOptId);
-            chosenSpecial = opt?.priorityId as PriorityId | undefined;
-        }
-        return PRIORITIES.filter(p => !specialIds.has(p.id as PriorityId) || p.id === chosenSpecial);
-    }, [answers]);
+    // Keep context-selected priorities in sync for initial seed; actual state is managed by usePickVM
+    useEffect(() => { setSelectedPriorities(selectedPriorities as any); }, [selectedPriorities, setSelectedPriorities]);
 
-    useEffect(() => {
-        const currentQ8 = lastQ8OptionId as any;
-        const usedQ8 = q8UsedForPriorities as any;
-        if (!usedQ8 && currentQ8) {
-            setQ8UsedForPriorities(currentQ8);
-            return;
-        }
-        if (currentQ8 && usedQ8 && currentQ8 !== usedQ8) {
-            setSelected([]);
-            setSelectedPriorities([]);
-            setQ8UsedForPriorities(currentQ8);
-            setPickNotice('Your last answer changed. Please pick 5 priorities again.');
-            setShowPickNotice(true);
-            const t = setTimeout(() => setShowPickNotice(false), 3000);
-            return () => clearTimeout(t);
-        }
-    }, [lastQ8OptionId, q8UsedForPriorities]);
+    // VM and classes for Pick
+    const pickVM = usePickVM();
+    const pickClasses = {
+        wrap: `${dqStyles.qSection} ${dqDesktop.qSection}`,
+        hint: pickRankStyles.pickHint,
+        chipList: `${pickRankStyles.pickChipList} ${desktopPickRank.pickTwoCol}`,
+        chip: `${pickRankStyles.pickChip} ${desktopPickRank.pickChipWide}`,
+        chipSelected: pickRankStyles.pickChipSelected,
+        chipDisabled: pickRankStyles.pickChipDisabled,
+        notice: `${pickRankStyles.notice} ${desktopPickRank.notice}`,
+    } as const;
 
-    useEffect(() => { setSelectedPriorities(selected); }, [selected]);
-
-    function togglePriority(id: PriorityId) {
-        const isSelected = selected.includes(id);
-        if (isSelected) {
-            setSelected(prev => prev.filter(x => x !== id));
-            return;
-        }
-        if (selected.length >= 5) return;
-        setSelected(prev => [...prev, id]);
-    }
-
-    const pickReady = selected.length === 5;
-
-    // ----- Rank VM for desktop inline rank -----
-    const rankVM = useRankVM(selected);
-    const rankClasses = useMemo(() => ({
+    // ----- Rank VM for desktop -----
+    const rankVM = useRankVM(pickVM.selected);
+    const rankClasses = {
         wrap: pickRankStyles.rankContent,
         hint: pickRankStyles.rankHint,
         list: pickRankStyles.rankList,
@@ -110,26 +79,7 @@ function DesktopQuiz() {
         card: pickRankStyles.rankCard,
         handle: pickRankStyles.rankHandle,
         label: pickRankStyles.rankLabel,
-    }), []);
-
-    // ----- Rank Your Priorities state (desktop inline) -----
-    const initialOrder = useMemo<PriorityId[]>(() => {
-        const defaults = filteredPriorities.map(p => p.id as PriorityId);
-        if (Array.isArray(selected) && selected.length === 5) return selected as PriorityId[];
-        return defaults.slice(0, 5);
-    }, [selected, filteredPriorities]);
-
-    const [rankOrder, setRankOrder] = useState<PriorityId[]>(initialOrder);
-    useEffect(() => {
-        setRankOrder(prev => {
-            if (prev.length !== initialOrder.length || prev.some((v, i) => v !== initialOrder[i])) {
-                return initialOrder;
-            }
-            return prev;
-        });
-    }, [initialOrder]);
-
-
+    } as const;
 
     useEffect(() => {
         setAnswers(persisted as Record<string, string>);
@@ -158,7 +108,7 @@ function DesktopQuiz() {
     }
 
     function requireAllAnsweredThen(targetKey: number) {
-        if (Object.keys(answers).length === total) {
+        if (questions.every((q: any) => Boolean((answers as any)[q.id]))) {
             scrollToKey(targetKey);
             return;
         }
@@ -173,7 +123,7 @@ function DesktopQuiz() {
     }
 
     function handlePickFromSidebar() {
-        if (!allAnswered) {
+        if (!questions.every((q: any) => Boolean((answers as any)[q.id]))) {
             requireAllAnsweredThen(100);
             return;
         }
@@ -186,7 +136,7 @@ function DesktopQuiz() {
     }
 
     function handleRankFromSidebar() {
-        if (!allAnswered) {
+        if (!questions.every((q: any) => Boolean((answers as any)[q.id]))) {
             requireAllAnsweredThen(101);
             return;
         }
@@ -196,17 +146,14 @@ function DesktopQuiz() {
             return;
         }
         if (!rankVisible) {
-            // Show hint in Pick if not ready yet
-            setPickNotice(selected.length < 5 ? 'Pick 5 to proceed' : 'Click Next to continue');
-            setShowPickNotice(true);
+            // Guide user to Pick; 
             scrollToKey(100);
-            setTimeout(() => setShowPickNotice(false), 3000);
             return;
         }
         scrollToKey(101);
     }
 
-    const allAnswered = Object.keys(answers).length === total;
+    const allAnswered = useMemo(() => questions.every((q: any) => Boolean((answers as any)[q.id])), [questions, answers]);
 
     function goToQ1() { scrollToKey(1); }
 
@@ -325,7 +272,7 @@ function DesktopQuiz() {
                 );
             })}
 
-            {/* Pick Your Priorities section (desktop inline) */}
+            {/* Pick Your Priorities section */}
             {pickVisible && (
             <>
             <div id="pick-header" className={`${styles.pageHeaderBar} ${styles.stickyHeader} ${styles.questionHeader}`}>
@@ -342,56 +289,38 @@ function DesktopQuiz() {
                     />
                 </aside>
                 <main className={styles.main}>
-                    <section className={`${dqStyles.qSection} ${dqDesktop.qSection}`}>
-                        <p className={pickRankStyles.pickHint}>Pick The 5 Topics That Matter Most To You.</p>
-                        <div className={`${pickRankStyles.pickChipList} ${desktopPickRank.pickTwoCol}`}>
-                            {filteredPriorities.map(p => {
-                                const active = selected.includes(p.id as PriorityId);
-                                const reachedCap = !active && selected.length >= 5;
-                                return (
-                                    <button
-                                        key={p.id}
-                                        type="button"
-                                        className={`${pickRankStyles.pickChip} ${desktopPickRank.pickChipWide} ${active ? pickRankStyles.pickChipSelected : ''} ${reachedCap ? pickRankStyles.pickChipDisabled : ''}`}
-                                        onClick={() => togglePriority(p.id as PriorityId)}
-                                        aria-pressed={active}
-                                        disabled={reachedCap}
-                                    >
-                                        {p.label}
-                                    </button>
-                                );
-                            })}
-                        </div>
-                        
-                        {showPickNotice ? (<div className={`${pickRankStyles.notice} ${desktopPickRank.notice}`}>{pickNotice || 'Choose 5 priorities to proceed.'}</div>) : null}
-                        <div className={`${dqDesktop.actions}`}>
-                            <button className={`${dqStyles.btnSecondary} ${dqDesktop.btnSecondary}`} onClick={() => scrollToKey(questions.length)}>Back</button>
-                            <button
-                                className={`${dqStyles.btnPrimary} ${dqDesktop.btnPrimary} ${dqDesktop.btnWide}`}
-                                onClick={() => {
-                                    if (!pickReady) {
-                                        setPickNotice('Pick 5 to proceed');
-                                        setShowPickNotice(true);
-                                        setTimeout(() => setShowPickNotice(false), 3000);
-                                        return;
-                                    }
-                                    setSelectedPriorities(selected);
-                                    setQ8UsedForPriorities(lastQ8OptionId as any);
-                                    if (!rankVisible) setRankVisible(true);
-                                    setTimeout(() => scrollToKey(101), 0);
-                                }}
-                            >
-                                Next: Rank Your Priorities
-                            </button>
-                        </div>
-                        
-                    </section>
+                    <PickPanel
+                        vm={pickVM}
+                        classes={pickClasses}
+                        renderActions={(isReady, selectedFive) => {
+                            void selectedFive;
+                            return (
+                            <div className={`${dqDesktop.actions}`}>
+                                <button className={`${dqStyles.btnSecondary} ${dqDesktop.btnSecondary}`} onClick={() => scrollToKey(questions.length)}>Back</button>
+                                <button
+                                    className={`${dqStyles.btnPrimary} ${dqDesktop.btnPrimary} ${dqDesktop.btnWide}`}
+                                    onClick={() => {
+                                        if (!isReady) {
+                                            pickVM.showTempNotice('Pick 5 to proceed');
+                                            return;
+                                        }
+                                        pickVM.commitBeforeRank();
+                                        if (!rankVisible) setRankVisible(true);
+                                        setTimeout(() => scrollToKey(101), 0);
+                                    }}
+                                >
+                                    Next: Rank Your Priorities
+                                </button>
+                            </div>
+                            );
+                        }}
+                    />
                 </main>
             </div>
             </>
             )}
 
-            {/* Rank Your Priorities section (desktop inline) */}
+            {/* Rank Your Priorities section  */}
             {rankVisible && (
             <>
             <div id="rank-header" className={`${styles.pageHeaderBar} ${styles.stickyHeader} ${styles.questionHeader}`}>
@@ -435,6 +364,5 @@ function DesktopQuiz() {
         </div>
     );
 }
-
 
 export default DesktopQuiz
