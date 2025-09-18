@@ -30,6 +30,14 @@ function DesktopQuiz() {
     const [showNotice, setShowNotice] = useState(false);
     const [activeQuestion, setActiveQuestion] = useState<number>(0);
 
+    const completedQuestions = useMemo(() => {
+        const set = new Set<number>();
+        questions.forEach((q, idx) => {
+            if ((answers as Record<string, string>)[q.id]) set.add(idx + 1);
+        });
+        return set;
+    }, [answers, questions]);
+
     useEffect(() => {
         setAnswers(persisted as Record<string, string>);
     }, [persisted]);
@@ -166,7 +174,7 @@ function DesktopQuiz() {
                         {/* Columns under header */}
                         <div className={styles.columns}>
                             <aside className={styles.sidebar}>
-                                <QuizSidebar includeStart={false} activeQuestion={activeQuestion} />
+                                <QuizSidebar includeStart={false} activeQuestion={activeQuestion} completedQuestions={completedQuestions} />
                             </aside>
                             <main className={styles.main}>
                                 <div className={`${dqStyles.qSection} ${dqDesktop.qSection}`}>
