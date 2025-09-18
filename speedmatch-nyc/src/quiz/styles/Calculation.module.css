@@ -1,0 +1,20 @@
+.calcBlock {
+	padding: 16px 20px;
+    border-top-color: white;
+	border-top: 1px solid white;
+    border-bottom: 1px solid white
+}
+
+.calcHeading {
+	margin: 0 0 8px 0;
+	font-size: 22px;
+	color: #3cff00;
+	letter-spacing: -4%;
+	font-weight: 500;
+}
+
+.calcList {
+	margin: 0;
+	padding-left: 1.25rem;
+	line-height: 140%;
+}

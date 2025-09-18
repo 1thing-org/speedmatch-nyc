@@ -1,13 +1,41 @@
 .resultWrapper {
-    min-height: 100vh;
+	min-height: 100vh;
 	background-color:
 		#003cff;
 	color: white;
-	--border-color: white;
+	--border-top-color: white;
+	--border-bottom-color: white;
 }
 
 .resultContent {
 	padding: 1.5rem 1.2rem 2.5rem 1.2rem;
+}
+
+
+/* default: show bottom under list, hide top */
+.calcTop {
+	display: none;
+}
+
+.calcBottom {
+	display: block;
+
+}
+
+/* tablet/desktop: show top under header, hide bottom under list */
+@media (min-width: 744px) {
+	.calcTop {
+		display: block;
+	}
+
+	.calcBottom {
+		display: none;
+	}
+
+	.resultWrapper {
+		--border-top-color: white;
+		--border-bottom-color: transparent;
+	}
 }
 
 .resultList {
@@ -27,6 +55,13 @@
 	padding-bottom: 32px;
 }
 
+/* Remove bottom border for the last displayed candidate only */
+.resultList>.resultItem:last-child .resultCard {
+	border-bottom: 0;
+	padding-bottom: 0;
+
+}
+
 .resultCandidate {
 	display: grid;
 	grid-template-columns: 160px 1fr;
@@ -34,6 +69,13 @@
 	align-items: start;
 	background: transparent;
 	padding: 16px 0 8px 0;
+}
+
+.resultScore {
+	color: #3cff00;
+	font-size: 32px;
+	letter-spacing: -8%;
+	line-height: 100%;
 }
 
 .resultPhoto {
@@ -53,7 +95,7 @@
 	font-size: 24px;
 	font-weight: 400;
 	color: #fff;
-    line-height: 87%;
+	line-height: 87%;
 	letter-spacing: -4%;
 }
 
@@ -63,29 +105,94 @@
 	display: inline;
 }
 
+/* Tablet portrait: stack first and last name vertically and use 3 columns */
+@media (min-width: 744px) and (max-width: 1366px) and (orientation: portrait) {
+	.resultCard {
+		display: grid;
+		grid-template-columns: 160px 200px 1fr;
+		column-gap: 24px;
+		align-items: start;
+	}
 
 
+	/* Candidate block spans first two columns */
+	.resultCandidate {
+		grid-column: 1 / span 2;
+		display: grid;
+		grid-template-columns: 160px 200px;
+		column-gap: 24px;
+	}
 
+	.resultPhoto {
+		grid-column: 1;
+	}
 
-.resultParty {
-	font-size: 14px;
-	color: #D9D9D9;
-	line-height: 87%;
-	letter-spacing: -4%;
-    font-weight: 400;
- 
+	.resultMeta {
+		grid-column: 2;
+	}
+
+	.issuesAligned {
+		grid-column: 3;
+		margin-top: 0;
+	}
+
+	.issuesHeading {
+		margin-top: 0;
+	}
+
+	.nameFirst,
+	.nameLast {
+		display: block;
+	}
+
+	.resultName {
+		display: grid;
+	}
 }
 
-.resultScore {
-	margin-top: 2px;
-	font-size: 32px;
-	font-weight: 400;
-	color: #3cff00;
-    line-height: 100%;
-    letter-spacing: -8%;
+/* Desktop landscape: inline name and wider middle column */
+@media (min-width: 1024px) and (orientation: landscape) {
+	.resultCard {
+		display: grid;
+		grid-template-columns: 160px 320px 1fr;
+		column-gap: 24px;
+		align-items: start;
+	}
+
+	/* Candidate block spans first two columns */
+	.resultCandidate {
+		grid-column: 1 / span 2;
+		display: grid;
+		grid-template-columns: 160px 320px;
+		column-gap: 24px;
+	}
+
+	.resultPhoto {
+		grid-column: 1;
+	}
+
+	.resultMeta {
+		grid-column: 2;
+	}
+
+	.issuesAligned {
+		grid-column: 3;
+		margin-top: 0;
+	}
+
+	.issuesHeading {
+		margin-top: 0;
+	}
+
+	.nameFirst,
+	.nameLast {
+		display: inline;
+	}
+
+	.resultName {
+		display: block;
+	}
 }
-
-
 
 /* Aligned issues chips */
 .issuesHeading {
@@ -96,9 +203,7 @@
 	letter-spacing: -4%;
 }
 
-.issuesAligned {
-	/* mobile stacks under candidate */
-}
+
 
 .issueChips {
 	display: grid;
@@ -107,8 +212,8 @@
 	row-gap: 12px;
 	column-gap: 14px;
 	width: 100%;
-	justify-items: start;   /* keep chip width to its content */
-	align-items: start;     /* prevent vertical stretch */
+	justify-items: start;
+	align-items: start;
 }
 
 .issueChip {
@@ -125,54 +230,11 @@
 	white-space: nowrap;
 	letter-spacing: -4%;
 	line-height: 150%;
-    font-weight: 500;
+	font-weight: 500;
 }
 
 .issueChipSelected {
 	background: #3cff00;
 	color: #003CFF;
 	border-color: #3cff00;
-}
-
-
-/* Tablet PORTRAIT window */
-@media (orientation: portrait) and (744px <= width <= 1366px) {
-  /* parent grid: photo | meta | issues */
-  .resultCard {
-    display: grid;
-    grid-template-columns: 160px 200px 1fr; /* meta = 200px */
-    column-gap: 24px;
-    align-items: start;
-  }
-
-  /* let children participate in parent grid */
-  .resultCandidate { display: contents; }
-  .resultPhoto { grid-column: 1; }
-  .resultMeta  { grid-column: 2; }
-  .issuesAligned { grid-column: 3; margin-top: 0; }
-  .issuesHeading { margin-top: 0; }
-
-  /* stack last name under first name on tablet portrait */
-  .resultName .nameLast { display: block; }
-}
-
-
-/* Desktop  */
-@media (min-width: 1024px) and (orientation: landscape) {
-  .resultCard {
-    display: grid;
-    grid-template-columns: 160px 320px 1fr; /* meta = 320px */
-    column-gap: 24px;
-    align-items: start;
-  }
-
-  .resultCandidate { display: contents; }
-  .resultPhoto { grid-column: 1; }
-  .resultMeta  { grid-column: 2; }
-  .issuesAligned { grid-column: 3; margin-top: 0; }
-  .issuesHeading { margin-top: 0; }
-
-  /* names back on one line */
-  .resultName .nameFirst,
-  .resultName .nameLast { display: inline; }
 }

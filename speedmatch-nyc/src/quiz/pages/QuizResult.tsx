@@ -9,6 +9,7 @@ import { fixedQuestions } from "../content/questions";
 import { addPointsFromAnswers, addPriorityScoresFromAnswersByRank, rankScores, DefaultRankWeights } from "../scoring/scoreEngine";
 import { candidateById } from "../../data/candidates";
 import { PRIORITY_LABEL_BY_ID, type PriorityId } from "../content/priorities";
+import Calculation from "../components/Calculation";
 
 function QuizResult() {
 	const location = useLocation() as any;
@@ -85,6 +86,10 @@ function QuizResult() {
 	return (
 		<div className={styles.resultWrapper}>
 			<PageHeader title="Your Matching Results" />
+
+			{/* Tablet/Desktop explainer under header */}
+			<Calculation className={styles.calcTop} />
+
 			<section className={styles.resultContent}>
 				<ul className={styles.resultList}>
 					{list.map((r, idx) => {
@@ -119,7 +124,11 @@ function QuizResult() {
 						);
 					})}
 				</ul>
+
+				
 			</section>
+			{/* Mobile explainer under list */}
+				<Calculation className={styles.calcBottom} />
 
 			<footer>
 				<Footer />
