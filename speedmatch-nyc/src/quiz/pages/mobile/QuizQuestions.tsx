@@ -1,9 +1,11 @@
-import { useMemo, useRef, useState, useEffect } from "react";
-import { Link } from "react-router";
+import { useMemo, useState } from "react";
+import { useNavigate } from "react-router";
 import { fixedQuestions } from "../../content/questions";
 import styles from "../../styles/QuizMobileQuestions.module.css";
 import { useQuizActions, useQuizState } from "../../state/QuizContext";
 import { candidates } from '../../../data/candidates';
+import QuestionPanel from "../../components/QuestionPanel";
+import { useQuestionVM } from "../../hooks/useQuestionVM";
 
 function shuffleArray<T>(input: readonly T[]): T[] {
   const arr = input.slice() as T[];
@@ -15,123 +17,70 @@ function shuffleArray<T>(input: readonly T[]): T[] {
 }
 
 function QuizQuestions() {
-  const questions = fixedQuestions;
+  const questions = fixedQuestions as readonly any[];
   const total = questions.length;
-  const sectionRefs = useRef<HTMLDivElement[]>([]);
-  const { answers: persisted, optionOrders } = useQuizState();
-  const { setAnswer, setLastQ8OptionId, setOptionOrder } = useQuizActions();
-  const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [showNotice, setShowNotice] = useState(false);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    setAnswers(persisted as Record<string, string>);
-  }, [persisted]);
+  const { optionOrders, answers } = useQuizState();
+  const { setOptionOrder } = useQuizActions();
 
   // Stable order per question stored in context
   const orders = useMemo(() => {
     return questions.map(q => {
       const existing = (optionOrders as any)[q.id] as number[] | undefined;
-      if (existing && existing.length === q.options.length) return existing;
-      const order = shuffleArray(q.options.map((_, i) => i));
+      if (existing && existing.length === (q.options as any[]).length) return existing;
+      const order = shuffleArray((q.options as readonly any[]).map((_: any, i: number) => i));
       setOptionOrder(q.id as any, order);
       return order;
     });
   }, [questions, optionOrders, setOptionOrder]);
 
-  const setRef = (idx: number) => (el: HTMLDivElement | null) => {
-    if (!el) return;
-    sectionRefs.current[idx] = el;
-  };
-
-  function onSelect(qid: string, oid: string) {
-    setAnswers(prev => ({ ...prev, [qid]: oid }));
-    setAnswer(qid as any, oid as any);
-    if (qid === 'Q8') setLastQ8OptionId(oid as any);
-  }
-
   function scrollToIdx(idx: number) {
-    const el = sectionRefs.current[idx];
+    const el = document.getElementById(`q-${idx + 1}`);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  const allAnswered = Object.keys(answers).length === total;
+  const allAnswered = Object.keys(answers as Record<string, unknown>).length === total;
+  const [showNotice, setShowNotice] = useState(false);
 
   return (
     <div className={styles.page}>
-      {questions.map((q, idx) => {
-        const current = idx + 1;
-        const selected = answers[q.id];
-        const isLast = idx === total - 1;
+      {questions.map((q: any, idx: number) => {
         const order = orders[idx];
+        const vm = useQuestionVM(q, idx, total, order);
 
         const declared = new Set<number>();
-        q.options.forEach(o => declared.add((o as any).candidateId));
+        (q.options as any[]).forEach(o => declared.add((o as any).candidateId));
         const undeclared = Math.max(0, candidates.length - declared.size);
 
-        const actionsClass = `${styles.actions} ${isLast ? styles.actionsStack : ''} ${idx === 0 ? styles.actionsSingle : ''}`;
+        const onBack = () => {
+          if (!vm.isFirst) scrollToIdx(idx - 1);
+        };
+        const onNext = () => {
+          if (vm.isLast) {
+            if (!allAnswered) {
+              setShowNotice(true);
+              setTimeout(() => setShowNotice(false), 3000);
+              return;
+            }
+            navigate('/quiz/pick', { state: { fromSpecialPriorityOption: (answers as any)['Q8'] } });
+            return;
+          }
+          scrollToIdx(idx + 1);
+        };
+
+        const noticeText = vm.isLast && showNotice && !allAnswered ? 'You must finish all questions to proceed' : null;
 
         return (
-          <div key={q.id} ref={setRef(idx)} id={`q-${current}`} className={styles.qSection}>
-            <div className={styles.qMeta}>Question {current}/{total}</div>
-            <h2 className={styles.qTitle}>{q.prompt}</h2>
-            
-            <div className={styles.qSub}>
-              ({undeclared} candidates have not declared a stance on this issue.)
-            </div>
-
-            <ul className={styles.options}>
-              {order.map((optIndex, displayIndex) => {
-                const opt = q.options[optIndex] as any;
-                const isSelected = selected === opt.id;
-                return (
-                  <li key={opt.id}>
-                    <button
-                      type="button"
-                      onClick={() => onSelect(q.id, opt.id)}
-                      className={`${styles.option} ${isSelected ? styles.optionSelected : ""}`}
-                    >
-                      <span className={styles.optIndex}>{displayIndex + 1}.</span>
-                      <span className={styles.optLabel}>{opt.label}</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <div className={actionsClass}>
-              {isLast ? (
-                <>
-                  {showNotice && (
-                    <div className={styles.notice}>You must finish all questions to proceed</div>
-                  )}
-                  <Link
-                    to="/quiz/pick"
-                    className={styles.btnPrimary}
-                    onClick={(e) => {
-                      if (!allAnswered) {
-                        e.preventDefault();
-                        setShowNotice(true);
-                        setTimeout(() => setShowNotice(false), 3000);
-                      }
-                    }}
-                    state={{ fromSpecialPriorityOption: answers['Q8'] }}
-                  >
-                    Next: Pick Your Priorities
-                  </Link>
-                  {idx > 0 ? (
-                    <button className={styles.btnSecondary} onClick={() => scrollToIdx(idx - 1)}>Back</button>
-                  ) : null}
-                </>
-              ) : (
-                <>
-                  {idx > 0 ? (
-                    <button className={styles.btnSecondary} onClick={() => scrollToIdx(idx - 1)}>Back</button>
-                  ) : null}
-                  <button className={styles.btnPrimary} onClick={() => scrollToIdx(idx + 1)}>Next</button>
-                </>
-              )}
-            </div>
-          </div>
+          <QuestionPanel
+            key={q.id}
+            vm={vm}
+            variant="mobile"
+            onBack={onBack}
+            onNext={onNext}
+            undeclaredCount={undeclared}
+            noticeText={noticeText}
+          />
         );
       })}
     </div>

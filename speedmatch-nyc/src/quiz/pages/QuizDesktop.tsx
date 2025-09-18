@@ -15,6 +15,8 @@ import { DndContext, closestCenter, DragOverlay, MouseSensor, TouchSensor, useSe
 import { SortableContext, useSortable, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis, restrictToParentElement } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
+import QuestionPanel from "../components/QuestionPanel";
+import { useQuestionVM } from "../hooks/useQuestionVM";
 
 function shuffleArray<T>(input: readonly T[]): T[] {
     const arr = input.slice() as T[];
@@ -159,12 +161,6 @@ function DesktopQuiz() {
         });
     }, [questions, optionOrders, setOptionOrder]);
 
-    function onSelect(qid: string, oid: string) {
-        setAnswers(prev => ({ ...prev, [qid]: oid }));
-        setAnswer(qid as any, oid as any);
-        if (qid === 'Q8') setLastQ8OptionId(oid as any);
-    }
-
     function scrollToKey(key: number) {
         let el: HTMLElement | null = null;
         if (key === 100) el = document.getElementById('pick-header');
@@ -308,13 +304,15 @@ function DesktopQuiz() {
             {/* All questions rendered as desktop sections */}
             {questions.map((q: any, idx: number) => {
                 const current = idx + 1;
-                const selected = (answers as any)[q.id];
                 const isLast = idx === total - 1;
                 const order = orders[idx];
 
                 const declared = new Set<number>();
                 (q.options as any[]).forEach(o => declared.add((o as any).candidateId));
                 const undeclared = Math.max(0, candidates.length - declared.size);
+
+                const vm = useQuestionVM(q, idx, total, order);
+                const noticeText = showNotice && noticeAt === current ? 'You must finish all questions to proceed' : null;
 
                 return (
                     <div key={q.id}>
@@ -335,66 +333,27 @@ function DesktopQuiz() {
                                 />
                             </aside>
                             <main className={styles.main}>
-                                <div className={`${dqStyles.qSection} ${dqDesktop.qSection}`}>
-                                    <h2 className={dqStyles.qTitle}>{q.prompt}</h2>
-                                    <div className={dqStyles.qSub}>
-                                        ({undeclared} candidates have not declared a stance on this issue.)
-                                    </div>
-
-                                    <ul className={dqStyles.options}>
-                                        {order.map((optIndex: number, displayIndex: number) => {
-                                            const opt = (q.options as any[])[optIndex] as any;
-                                            const isSelected = selected === opt.id;
-                                            return (
-                                                <li key={opt.id}>
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => onSelect(q.id, opt.id)}
-                                                        className={`${dqStyles.option} ${isSelected ? dqStyles.optionSelected : ""}`}
-                                                    >
-                                                        <span className={dqStyles.optIndex}>{displayIndex + 1}.</span>
-                                                        <span className={dqStyles.optLabel}>{opt.label}</span>
-                                                    </button>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-
-                                    {/* Notice for current/first unanswered question */}
-                                    {showNotice && noticeAt === current ? (
-                                        <div className={`${dqStyles.notice} ${dqDesktop.notice}`}>You must finish all questions to proceed</div>
-                                    ) : null}
-
-                                    <div className={`${dqStyles.actions} ${dqDesktop.actions}`} >
-                                        {isLast ? (
-                                            <>
-                                                {/* Back first on last question */}
-                                                <button className={`${dqStyles.btnSecondary} ${dqDesktop.btnSecondary}`} onClick={() => scrollToKey(idx)}>Back</button>
-                                                <button
-                                                    className={`${dqStyles.btnPrimary} ${dqDesktop.btnPrimary} ${dqDesktop.btnWide}`}
-                                                    onClick={() => {
-                                                        if (!allAnswered) {
-                                                            requireAllAnsweredThen(100);
-                                                            return;
-                                                        }
-                                                        if (!pickVisible) setPickVisible(true);
-                                                        setTimeout(() => scrollToKey(100), 0);
-                                                    }}
-                                                >
-                                                    Next: Pick Your Priorities
-                                                </button>
-                                            </>
-                                        ) : (
-                                            <>
-                                                {/* Show Back on non-first questions */}
-                                                {idx > 0 ? (
-                                                    <button className={`${dqStyles.btnSecondary} ${dqDesktop.btnSecondary}`} onClick={() => scrollToKey(idx)}>Back</button>
-                                                ) : null}
-                                                <button className={`${dqStyles.btnPrimary} ${dqDesktop.btnPrimary}`} onClick={() => scrollToKey(idx + 2)}>Next</button>
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
+                                <QuestionPanel
+                                    vm={vm}
+                                    variant="desktop"
+                                    onBack={() => scrollToKey(idx)}
+                                    onNext={() => {
+                                        if (isLast) {
+                                            if (!allAnswered) {
+                                                requireAllAnsweredThen(100);
+                                                return;
+                                            }
+                                            if (!pickVisible) setPickVisible(true);
+                                            setTimeout(() => scrollToKey(100), 0);
+                                            return;
+                                        }
+                                        scrollToKey(idx + 2);
+                                    }}
+                                    undeclaredCount={undeclared}
+                                    noticeText={noticeText}
+                                    primaryLabel={isLast ? 'Next: Pick Your Priorities' : 'Next'}
+                                    primaryWide={isLast}
+                                />
                             </main>
                         </div>
                     </div>
@@ -479,7 +438,7 @@ function DesktopQuiz() {
                         includeStart={false}
                         activeQuestion={activeQuestion}
                         completedQuestions={completedQuestions}
-                        onPickClick={handlePickFromSidebar}
+                        onPickClick={handleRankFromSidebar}
                         onRankClick={handleRankFromSidebar}
                     />
                 </aside>
