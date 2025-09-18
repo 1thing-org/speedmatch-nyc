@@ -1,4 +1,3 @@
-// quiz/components/QuestionPanel.tsx
 import type { VM } from "../hooks/useQuestionVM";
 import m from "../styles/QuizMobileQuestions.module.css";
 import d from "../styles/QuizDesktopQuestions.module.css";

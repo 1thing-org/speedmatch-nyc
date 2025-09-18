@@ -11,12 +11,10 @@ import { useQuizActions, useQuizState } from "../state/QuizContext";
 import { candidates } from "../../data/candidates";
 import { Link } from "react-router";
 import { PRIORITIES, type PriorityId } from "../content/priorities";
-import { DndContext, closestCenter, DragOverlay, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
-import { SortableContext, useSortable, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { restrictToVerticalAxis, restrictToParentElement } from "@dnd-kit/modifiers";
-import { CSS } from "@dnd-kit/utilities";
 import QuestionPanel from "../components/QuestionPanel";
 import { useQuestionVM } from "../hooks/useQuestionVM";
+import RankPanel from "../components/RankPanel";
+import { useRankVM } from "../hooks/useRankVM";
 
 function shuffleArray<T>(input: readonly T[]): T[] {
     const arr = input.slice() as T[];
@@ -34,7 +32,7 @@ function DesktopQuiz() {
     const questions = fixedQuestions as readonly any[];
     const total = questions.length;
     const { answers: persisted, optionOrders } = useQuizState();
-    const { setAnswer, setLastQ8OptionId, setOptionOrder, setSelectedPriorities, setQ8UsedForPriorities } = useQuizActions();
+    const { setOptionOrder, setSelectedPriorities, setQ8UsedForPriorities } = useQuizActions();
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [showNotice, setShowNotice] = useState(false);
     const [noticeAt, setNoticeAt] = useState<number | null>(null);
@@ -100,6 +98,19 @@ function DesktopQuiz() {
 
     const pickReady = selected.length === 5;
 
+    // ----- Rank VM for desktop inline rank -----
+    const rankVM = useRankVM(selected);
+    const rankClasses = useMemo(() => ({
+        wrap: pickRankStyles.rankContent,
+        hint: pickRankStyles.rankHint,
+        list: pickRankStyles.rankList,
+        item: pickRankStyles.rankItem,
+        badge: pickRankStyles.rankBadge,
+        card: pickRankStyles.rankCard,
+        handle: pickRankStyles.rankHandle,
+        label: pickRankStyles.rankLabel,
+    }), []);
+
     // ----- Rank Your Priorities state (desktop inline) -----
     const initialOrder = useMemo<PriorityId[]>(() => {
         const defaults = filteredPriorities.map(p => p.id as PriorityId);
@@ -117,34 +128,7 @@ function DesktopQuiz() {
         });
     }, [initialOrder]);
 
-    const [activeDragId, setActiveDragId] = useState<PriorityId | null>(null);
-    const sensors = useSensors(
-        useSensor(MouseSensor),
-        useSensor(TouchSensor, { activationConstraint: { delay: 180, tolerance: 8 } })
-    );
 
-    function handleDragStart(event: any) {
-        setActiveDragId(event.active.id as PriorityId);
-        document.body.style.overflow = 'hidden';
-        document.body.style.touchAction = 'none';
-    }
-    function handleDragEnd(event: any) {
-        const { active, over } = event;
-        setActiveDragId(null);
-        document.body.style.overflow = '';
-        document.body.style.touchAction = '';
-        if (!over || active.id === over.id) return;
-        setRankOrder(prev => {
-            const oldIndex = prev.indexOf(active.id as PriorityId);
-            const newIndex = prev.indexOf(over.id as PriorityId);
-            return arrayMove(prev, oldIndex, newIndex);
-        });
-    }
-    function handleDragCancel() {
-        setActiveDragId(null);
-        document.body.style.overflow = '';
-        document.body.style.touchAction = '';
-    }
 
     useEffect(() => {
         setAnswers(persisted as Record<string, string>);
@@ -438,47 +422,30 @@ function DesktopQuiz() {
                         includeStart={false}
                         activeQuestion={activeQuestion}
                         completedQuestions={completedQuestions}
-                        onPickClick={handleRankFromSidebar}
+                        onPickClick={handlePickFromSidebar}
                         onRankClick={handleRankFromSidebar}
                     />
                 </aside>
                 <main className={styles.main}>
                     <section className={`${dqStyles.qSection} ${dqDesktop.qSection}`}>
-                        <p className={pickRankStyles.rankHint}>Drag And Drop Your Priorities In Order, From Most Important To Least Important.</p>
-                        <DndContext
-                            sensors={sensors}
-                            collisionDetection={closestCenter}
-                            onDragStart={handleDragStart}
-                            onDragEnd={handleDragEnd}
-                            onDragCancel={handleDragCancel}
-                            modifiers={[restrictToVerticalAxis, restrictToParentElement]}
-                        >
-                            <SortableContext items={rankOrder} strategy={verticalListSortingStrategy}>
-                                <ul className={pickRankStyles.rankList}>
-                                    {rankOrder.map((id, idx) => (
-                                        <SortableRow key={id} id={id} index={idx} label={PRIORITIES.find(p => p.id === id)?.label || ''} />
-                                    ))}
-                                </ul>
-                            </SortableContext>
-                            <DragOverlay>
-                                {activeDragId ? (
-                                    <DraggedPreview index={rankOrder.indexOf(activeDragId)} label={PRIORITIES.find(p => p.id === activeDragId)?.label || ''} />
-                                ) : null}
-                            </DragOverlay>
-                        </DndContext>
-
-                        <div className={`${dqDesktop.actions}`}>
-                            <button className={`${dqStyles.btnSecondary} ${dqDesktop.btnSecondary}`} onClick={() => scrollToKey(100)}>Back</button>
-                            <Link
-                                to="/quiz/result"
-                                className={`${dqStyles.btnPrimary} ${dqDesktop.btnPrimary} ${dqDesktop.btnWide} ${! (rankOrder.length === 5) ? pickRankStyles.buttonDisabled : ''}`}
-                                aria-disabled={!(rankOrder.length === 5)}
-                                onClick={(e) => { if (!(rankOrder.length === 5)) e.preventDefault(); }}
-                                state={{ rankedFive: rankOrder }}
-                            >
-                                Submit And See Result
-                            </Link>
-                        </div>
+                        <RankPanel
+                            vm={rankVM}
+                            classes={rankClasses}
+                            renderActions={(isReady, order) => (
+                                <div className={`${dqDesktop.actions}`}>
+                                    <button className={`${dqStyles.btnSecondary} ${dqDesktop.btnSecondary}`} onClick={() => scrollToKey(100)}>Back</button>
+                                    <Link
+                                        to="/quiz/result"
+                                        className={`${dqStyles.btnPrimary} ${dqDesktop.btnPrimary} ${dqDesktop.btnWide} ${!isReady ? pickRankStyles.buttonDisabled : ''}`}
+                                        aria-disabled={!isReady}
+                                        onClick={(e) => { if (!isReady) e.preventDefault(); }}
+                                        state={{ rankedFive: order }}
+                                    >
+                                        Submit And See Result
+                                    </Link>
+                                </div>
+                            )}
+                        />
                     </section>
                 </main>
             </div>
@@ -488,36 +455,5 @@ function DesktopQuiz() {
     );
 }
 
-function SortableRow({ id, index, label }: { id: PriorityId; index: number; label: string }) {
-    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
-    const style = {
-        transform: CSS.Transform.toString(transform),
-        transition,
-        cursor: isDragging ? 'grabbing' : 'grab',
-        touchAction: isDragging ? 'none' as const : undefined,
-    } as React.CSSProperties;
-
-    return (
-        <li ref={setNodeRef} style={style} className={pickRankStyles.rankItem} {...attributes} {...listeners}>
-            <div className={pickRankStyles.rankBadge}>{index + 1}</div>
-            <div className={pickRankStyles.rankCard}>
-                <span className={pickRankStyles.rankHandle} aria-label="Drag handle" role="button" tabIndex={0}>⋮⋮</span>
-                <span className={pickRankStyles.rankLabel}>{label}</span>
-            </div>
-        </li>
-    );
-}
-
-function DraggedPreview({ index, label }: { index: number; label: string }) {
-    return (
-        <li className={pickRankStyles.rankItem}>
-            <div className={pickRankStyles.rankBadge}>{index + 1}</div>
-            <div className={pickRankStyles.rankCard}>
-                <span className={pickRankStyles.rankHandle} aria-hidden>⋮⋮</span>
-                <span className={pickRankStyles.rankLabel}>{label}</span>
-            </div>
-        </li>
-    );
-}
 
 export default DesktopQuiz
