@@ -21,7 +21,7 @@
 .list {
 	list-style: none;
 	margin: 0;
-	padding: 12px 8px;
+	padding: 12px 0px;
 	background: transparent;
 	color: inherit;
 }
@@ -32,10 +32,15 @@
 	background: transparent;
 	color: inherit;
 	border: none;
-	padding: 10px 8px;
+	padding: 10px 16px;
 	cursor: pointer;
 	display: grid;
 	gap: 4px;
+}
+
+.itemActive {
+	background: #3cff00;
+	color: #000;
 }
 
 .qNumber {

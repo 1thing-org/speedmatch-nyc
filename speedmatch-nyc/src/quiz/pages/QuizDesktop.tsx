@@ -28,6 +28,7 @@ function DesktopQuiz() {
     const { setAnswer, setLastQ8OptionId, setOptionOrder } = useQuizActions();
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [showNotice, setShowNotice] = useState(false);
+    const [activeQuestion, setActiveQuestion] = useState<number>(0);
 
     useEffect(() => {
         setAnswers(persisted as Record<string, string>);
@@ -51,8 +52,12 @@ function DesktopQuiz() {
     }
 
     function scrollToHeader(idx: number) {
-        const el = document.getElementById(`q-header-${idx + 1}`);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const target = idx + 1;
+        const el = document.getElementById(`q-header-${target}`);
+        if (el) {
+            setActiveQuestion(target);
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
     const allAnswered = Object.keys(answers).length === total;
@@ -71,6 +76,39 @@ function DesktopQuiz() {
         setQHeaderHeight(node.getBoundingClientRect().height);
         return () => ro.disconnect();
     }, []);
+
+    useEffect(() => {
+        const headers = questions
+            .map((_, idx) => document.getElementById(`q-header-${idx + 1}`))
+            .filter((node): node is HTMLElement => Boolean(node));
+
+        if (!headers.length) return;
+
+        const updateActive = () => {
+            const offset = qHeaderHeight + 16;
+            const scrollPosition = window.scrollY + offset;
+            let activeIdx = 0;
+
+            for (let i = headers.length - 1; i >= 0; i--) {
+                const el = headers[i];
+                if (scrollPosition >= el.offsetTop) {
+                    activeIdx = i + 1;
+                    break;
+                }
+            }
+
+            setActiveQuestion(prev => (prev === activeIdx ? prev : activeIdx));
+        };
+
+        updateActive();
+        window.addEventListener('scroll', updateActive, { passive: true });
+        window.addEventListener('resize', updateActive);
+
+        return () => {
+            window.removeEventListener('scroll', updateActive);
+            window.removeEventListener('resize', updateActive);
+        };
+    }, [questions, qHeaderHeight]);
 
     return (
         <div className={styles.desktopPage} style={{ ['--page-header-offset' as any]: `${qHeaderHeight}px` }}>
@@ -128,7 +166,7 @@ function DesktopQuiz() {
                         {/* Columns under header */}
                         <div className={styles.columns}>
                             <aside className={styles.sidebar}>
-                                <QuizSidebar includeStart={false} />
+                                <QuizSidebar includeStart={false} activeQuestion={activeQuestion} />
                             </aside>
                             <main className={styles.main}>
                                 <div className={`${dqStyles.qSection} ${dqDesktop.qSection}`}>

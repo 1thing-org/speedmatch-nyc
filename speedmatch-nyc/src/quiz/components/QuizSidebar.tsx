@@ -1,7 +1,12 @@
 import styles from "../styles/QuizSidebar.module.css";
 import { fixedQuestions } from "../content/questions";
 
-function QuizSidebar({ includeStart = true }: { includeStart?: boolean }) {
+type QuizSidebarProps = {
+    includeStart?: boolean;
+    activeQuestion?: number;
+};
+
+function QuizSidebar({ includeStart = true, activeQuestion }: QuizSidebarProps) {
     function scrollToId(id: string) {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -18,7 +23,11 @@ function QuizSidebar({ includeStart = true }: { includeStart?: boolean }) {
             <ul className={styles.list}>
                 {fixedQuestions.map((q, idx) => (
                     <li key={q.id}>
-                        <button className={styles.item} onClick={() => scrollToId(`q-header-${idx + 1}`)}>
+                        <button
+                            className={`${styles.item} ${activeQuestion === idx + 1 ? styles.itemActive : ""}`}
+                            onClick={() => scrollToId(`q-header-${idx + 1}`)}
+                            aria-current={activeQuestion === idx + 1 ? "location" : undefined}
+                        >
                             <span className={styles.qNumber}>Question {idx + 1}</span>
                             <span className={styles.qTitle}>{q.title}</span>
                         </button>
