@@ -49,18 +49,7 @@
     font-weight: 500;
 }
 
-.startButton {
-	height: 56px;
-	background: #3cff00;
-	border: none;
-	padding: 0 20px;
-	font-size: 18px;
-	cursor: pointer;
-	align-self: flex-end;
-	margin-top: 3rem;
-    margin-right: 1rem;
-	color: #000;
-}
+
 
 @media (hover: hover) {
     .startButton:hover {
@@ -68,27 +57,7 @@
     }
   }
 
-.startContent {
-	max-width: 800px;
-	width: 100%;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-}
 
-.startContent strong {
-	color: #003cff;
-	font-weight: 400;
-}
-
-
-.startContent ul {
-	line-height: 140%;
-	font-size: 18px;
-	letter-spacing: -4%;
-    padding-left: 1.5rem;
-    padding-right: 0.5rem;
-}
 
 .titleSentinel {
 	height: 1px;

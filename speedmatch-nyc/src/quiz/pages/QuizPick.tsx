@@ -1,13 +1,14 @@
-import PageHeader from "../../../components/PageHeader";
-import styles from "../../styles/QuizMobile.module.css"
+import PageHeader from "../../components/PageHeader";
+import styles from "../styles/QuizPickRank.module.css"
 import { Link, useLocation } from "react-router";
+import Navbar from "../../components/Navbar";
 import { useMemo } from "react";
-import { type PriorityId } from "../../content/priorities";
-import PickPanel from "../../components/PickPanel";
-import { usePickVM } from "../../hooks/usePickVM";
+import { type PriorityId } from "../content/priorities";
+import PickPanel from "../components/PickPanel";
+import { usePickVM } from "../hooks/usePickVM";
 
 function QuizPick() {
-    const location = useLocation() as any;
+        const location = useLocation() as any;
     const initial: PriorityId[] | undefined = location?.state?.selected;
 
     const vm = usePickVM(initial);
@@ -22,11 +23,16 @@ function QuizPick() {
         notice: styles.notice,
     }), []);
 
-    return (
-        <div className={styles.wrapper}>
-            <PageHeader title="Pick Your Priorities" />
+  return (
+    <div className={styles.pickPage}>
+      <header>
+        <Navbar forceHamburger />
+      </header>
 
-            <PickPanel
+      <div className={styles.wrapper}>
+        <PageHeader title="Pick Your Priorities" />
+
+         <PickPanel
                 vm={vm}
                 classes={classes}
                 renderActions={(isReady, selected) => (
@@ -49,7 +55,9 @@ function QuizPick() {
                     </div>
                 )}
             />
-        </div>
-    )
+      </div>
+    </div>
+  )
 }
-export default QuizPick
+
+export default QuizPick;

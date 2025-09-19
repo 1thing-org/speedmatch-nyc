@@ -17,6 +17,7 @@ import { useRankVM } from "../hooks/useRankVM";
 import BeforeStartContent from "../components/BeforeStartContent";
 import PickPanel from "../components/PickPanel";
 import { usePickVM } from "../hooks/usePickVM";
+import { readStepFromUrl, writeStepToUrl } from "../stepUrl";
 
 function shuffleArray<T>(input: readonly T[]): T[] {
     const arr = input.slice() as T[];
@@ -96,6 +97,8 @@ function DesktopQuiz() {
         });
     }, [questions, optionOrders, setOptionOrder]);
 
+    const lastWrittenRef = useRef<number | null>(null);
+
     function scrollToKey(key: number) {
         let el: HTMLElement | null = null;
         if (key === 100) el = document.getElementById('pick-header');
@@ -103,6 +106,11 @@ function DesktopQuiz() {
         else el = document.getElementById(`q-header-${key}`);
         if (el) {
             setActiveQuestion(key);
+            // write canonical step immediately for programmatic scrolls
+            if (key >= 1 && key <= total) writeStepToUrl('questions', key, true);
+            else if (key === 100) writeStepToUrl('pick', undefined, true);
+            else if (key === 101) writeStepToUrl('rank', undefined, true);
+            lastWrittenRef.current = key;
             el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
@@ -168,6 +176,29 @@ function DesktopQuiz() {
         return () => ro.disconnect();
     }, []);
 
+    // Read URL step on mount and on popstate; scroll/show sections accordingly
+    useEffect(() => {
+        const applyFromUrl = () => {
+            const { step, idx } = readStepFromUrl(total);
+            if (step === 'questions') {
+                const target = typeof idx === 'number' ? idx : 1;
+                scrollToKey(target);
+            } else if (step === 'pick') {
+                if (!pickVisible) setPickVisible(true);
+                setTimeout(() => scrollToKey(100), 0);
+            } else if (step === 'rank') {
+                if (!pickVisible) setPickVisible(true);
+                if (!rankVisible) setRankVisible(true);
+                setTimeout(() => scrollToKey(101), 0);
+            }
+        };
+        applyFromUrl();
+        const onPop = () => applyFromUrl();
+        window.addEventListener('popstate', onPop);
+        return () => window.removeEventListener('popstate', onPop);
+       
+    }, [qHeaderHeight, total, pickVisible, rankVisible]);
+
     useEffect(() => {
         const headers = [
             ...questions.map((_, idx) => ({ el: document.getElementById(`q-header-${idx + 1}`), key: idx + 1 })),
@@ -197,6 +228,15 @@ function DesktopQuiz() {
             window.removeEventListener('resize', updateActive);
         };
     }, [questions, qHeaderHeight, pickVisible, rankVisible]);
+
+    // Write URL when the active section changes (from scrollspy)
+    useEffect(() => {
+        if (activeQuestion === 0 || lastWrittenRef.current === activeQuestion) return;
+        lastWrittenRef.current = activeQuestion;
+        if (activeQuestion >= 1 && activeQuestion <= total) writeStepToUrl('questions', activeQuestion, true);
+        else if (activeQuestion === 100) writeStepToUrl('pick', undefined, true);
+        else if (activeQuestion === 101) writeStepToUrl('rank', undefined, true);
+    }, [activeQuestion, total]);
 
     return (
         <div className={styles.desktopPage} style={{ ['--page-header-offset' as any]: `${qHeaderHeight}px` }}>
@@ -256,6 +296,8 @@ function DesktopQuiz() {
                                                 return;
                                             }
                                             if (!pickVisible) setPickVisible(true);
+                                            lastWrittenRef.current = 100;
+                                            writeStepToUrl('pick', undefined, true);
                                             setTimeout(() => scrollToKey(100), 0);
                                             return;
                                         }
@@ -306,6 +348,8 @@ function DesktopQuiz() {
                                         }
                                         pickVM.commitBeforeRank();
                                         if (!rankVisible) setRankVisible(true);
+                                        lastWrittenRef.current = 101;
+                                        writeStepToUrl('rank', undefined, true);
                                         setTimeout(() => scrollToKey(101), 0);
                                     }}
                                 >

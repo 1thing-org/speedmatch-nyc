@@ -1,7 +1,7 @@
 import PageHeader from "../../components/PageHeader";
 import Footer from "../../components/Footer";
 import styles from "../styles/QuizResults.module.css";
-
+import Navbar from "../../components/Navbar";
 import { useLocation } from "react-router";
 import { useMemo } from "react";
 import { useQuizState } from "../state/QuizContext";
@@ -36,9 +36,9 @@ function QuizResult() {
 				return { id: idNum, name: candidateById[idNum]?.name ?? String(idNum), base: baseScore, final: finalScore, delta };
 			});
 			rows.sort((a, b) => b.final - a.final);
-			// eslint-disable-next-line no-console
+			
 			console.table(rows);
-			// eslint-disable-next-line no-console
+
 			console.log("Ranked priorities:", Array.isArray(rankedFive) ? rankedFive : []);
 		} catch (_) { }
 
@@ -84,6 +84,11 @@ function QuizResult() {
 	const rankedSet = new Set(Array.isArray(rankedFive) ? rankedFive : []);
 
 	return (
+		    <div className={styles.resultPage}>
+      <header>
+        <Navbar forceHamburger />
+      </header>
+
 		<div className={styles.resultWrapper}>
 			<PageHeader title="Your Matching Results" />
 
@@ -133,6 +138,7 @@ function QuizResult() {
 			<footer>
 				<Footer />
 			</footer>
+		</div>
 		</div>
 	);
 }

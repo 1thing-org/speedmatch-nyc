@@ -1,5 +1,5 @@
 import type { VM } from "../hooks/useQuestionVM";
-import m from "../styles/QuizMobileQuestions.module.css";
+import m from "../styles/QuizQuestions.module.css";
 import d from "../styles/QuizDesktopQuestions.module.css";
 
 

@@ -1,0 +1,94 @@
+.startPage {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background: #fff;
+}
+
+.wrapper {
+    background-color:
+        white;
+    --border-bottom-color: #003cff;
+}
+
+.content {
+    padding: 1.5rem 1.2rem;
+    color: #000;
+    line-height: 140%;
+    font-size: 18px;
+    letter-spacing: -4%;
+    font-weight: 400;
+}
+
+.quickNote {
+  display: none;
+}
+
+
+.content ul {
+    margin: 0rem 1rem 0rem 2rem;
+}
+
+.content strong {
+    color: #003cff;
+    font-weight: 400;
+}
+
+.startQuiz {
+    padding: 3rem 1.2rem 2rem 1.2rem;
+}
+
+.startButton {
+    height: 3.5rem;
+    background-color: #3cff00;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (hover: hover) {
+    .startButton:hover {
+        background-color: #2EB800;
+    }
+}
+
+@media (min-width: 744px) {
+    .content {
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .quickNote {
+    display: block;
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0 0 2.5rem 1rem;
+    color: #000;
+  }
+
+    .startButton {
+        padding: 0 20px;
+
+        margin-right: 1rem;
+        width: 240px
+    }
+
+    .startQuiz {
+        display: flex;
+        justify-content: flex-end; 
+    }
+
+}

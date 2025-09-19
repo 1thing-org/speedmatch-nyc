@@ -1,11 +1,14 @@
-import { useMemo, useState } from "react";
+import PageHeader from "../../components/PageHeader";
 import { useNavigate } from "react-router";
-import { fixedQuestions } from "../../content/questions";
-import styles from "../../styles/QuizMobileQuestions.module.css";
-import { useQuizActions, useQuizState } from "../../state/QuizContext";
-import { candidates } from '../../../data/candidates';
-import QuestionPanel from "../../components/QuestionPanel";
-import { useQuestionVM } from "../../hooks/useQuestionVM";
+import { useMemo, useState } from "react";
+import styles from "../styles/QuizQuestions.module.css"
+import { Link } from "react-router";
+import Navbar from "../../components/Navbar";
+import { useQuizActions, useQuizState } from "../state/QuizContext";
+import { fixedQuestions } from "../content/questions";
+import { candidates } from '../../data/candidates';
+import QuestionPanel from "../components/QuestionPanel";
+import { useQuestionVM } from "../hooks/useQuestionVM";
 
 function shuffleArray<T>(input: readonly T[]): T[] {
   const arr = input.slice() as T[];
@@ -17,6 +20,7 @@ function shuffleArray<T>(input: readonly T[]): T[] {
 }
 
 function QuizQuestions() {
+
   const questions = fixedQuestions as readonly any[];
   const total = questions.length;
   const navigate = useNavigate();
@@ -37,14 +41,21 @@ function QuizQuestions() {
 
   function scrollToIdx(idx: number) {
     const el = document.getElementById(`q-${idx + 1}`);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
   }
 
-  const allAnswered = Object.keys(answers as Record<string, unknown>).length === total;
-  const [showNotice, setShowNotice] = useState(false);
+const allAnswered = Object.keys(answers as Record<string, unknown>).length === total;
+  const [showNotice, setShowNotice] = useState(false);  
 
   return (
-    <div className={styles.page}>
+    <div className={styles.questionPage}>
+      <header>
+        <Navbar forceHamburger />
+      </header>
+      <main>
+        <div className={styles.questionWrapper}>
       {questions.map((q: any, idx: number) => {
         const order = orders[idx];
         const vm = useQuestionVM(q, idx, total, order);
@@ -84,7 +95,9 @@ function QuizQuestions() {
         );
       })}
     </div>
-  );
+      </main>
+    </div>
+  )
 }
 
-export default QuizQuestions
+export default QuizQuestions;

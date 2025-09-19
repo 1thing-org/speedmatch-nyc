@@ -1,10 +1,12 @@
-import PageHeader from "../../../components/PageHeader";
-import styles from "../../styles/QuizMobile.module.css"
+import PageHeader from "../../components/PageHeader";
+import styles from "../styles/QuizPickRank.module.css"
 import { Link, useLocation } from "react-router";
+import Navbar from "../../components/Navbar";
 import { useMemo } from "react";
-import { type PriorityId } from "../../content/priorities";
-import RankPanel from "../../components/RankPanel";
-import { useRankVM } from "../../hooks/useRankVM";
+import { type PriorityId } from "../content/priorities";
+import RankPanel from "../components/RankPanel";
+import { useRankVM } from "../hooks/useRankVM";
+
 
 function QuizRank() {
     const location = useLocation() as any;
@@ -23,11 +25,15 @@ function QuizRank() {
         label: styles.rankLabel,
     }), []);
 
-    return (
-        <div className={styles.wrapper}>
-            <PageHeader title="Rank Your Priorities" />
+  return (
+    <div className={styles.rankPage}>
+      <header>
+        <Navbar forceHamburger />
+      </header>
 
-            <RankPanel
+      <div className={styles.wrapper}>
+        <PageHeader title="Rank Your Priorities" />
+        <RankPanel
                 vm={vm}
                 classes={classes}
                 renderActions={(isReady, order) => (
@@ -45,8 +51,10 @@ function QuizRank() {
                     </div>
                 )}
             />
-        </div>
-    )
+
+      </div>
+    </div>
+  )
 }
 
-export default QuizRank
+export default QuizRank;

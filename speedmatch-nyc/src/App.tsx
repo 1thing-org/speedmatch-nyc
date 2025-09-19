@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import CandidatesPage from './pages/CandidatesPage';
 import Aboutpage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import QuizPage from './quiz/pages/QuizPage';
+import QuizRoutes from './quiz/pages/QuizRoutes';
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
       <Route path="/explore" element={<CandidatesPage />} />
       <Route path="/about" element={<Aboutpage />} />
       <Route path="/contact" element={<ContactPage />} />
-      <Route path="/quiz/*" element={<QuizPage />} />
+      <Route path="/quiz/*" element={<QuizRoutes />} />
 
 
       <Route path="/about/index.html" element={<Navigate to="/about" replace />} />
