@@ -174,7 +174,7 @@
 
   .contentArea {
     display: flex;
-    
+    min-height: 60vh;
   }
 
 
@@ -187,7 +187,7 @@
     height: calc(100vh - 85px);
     overflow-y: auto;
     background: #003CFF;
-    flex-shrink: 0;
+    align-self: flex-start;
   }
 
   .desktopHeader {

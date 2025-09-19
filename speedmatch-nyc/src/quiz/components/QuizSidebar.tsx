@@ -9,9 +9,17 @@ type QuizSidebarProps = {
 };
 
 function QuizSidebar({  activeQuestion, completedQuestions }: QuizSidebarProps) {
-    function scrollToId(id: string) {
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function scrollToId(questionNumber: number) {
+        // Sidebar只在桌面端显示，所以直接使用桌面端逻辑
+        const headerEl = document.getElementById(`q-header-${questionNumber}`);
+        if (headerEl) {
+            const navbarHeight = 80;
+            const targetPosition = headerEl.offsetTop - navbarHeight;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth"
+            });
+        }
     }
 
     return (
@@ -34,7 +42,7 @@ function QuizSidebar({  activeQuestion, completedQuestions }: QuizSidebarProps) 
                         <li key={q.id}>
                             <button
                                 className={itemClass}
-                                onClick={() => scrollToId(`q-header-${questionNumber}`)}
+                                 onClick={() => scrollToId(questionNumber)}
                                 aria-current={isActive ? "location" : undefined}
                             >
                                 <span className={styles.metaRow}>

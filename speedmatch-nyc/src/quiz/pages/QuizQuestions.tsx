@@ -63,12 +63,24 @@ function QuizQuestions() {
   
 
   function scrollToIdx(idx: number) {
-    const header = document.getElementById(`q-header-${idx + 1}`);
-    const content = document.getElementById(`q-${idx + 1}`);
-    const el = isLargeScreen ? (header || content) : (content || header);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (isLargeScreen) {
+    // Desktop, scroll to header
+    const headerEl = document.getElementById(`q-header-${idx + 1}`);
+    if (headerEl) {
+      const navbarHeight = 80;
+      const targetPosition = headerEl.offsetTop - navbarHeight;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth"
+      });
     }
+  } else {
+    // Mobile: scroll to question
+    const contentEl = document.getElementById(`q-${idx + 1}`);
+    if (contentEl) {
+      contentEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
   }
 
   // Track active question for desktop sidebar
@@ -89,11 +101,13 @@ function QuizQuestions() {
 
     updateActive();
     window.addEventListener('scroll', updateActive, { passive: true });
+    window.addEventListener('resize', updateActive); 
     return () =>
       window.removeEventListener('scroll', updateActive);
+    window.removeEventListener('resize', updateActive);
 
     ;
-  }, [questions]);
+  }, [questions, isLargeScreen]);
 
   const allAnswered = Object.keys(answers as Record<string, unknown>).length === total;
   const [showNotice, setShowNotice] = useState(false);
