@@ -1,19 +1,27 @@
 .questionPage {
-    min-height: 100dvh;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    background: #fff;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: #fff;
 }
 
 .questionWrapper {
-    margin-top: 80px;
+  margin-top: 80px;
+}
+
+.desktopSidebar {
+  display: none;
+}
+
+.desktopHeader {
+  display: none;
 }
 
 .qSection {
   padding: 1rem 1.5rem 2rem 1.5rem;
-  border-bottom: 26px solid #0a46ff;
-  width: 100%
-  ;scroll-margin-top: 96px; /* leave space for fixed navbar so the section is fully visible */
+  border-bottom: 26px solid #003CFF;
+  width: 100%;
+  scroll-margin-top: 96px;
 }
 
 .qMeta {
@@ -124,8 +132,10 @@
   font-weight: 500;
   color: #000;
   text-decoration: none;
-  display: flex;            /* ensure anchor behaves like the button */
-  width: 100%;              /* fill the grid cell */
+  display: flex;
+  /* ensure anchor behaves like the button */
+  width: 100%;
+  /* fill the grid cell */
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -138,9 +148,9 @@
 }
 
 @media (hover: hover) {
-.btnSecondary:hover{
-  background-color: #D9D9D9;
-}
+  .btnSecondary:hover {
+    background-color: #D9D9D9;
+  }
 }
 
 .notice {
@@ -148,4 +158,85 @@
   text-align: center;
   margin-bottom: 4px;
   font-size: 14px;
+}
+
+@media (min-width: 744px) {
+  .questionPage {
+    display: block;
+    position: relative;
+  }
+
+
+  .questionWrapper {
+    flex: 1;
+    margin-left: 0;
+  }
+
+  .contentArea {
+    display: flex;
+    
+  }
+
+
+  .desktopSidebar {
+    display: block;
+     position: sticky; 
+    left: 0;
+    top: 0;
+    width: 300px;
+    height: calc(100vh - 85px);
+    overflow-y: auto;
+    background: #003CFF;
+    flex-shrink: 0;
+  }
+
+  .desktopHeader {
+    display: block;
+    
+    top: 0;
+    z-index: 10;
+    background: white;
+    border-top: 1px solid #003CFF;;
+    border-bottom: 1px solid #003CFF;
+    width: 100%;
+  }
+
+
+  .desktopHeader > * {
+    margin-top: 0 ;
+  }
+
+  .firstDesktopHeader > * {
+    margin-top: 80px ;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: flex-end; 
+  
+    gap: 1rem;
+  }
+
+  .btnPrimary {
+    width: 300px;
+  }
+  
+  .btnSecondary {
+    width: 200px;
+  }
+
+  .questionWrapper {
+    margin-top: 0;
+    /* Remove mobile top margin */
+  }
+
+  .qSection {
+    border-bottom: none;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex:1;
+  }
 }

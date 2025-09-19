@@ -1,9 +1,9 @@
 import PageHeader from "../../components/PageHeader";
 import { useNavigate } from "react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import styles from "../styles/QuizQuestions.module.css"
-import { Link } from "react-router";
 import Navbar from "../../components/Navbar";
+import QuizSidebar from "../components/QuizSidebar"
 import { useQuizActions, useQuizState } from "../state/QuizContext";
 import { fixedQuestions } from "../content/questions";
 import { candidates } from '../../data/candidates';
@@ -19,14 +19,35 @@ function shuffleArray<T>(input: readonly T[]): T[] {
   return arr;
 }
 
+function useIsLargeScreen() {
+  const [flag, setFlag] = useState(() => window.innerWidth >= 744);
+  useEffect(() => {
+    const onResize = () => setFlag(window.innerWidth >= 744);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return flag;
+}
+
 function QuizQuestions() {
 
   const questions = fixedQuestions as readonly any[];
   const total = questions.length;
   const navigate = useNavigate();
+  const isLargeScreen = useIsLargeScreen();
 
   const { optionOrders, answers } = useQuizState();
   const { setOptionOrder } = useQuizActions();
+
+  // states for desktop sidebar functionality
+  const [activeQuestion, setActiveQuestion] = useState(1);
+  const completedQuestions = useMemo(() => {
+    const set = new Set<number>();
+    questions.forEach((q, idx) => {
+      if ((answers as Record<string, unknown>)[q.id]) set.add(idx + 1);
+    });
+    return set;
+  }, [answers, questions]);
 
   // Stable order per question stored in context
   const orders = useMemo(() => {
@@ -39,15 +60,43 @@ function QuizQuestions() {
     });
   }, [questions, optionOrders, setOptionOrder]);
 
+  
+
   function scrollToIdx(idx: number) {
-    const el = document.getElementById(`q-${idx + 1}`);
+    const header = document.getElementById(`q-header-${idx + 1}`);
+    const content = document.getElementById(`q-${idx + 1}`);
+    const el = isLargeScreen ? (header || content) : (content || header);
     if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
-const allAnswered = Object.keys(answers as Record<string, unknown>).length === total;
-  const [showNotice, setShowNotice] = useState(false);  
+  // Track active question for desktop sidebar
+  useEffect(() => {
+    const updateActive = () => {
+      const scrollPosition = window.scrollY + 100; // Offset for header
+      let activeKey = 1;
+
+      questions.forEach((_, idx) => {
+        const el = document.getElementById(`q-header-${idx + 1}`);
+        if (el && scrollPosition >= el.offsetTop) {
+          activeKey = idx + 1;
+        }
+      });
+
+      setActiveQuestion(activeKey);
+    };
+
+    updateActive();
+    window.addEventListener('scroll', updateActive, { passive: true });
+    return () =>
+      window.removeEventListener('scroll', updateActive);
+
+    ;
+  }, [questions]);
+
+  const allAnswered = Object.keys(answers as Record<string, unknown>).length === total;
+  const [showNotice, setShowNotice] = useState(false);
 
   return (
     <div className={styles.questionPage}>
@@ -56,45 +105,62 @@ const allAnswered = Object.keys(answers as Record<string, unknown>).length === t
       </header>
       <main>
         <div className={styles.questionWrapper}>
-      {questions.map((q: any, idx: number) => {
-        const order = orders[idx];
-        const vm = useQuestionVM(q, idx, total, order);
+          {questions.map((q: any, idx: number) => {
+            const order = orders[idx];
+            const vm = useQuestionVM(q, idx, total, order);
 
-        const declared = new Set<number>();
-        (q.options as any[]).forEach(o => declared.add((o as any).candidateId));
-        const undeclared = Math.max(0, candidates.length - declared.size);
+            const declared = new Set<number>();
+            (q.options as any[]).forEach(o => declared.add((o as any).candidateId));
+            const undeclared = Math.max(0, candidates.length - declared.size);
 
-        const onBack = () => {
-          if (!vm.isFirst) scrollToIdx(idx - 1);
-        };
-        const onNext = () => {
-          if (vm.isLast) {
-            if (!allAnswered) {
-              setShowNotice(true);
-              setTimeout(() => setShowNotice(false), 3000);
-              return;
-            }
-            navigate('/quiz/pick', { state: { fromSpecialPriorityOption: (answers as any)['Q8'] } });
-            return;
-          }
-          scrollToIdx(idx + 1);
-        };
+            const onBack = () => {
+              if (!vm.isFirst) scrollToIdx(idx - 1);
+            };
+            const onNext = () => {
+              if (vm.isLast) {
+                if (!allAnswered) {
+                  setShowNotice(true);
+                  setTimeout(() => setShowNotice(false), 3000);
+                  return;
+                }
+                navigate('/quiz/pick', { state: { fromSpecialPriorityOption: (answers as any)['Q8'] } });
+                return;
+              }
+              scrollToIdx(idx + 1);
+            };
 
-        const noticeText = vm.isLast && showNotice && !allAnswered ? 'You must finish all questions to proceed' : null;
+            const noticeText = vm.isLast && showNotice && !allAnswered ? 'You must finish all questions to proceed' : null;
 
-        return (
-          <QuestionPanel
-            key={q.id}
-            vm={vm}
-            variant="mobile"
-            onBack={onBack}
-            onNext={onNext}
-            undeclaredCount={undeclared}
-            noticeText={noticeText}
-          />
-        );
-      })}
-    </div>
+            return (
+              <div key={q.id}>
+                {/* Desktop header - hidden by default, shown on desktop */}
+                <div id={`q-header-${idx + 1}`}
+                  className={`${styles.desktopHeader} ${idx === 0 ? styles.firstDesktopHeader : ''}`}
+                >
+                  <PageHeader title={`Question ${idx + 1} ${q.title}`} />
+                </div>
+
+                <div className={styles.contentArea}>
+
+                  <aside className={styles.desktopSidebar}>
+                    <QuizSidebar
+                      activeQuestion={activeQuestion}
+                      completedQuestions={completedQuestions}
+                    />
+                  </aside>
+
+                  <QuestionPanel
+                    vm={vm}
+                    onBack={onBack}
+                    onNext={onNext}
+                    undeclaredCount={undeclared}
+                    noticeText={noticeText}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </main>
     </div>
   )

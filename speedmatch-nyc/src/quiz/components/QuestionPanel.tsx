@@ -1,11 +1,9 @@
 import type { VM } from "../hooks/useQuestionVM";
 import m from "../styles/QuizQuestions.module.css";
-import d from "../styles/QuizDesktopQuestions.module.css";
 
 
 type Props = {
   vm: VM;
-  variant?: "mobile" | "desktop";
   onBack?: () => void;
   onNext?: () => void;
   undeclaredCount?: number;
@@ -16,7 +14,7 @@ type Props = {
 
 export default function QuestionPanel({
   vm,
-  variant = "mobile",
+
   onBack,
   onNext,
   undeclaredCount,
@@ -26,60 +24,22 @@ export default function QuestionPanel({
 }: Props) {
   const { q, order, selectedId, onSelect, idx, total, isFirst, isLast } = vm;
 
-  
-  const C = variant === "mobile"
-    ? {
-        section: m.qSection,
-        meta: m.qMeta,
-        title: m.qTitle,
-        sub: m.qSub,
-        options: m.options,
-        option: m.option,
-        optionSelected: m.optionSelected,
-        optIndex: m.optIndex,
-        optLabel: m.optLabel,
-        actions: `${m.actions} ${isLast ? m.actionsStack : ""} ${isFirst ? m.actionsSingle : ""}`,
-        btnPri: m.btnPrimary,
-        btnSec: m.btnSecondary,
-        notice: m.notice,
-        btnWide: "",
-      }
-    : {
-       
-        section: `${m.qSection} ${d.qSection}`,
-        meta: undefined, 
-        title: m.qTitle,
-        sub: m.qSub,
-        options: m.options,
-        option: m.option,
-        optionSelected: m.optionSelected,
-        optIndex: m.optIndex,
-        optLabel: m.optLabel,
-        actions: `${d.actions}`,
-        btnPri: `${m.btnPrimary} ${d.btnPrimary}`,
-        btnSec: `${m.btnSecondary} ${d.btnSecondary}`,
-        notice: `${m.notice} ${d.notice ?? ""}`,
-        btnWide: d.btnWide,
-      };
-
   const nextLabel = primaryLabel ?? (isLast ? "Next: Pick Your Priorities" : "Next");
-  const priClass = `${C.btnPri} ${primaryWide ? C.btnWide : ""}`.trim();
+  const priClass = `${m.btnPrimary} ${primaryWide ? m.btnWide : ""}`.trim();
 
-  return (
-    <div className={C.section} id={`q-${idx + 1}`}>
-      {variant === "mobile" && (
-        <div className={C.meta}>Question {idx + 1}/{total}</div>
-      )}
+   return (
+    <div className={m.qSection} id={`q-${idx + 1}`}>
+      <div className={m.qMeta}>Question {idx + 1}/{total}</div>
 
-      <h2 className={C.title}>{q.prompt}</h2>
+      <h2 className={m.qTitle}>{q.prompt}</h2>
 
       {typeof undeclaredCount === "number" && (
-        <div className={C.sub}>
+        <div className={m.qSub}>
           ({undeclaredCount} candidates have not declared a stance on this issue.)
         </div>
       )}
 
-      <ul className={C.options} role="radiogroup" aria-label={q.prompt}>
+      <ul className={m.options} role="radiogroup" aria-label={q.prompt}>
         {order.map((optIndex, displayIndex) => {
           const opt = q.options[optIndex];
           const selected = selectedId === opt.id;
@@ -90,35 +50,23 @@ export default function QuestionPanel({
                 aria-checked={selected}
                 type="button"
                 onClick={() => onSelect(opt.id)}
-                className={`${C.option} ${selected ? C.optionSelected : ""}`}
+                className={`${m.option} ${selected ? m.optionSelected : ""}`}
               >
-                <span className={C.optIndex}>{displayIndex + 1}.</span>
-                <span className={C.optLabel}>{opt.label}</span>
+                <span className={m.optIndex}>{displayIndex + 1}.</span>
+                <span className={m.optLabel}>{opt.label}</span>
               </button>
             </li>
           );
         })}
       </ul>
 
+      {noticeText ? <div className={m.notice}>{noticeText}</div> : null}
 
-      {noticeText ? <div className={C.notice}>{noticeText}</div> : null}
-
-      <div className={C.actions}>
-        {variant === "mobile" && isLast ? (
-          <>
-            <button className={priClass} onClick={onNext}>{nextLabel}</button>
-            {!isFirst && (
-              <button className={C.btnSec} onClick={onBack}>Back</button>
-            )}
-          </>
-        ) : (
-          <>
-            {!isFirst && (
-              <button className={C.btnSec} onClick={onBack}>Back</button>
-            )}
-            <button className={priClass} onClick={onNext}>{nextLabel}</button>
-          </>
+      <div className={m.actions}>
+        {!isFirst && (
+          <button className={m.btnSecondary} onClick={onBack}>Back</button>
         )}
+        <button className={priClass} onClick={onNext}>{nextLabel}</button>
       </div>
     </div>
   );
