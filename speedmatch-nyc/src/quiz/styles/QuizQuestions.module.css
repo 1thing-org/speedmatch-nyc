@@ -101,14 +101,30 @@
   margin-top: 16px;
 }
 
-.actionsStack {
+.actionsFirst {
   grid-template-columns: 1fr;
+
 }
 
-/* single column for first question: Next only */
-.actionsSingle {
+.actionsLast {
   grid-template-columns: 1fr;
+  gap: 12px;
 }
+
+.actionsFirst .btnPrimary {
+  width: 100%;
+}
+
+.actionsLast .btnPrimary {
+  order: -1;
+  width: 100%;
+}
+
+.actionsLast .btnSecondary {
+  width: 100%;
+}
+
+
 
 .btnPrimary {
   height: 60px;
@@ -213,9 +229,13 @@
   .actions {
     display: flex;
     justify-content: flex-end; 
-  
+    margin-top: 3rem;
     gap: 1rem;
   }
+
+  .actionsFirst .btnPrimary {
+  width: 300px;
+}  
 
   .btnPrimary {
     width: 300px;
@@ -225,9 +245,17 @@
     width: 200px;
   }
 
+  .actionsLast .btnPrimary {
+    order: 1;
+    width: 300px;
+  }
+
+  .actionsLast .btnSecondary {
+    width: 200px;
+  }
+
   .questionWrapper {
     margin-top: 0;
-    /* Remove mobile top margin */
   }
 
   .qSection {
@@ -238,5 +266,10 @@
     display: flex;
     flex-direction: column;
     flex:1;
+  }
+
+  .notice {
+    margin-top: 2rem;
+    margin-bottom: -2rem;
   }
 }

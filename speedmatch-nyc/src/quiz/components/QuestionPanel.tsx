@@ -20,12 +20,11 @@ export default function QuestionPanel({
   undeclaredCount,
   noticeText,
   primaryLabel,
-  primaryWide,
 }: Props) {
   const { q, order, selectedId, onSelect, idx, total, isFirst, isLast } = vm;
 
   const nextLabel = primaryLabel ?? (isLast ? "Next: Pick Your Priorities" : "Next");
-  const priClass = `${m.btnPrimary} ${primaryWide ? m.btnWide : ""}`.trim();
+
 
    return (
     <div className={m.qSection} id={`q-${idx + 1}`}>
@@ -62,11 +61,11 @@ export default function QuestionPanel({
 
       {noticeText ? <div className={m.notice}>{noticeText}</div> : null}
 
-      <div className={m.actions}>
+      <div className={`${m.actions} ${isFirst ? m.actionsFirst : ''} ${isLast ? m.actionsLast : ''}`}>
         {!isFirst && (
           <button className={m.btnSecondary} onClick={onBack}>Back</button>
         )}
-        <button className={priClass} onClick={onNext}>{nextLabel}</button>
+        <button className={m.btnPrimary} onClick={onNext}>{nextLabel}</button>
       </div>
     </div>
   );

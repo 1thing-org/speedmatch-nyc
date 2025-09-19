@@ -102,11 +102,10 @@ function QuizQuestions() {
     updateActive();
     window.addEventListener('scroll', updateActive, { passive: true });
     window.addEventListener('resize', updateActive); 
-    return () =>
+    return () => {
       window.removeEventListener('scroll', updateActive);
     window.removeEventListener('resize', updateActive);
-
-    ;
+    }
   }, [questions, isLargeScreen]);
 
   const allAnswered = Object.keys(answers as Record<string, unknown>).length === total;
