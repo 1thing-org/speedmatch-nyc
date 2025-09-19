@@ -1,4 +1,3 @@
-// useQuestionVM.ts
 import { useMemo } from "react";
 import { useQuizActions, useQuizState } from "../state/QuizContext";
 import type { FixedQuestion as Question, OptionId, QuestionId } from "../content/questions";

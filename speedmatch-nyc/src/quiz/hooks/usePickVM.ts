@@ -1,4 +1,3 @@
-// quiz/hooks/usePickVM.ts
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { PRIORITIES, type PriorityId } from "../content/priorities";
 import { fixedQuestions } from "../content/questions";
