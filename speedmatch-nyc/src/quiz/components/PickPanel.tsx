@@ -1,4 +1,3 @@
-// quiz/components/PickPanel.tsx
 import React from "react";
 import type { PriorityId } from "../content/priorities";
 
