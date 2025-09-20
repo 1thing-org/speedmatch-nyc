@@ -2,6 +2,7 @@ import PageHeader from "../../components/PageHeader";
 import Footer from "../../components/Footer";
 import styles from "../styles/QuizResults.module.css";
 import Navbar from "../../components/Navbar";
+import ShareAndChatbot from "../components/ShareAndChatbot";
 import { useLocation } from "react-router";
 import { useMemo } from "react";
 import { useQuizState } from "../state/QuizContext";
@@ -134,9 +135,11 @@ function QuizResult() {
 			</section>
 			{/* Mobile explainer under list */}
 				<Calculation className={styles.calcBottom} />
-
+			<div className={styles.shareWrapper}>
+			<ShareAndChatbot />
+			</div>
 			<footer>
-				<Footer />
+				<Footer />		
 			</footer>
 		</div>
 		</div>

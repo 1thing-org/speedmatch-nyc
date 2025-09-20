@@ -109,7 +109,7 @@
 @media (min-width: 744px) and (max-width: 1366px) and (orientation: portrait) {
 	.resultCard {
 		display: grid;
-		grid-template-columns: 160px 200px 1fr;
+		grid-template-columns: 160px 180px 1fr;
 		column-gap: 24px;
 		align-items: start;
 	}
@@ -148,6 +148,8 @@
 	.resultName {
 		display: grid;
 	}
+
+
 }
 
 /* Desktop landscape: inline name and wider middle column */
@@ -192,6 +194,8 @@
 	.resultName {
 		display: block;
 	}
+
+
 }
 
 /* Aligned issues chips */
