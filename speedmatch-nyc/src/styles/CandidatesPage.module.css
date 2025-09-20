@@ -4,6 +4,9 @@
 		#003cff;
 	color: white;
 	--border-color: white;
+	display: grid;
+  grid-template-rows: auto 1fr auto;
+
 }
 
 .candidatesPage footer {

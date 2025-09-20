@@ -191,6 +191,9 @@
   .contentArea {
     display: flex;
     min-height: 60vh;
+    width: 100%;
+  box-sizing: border-box;
+
   }
 
 
@@ -199,8 +202,9 @@
      position: sticky; 
     left: 0;
     top: 0;
-    width: 300px;
     height: calc(100vh - 85px);
+    width: 241px; /* Add this to prevent shrinking */
+  flex-shrink: 0;
     overflow-y: auto;
     background: #003CFF;
     align-self: flex-start;
@@ -266,6 +270,9 @@
     display: flex;
     flex-direction: column;
     flex:1;
+    min-width: 0; 
+  
+
   }
 
   .notice {

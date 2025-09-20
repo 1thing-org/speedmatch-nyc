@@ -32,7 +32,7 @@
   border: 1px solid black;
   padding: 0.75rem 2rem;
   font-size: 24px;
-  font-weight: 550;
+  font-weight: 500;
   cursor: pointer;
   align-self: center;
   display: block;
@@ -47,8 +47,11 @@
   gap: 0.5rem;  
 }
 
-.fullText { display: inline; }
-.shortText { display: none; }
+.fullText { 
+  display: inline; }
+.shortText { 
+  display: none; 
+}
 
 
 @media (hover: hover) {

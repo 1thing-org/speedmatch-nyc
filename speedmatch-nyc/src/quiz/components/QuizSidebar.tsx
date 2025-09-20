@@ -10,7 +10,7 @@ type QuizSidebarProps = {
 
 function QuizSidebar({  activeQuestion, completedQuestions }: QuizSidebarProps) {
     function scrollToId(questionNumber: number) {
-        // Sidebar只在桌面端显示，所以直接使用桌面端逻辑
+        // Sidebar only show in Desktop
         const headerEl = document.getElementById(`q-header-${questionNumber}`);
         if (headerEl) {
             const navbarHeight = 80;
