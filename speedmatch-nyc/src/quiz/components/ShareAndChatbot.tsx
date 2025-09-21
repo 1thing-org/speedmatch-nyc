@@ -4,7 +4,7 @@ import { FaRegCircleCheck } from 'react-icons/fa6';
 import SocialMedia from '../../components/SocialMedia';
 import starLogo from "../../assets/Star.svg";
 
-function ShareAndChatbot() {
+function ShareAndChatbot( {shareData} : {shareData?: any}) {
     const [email, setEmail] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showValidation, setShowValidation] = useState(false);
@@ -23,9 +23,7 @@ function ShareAndChatbot() {
 
         // Your email submission logic here
         try {
-            // Your email submission logic here
-            console.log('Sending result to:', email);
-
+        
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 2000));
 
@@ -87,7 +85,7 @@ function ShareAndChatbot() {
                 </div>
                 <div className={styles.shareSocial}>
                     <h3 className={styles.title}>Share this website on Social Media:</h3>
-                    <SocialMedia />
+                    <SocialMedia variant="results" shareData={shareData}/>
                 </div>
             </div>
 

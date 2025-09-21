@@ -16,6 +16,17 @@ export default function RequireStep({ children }: { children: React.ReactNode })
     const rankTouched = Object.keys(optionOrders).length > 0;
 
     useEffect(() => {
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isSocialCrawler = userAgent.includes('facebookexternalhit') || 
+                              userAgent.includes('facebookcatalog') ||
+                              userAgent.includes('twitterbot') || 
+                              userAgent.includes('linkedinbot') ||
+                              userAgent.includes('slackbot') ||
+                              userAgent.includes('whatsapp');
+        
+        
+        if (isSocialCrawler) return;
+        
         if (pathname.endsWith("/pick") && !questionsDone) nav("/quiz", { replace: true });
         if (pathname.endsWith("/rank") && !pickDone) nav("/quiz", { replace: true });
         if (pathname.endsWith("/result") && !rankTouched) nav("/quiz", { replace: true });

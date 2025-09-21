@@ -3,6 +3,7 @@ import Footer from "../../components/Footer";
 import styles from "../styles/QuizResults.module.css";
 import Navbar from "../../components/Navbar";
 import ShareAndChatbot from "../components/ShareAndChatbot";
+import SEOHead from '../../components/SEOHead';
 import { useLocation } from "react-router";
 import { useMemo, useEffect } from "react";
 import { useQuizState } from "../state/QuizContext";
@@ -41,10 +42,10 @@ function QuizResult() {
 				return { id: idNum, name: candidateById[idNum]?.name ?? String(idNum), base: baseScore, final: finalScore, delta };
 			});
 			rows.sort((a, b) => b.final - a.final);
-			
-			console.table(rows);
 
-			console.log("Ranked priorities:", Array.isArray(rankedFive) ? rankedFive : []);
+			// Validate test results
+			// console.table(rows);
+			// console.log("Ranked priorities:", Array.isArray(rankedFive) ? rankedFive : []);
 		} catch (_) { }
 
 		return rankScores(base);
@@ -88,65 +89,96 @@ function QuizResult() {
 
 	const rankedSet = new Set(Array.isArray(rankedFive) ? rankedFive : []);
 
+
+	const shareData = useMemo(() => {
+		if (list.length === 0) return null;
+
+		const topMatch = list[0];
+		const candidate = candidateById[topMatch.id];
+
+		return {
+			title: "My Speed Match NYC Result",
+			description: `I took the Speed Match NYC quiz and my top match is ${candidate?.name}! Take the quiz to find your match.`,
+			// For testing, also need to build and deploy to this domain to see open graph shared
+			// Need to change to official domain if test is ok
+			url: 'https://test.speedmatch.nyc',
+			image: 'https://test.speedmatch.nyc/images/OG/OG_Facebook.jpg'
+		};
+	}, [list]);
+
 	return (
-		    <div className={styles.resultPage}>
-      <header>
-        <Navbar forceHamburger />
-      </header>
+		<>
+			<SEOHead
+				title={shareData?.title || "Your Matching Results"}
+				description={shareData?.description || "See your Speed Match NYC quiz results and find your ideal 2025 NYC Mayoral candidate."}
+				canonical="https://test.speedmatch.nyc/quiz/result"
+				ogImages={{
+					// Need to change to official domain if test is ok
+					facebook: "https://test.speedmatch.nyc/images/OG/OG_Facebook.jpg",
+					twitter: "https://test.speedmatch.nyc/images/OG/OG_Twitter.jpg",
+					linkedin: "https://test.speedmatch.nyc/images/OG/OG_Linkedin.jpg"
+				}}
+			/>
 
-		<div className={styles.resultWrapper}>
-			<PageHeader title="Your Matching Results" />
+			<div className={styles.resultPage}>
+				<header>
+					<Navbar forceHamburger />
+				</header>
 
-			{/* Tablet/Desktop explainer under header */}
-			<Calculation className={styles.calcTop} />
+				<div className={styles.resultWrapper}>
+					<PageHeader title="Your Matching Results" />
 
-			<section className={styles.resultContent}>
-				<ul className={styles.resultList}>
-					{list.map((r, idx) => {
-						const c = candidateById[r.id];
-						const label = getRankLabel(idx);
-						const matches = getMatchesForCandidate(r.id);
-						const name = splitName(c?.name);
-						return (
-							<li key={r.id} className={styles.resultItem}>
-								<div className={styles.resultCard}>
-									<div className={styles.resultCandidate}>
-										<img className={styles.resultPhoto} src={c?.image} alt={c?.name} />
-										<div className={styles.resultMeta}>
-											<div className={styles.resultScore}>{label}</div>
-											<div className={styles.resultName}>
-												<span className={styles.nameFirst}>{name.first}</span>{name.last ? ' ' : ''}<span className={styles.nameLast}>{name.last}</span>
+					{/* Tablet/Desktop explainer under header */}
+					<Calculation className={styles.calcTop} />
+
+					<section className={styles.resultContent}>
+						<ul className={styles.resultList}>
+							{list.map((r, idx) => {
+								const c = candidateById[r.id];
+								const label = getRankLabel(idx);
+								const matches = getMatchesForCandidate(r.id);
+								const name = splitName(c?.name);
+								return (
+									<li key={r.id} className={styles.resultItem}>
+										<div className={styles.resultCard}>
+											<div className={styles.resultCandidate}>
+												<img className={styles.resultPhoto} src={c?.image} alt={c?.name} />
+												<div className={styles.resultMeta}>
+													<div className={styles.resultScore}>{label}</div>
+													<div className={styles.resultName}>
+														<span className={styles.nameFirst}>{name.first}</span>{name.last ? ' ' : ''}<span className={styles.nameLast}>{name.last}</span>
+													</div>
+													<div className={styles.resultParty}>{c?.party}</div>
+
+												</div>
 											</div>
-											<div className={styles.resultParty}>{c?.party}</div>
-
+											<div className={styles.issuesAligned}>
+												<div className={styles.issuesHeading}>Aligned With The Following Issues:</div>
+												<div className={styles.issueChips}>
+													{matches.map((m, i) => (
+														<span key={i} className={`${styles.issueChip} ${m.pid && rankedSet.has(m.pid) ? styles.issueChipSelected : ''}`}>{m.label}</span>
+													))}
+												</div>
+											</div>
 										</div>
-									</div>
-									<div className={styles.issuesAligned}>
-										<div className={styles.issuesHeading}>Aligned With The Following Issues:</div>
-										<div className={styles.issueChips}>
-											{matches.map((m, i) => (
-												<span key={i} className={`${styles.issueChip} ${m.pid && rankedSet.has(m.pid) ? styles.issueChipSelected : ''}`}>{m.label}</span>
-											))}
-										</div>
-									</div>
-								</div>
-							</li>
-						);
-					})}
-				</ul>
+									</li>
+								);
+							})}
+						</ul>
 
-				
-			</section>
-			{/* Mobile explainer under list */}
-				<Calculation className={styles.calcBottom} />
-			<div className={styles.shareWrapper}>
-			<ShareAndChatbot />
+
+					</section>
+					{/* Mobile explainer under list */}
+					<Calculation className={styles.calcBottom} />
+					<div className={styles.shareWrapper}>
+						<ShareAndChatbot shareData={shareData} />
+					</div>
+					<footer>
+						<Footer />
+					</footer>
+				</div>
 			</div>
-			<footer>
-				<Footer />		
-			</footer>
-		</div>
-		</div>
+		</>
 	);
 }
 

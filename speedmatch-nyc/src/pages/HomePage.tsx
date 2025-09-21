@@ -134,9 +134,9 @@ function HomePage() {
 									</h1>
 								</div>
 								<div className={styles.takeQuiz}>
-									<a href="/quiz" className={styles.takeQuizButton}>
+									<Link to="/quiz" className={styles.takeQuizButton}>
 										Take Quiz
-									</a>
+									</Link>
 								</div>
 							</div>
 						</section>

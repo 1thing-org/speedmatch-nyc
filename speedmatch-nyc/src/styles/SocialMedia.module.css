@@ -21,19 +21,14 @@
   display: inline-block;
 }
 
-.socialIcon img {
-  width: 24px;
-  height: 24px;
+.socialIcon svg {
+  width: 25px;
+  height: 25px;
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
 }
  
-.iconFix {
-  width: 26px;
-  height: 26px;
-  transform: scale(1.15);  
-}
 
 .label {
   margin: 0;
@@ -63,8 +58,7 @@
   justify-content: center;
 }
 
-.aboutIcon img {
+.aboutIcon svg {
   width: 27px;
   height: 27px;
-  filter: brightness(0) saturate(100%);
 }

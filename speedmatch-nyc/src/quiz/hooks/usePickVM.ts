@@ -73,7 +73,6 @@ export function usePickVM(initialSelected?: PriorityId[]) {
     return () => clearTimeout(t);
   }, []);
 
-  // 8) 前往 Rank 前提交（锁定当前 Q8 基线以防回退误判）
   const commitBeforeRank = useCallback(() => {
     if (!isReady) return false;
     setQ8UsedForPriorities(lastQ8OptionId as any);

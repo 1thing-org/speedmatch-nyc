@@ -35,7 +35,7 @@ function QuizPick() {
          <PickPanel
                 vm={vm}
                 classes={classes}
-                renderActions={(isReady, selected) => (
+                renderActions={(_isReady, selected) => (
                     <div className={styles.pickActions}>
                         <Link
                             to="/quiz/rank"

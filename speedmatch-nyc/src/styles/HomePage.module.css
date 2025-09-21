@@ -19,17 +19,9 @@
   object-fit: contain;
 }
 
-.headlineOnly {
-
-}
-
 .headlineAndBot {
   display: flex;
   flex-direction: column;
-}
-
-.headlineWithBot {
-
 }
 
 .headline {
