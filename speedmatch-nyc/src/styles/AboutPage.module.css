@@ -3,6 +3,8 @@
   background-color:
     white;
   --border-bottom-color: #003cff; 
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 .container {

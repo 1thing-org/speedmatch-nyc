@@ -1,0 +1,158 @@
+.container {
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.shareWrapper {
+  background-color: transparent;
+  padding: 1rem 2rem;
+}
+
+.title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  font-size: 20px
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input {
+  height: 3.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  outline: none;
+  background-color: white;
+  color: #000;
+  width: 100%;
+}
+
+.button {
+  height: 3.5rem;
+  background-color: #3cff00; /* Bright green */
+  color: black;
+  font-size: 1.25rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonDisabled {
+  cursor: not-allowed;
+}
+
+.button.successButton {
+  border: 2px solid #3cff00 !important;
+  background-color: transparent !important;
+  color: #3cff00;
+  font-size: 24px;
+  font-weight: 500;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.validationTooltip {
+    margin-top: 0.8rem;
+}
+
+.shareSocial {
+  margin: 1rem 0;
+}
+
+.chatbotWrapper {
+  background-color: #3cff00 !important;
+  height: 161px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+
+}
+
+.chatbottTitle {
+  font-size: 24px;
+  color: #003CFF;
+  font-weight: 400;
+  line-height: 100%;
+  text-align: left;
+  justify-self: center;
+  margin-bottom: 1rem;
+  letter-spacing: -4%;
+}
+
+.chatbotButton {
+  height: 61px;
+  background-color: #003CFF; /* Bright green */
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  gap: 0.5rem;  
+}
+
+.img {
+  margin-left: 1rem;
+}
+
+@media (hover: hover) {
+  .button:hover {
+    background-color: #2EB800;
+  }
+}
+
+@media (min-width: 744px) {
+  /* .title {
+    font-size: 1.2rem;
+  } */
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: 0;
+    border-bottom: 1px solid white
+  }
+  
+  .chatbotWrapper {
+    order: -1; 
+    height: 300px;
+    gap:4rem;
+    padding: 2.5rem ;
+  }
+
+  .chatbottTitle {
+    font-size: 30px;
+  }
+  
+  .shareWrapper {
+    order: 1;
+    padding: 1rem 1.2rem 1rem 1rem;
+  }
+}

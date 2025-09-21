@@ -32,7 +32,7 @@
   border: 1px solid black;
   padding: 0.75rem 2rem;
   font-size: 24px;
-  font-weight: 550;
+  font-weight: 500;
   cursor: pointer;
   align-self: center;
   display: block;
@@ -47,20 +47,36 @@
   gap: 0.5rem;  
 }
 
-.fullText { display: inline; }
-.shortText { display: none; }
+.fullText { 
+  display: inline; }
+.shortText { 
+  display: none; 
+}
 
 
 @media (hover: hover) {
 .supportButton:hover {
   background-color: #D9D9D9;
 }
+
+}
+
+@media (max-width: 407px) {
+  .supportButton {
+    font-size: 18px;
+  }
+
+  .supportButton img {
+    width: 24px;
+    height:auto;
+  }
 }
 
 /* Tablet styles */
 @media (min-width: 744px) and (max-width: 1366px) and (min-height: 900px) and (orientation: portrait) {
   .donationSec {
-    height: 300px;
+    height: 360px;
+
   }
 	.supportButtonWrapper {
 	width: 60%;

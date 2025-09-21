@@ -1,0 +1,244 @@
+.resultWrapper {
+	min-height: 100vh;
+	background-color:
+		#003cff;
+	color: white;
+	--border-top-color: white;
+	--border-bottom-color: white;
+}
+
+.resultContent {
+	padding: 1.5rem 1.2rem 2.5rem 1.2rem;
+}
+
+
+/* default: show bottom under list, hide top */
+.calcTop {
+	display: none;
+}
+
+.calcBottom {
+	display: block;
+
+}
+
+/* tablet/desktop: show top under header, hide bottom under list */
+@media (min-width: 744px) {
+	.calcTop {
+		display: block;
+	}
+
+	.calcBottom {
+		display: none;
+	}
+
+	.resultWrapper {
+		--border-top-color: white;
+		--border-bottom-color: transparent;
+	}
+}
+
+.resultList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 12px;
+}
+
+.resultItem {
+	display: block;
+}
+
+.resultCard {
+	border-bottom: 1px solid #fff;
+	padding-bottom: 32px;
+}
+
+/* Remove bottom border for the last displayed candidate only */
+.resultList>.resultItem:last-child .resultCard {
+	border-bottom: 0;
+	padding-bottom: 0;
+
+}
+
+.resultCandidate {
+	display: grid;
+	grid-template-columns: 160px 1fr;
+	gap: 1rem;
+	align-items: start;
+	background: transparent;
+	padding: 16px 0 8px 0;
+}
+
+.resultScore {
+	color: #3cff00;
+	font-size: 32px;
+	letter-spacing: -8%;
+	line-height: 100%;
+}
+
+.resultPhoto {
+	width: 160px;
+	height: 160px;
+	object-fit: cover;
+	background: #fff;
+}
+
+.resultMeta {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+}
+
+.resultName {
+	font-size: 24px;
+	font-weight: 400;
+	color: #fff;
+	line-height: 87%;
+	letter-spacing: -4%;
+}
+
+/* default: first and last inline */
+.nameFirst,
+.nameLast {
+	display: inline;
+}
+
+/* Tablet portrait: stack first and last name vertically and use 3 columns */
+@media (min-width: 744px) and (max-width: 1366px) and (orientation: portrait) {
+	.resultCard {
+		display: grid;
+		grid-template-columns: 160px 180px 1fr;
+		column-gap: 24px;
+		align-items: start;
+	}
+
+
+	/* Candidate block spans first two columns */
+	.resultCandidate {
+		grid-column: 1 / span 2;
+		display: grid;
+		grid-template-columns: 160px 200px;
+		column-gap: 24px;
+	}
+
+	.resultPhoto {
+		grid-column: 1;
+	}
+
+	.resultMeta {
+		grid-column: 2;
+	}
+
+	.issuesAligned {
+		grid-column: 3;
+		margin-top: 0;
+	}
+
+	.issuesHeading {
+		margin-top: 0;
+	}
+
+	.nameFirst,
+	.nameLast {
+		display: block;
+	}
+
+	.resultName {
+		display: grid;
+	}
+
+
+}
+
+/* Desktop landscape: inline name and wider middle column */
+@media (min-width: 1024px) and (orientation: landscape) {
+	.resultCard {
+		display: grid;
+		grid-template-columns: 160px 320px 1fr;
+		column-gap: 24px;
+		align-items: start;
+	}
+
+	/* Candidate block spans first two columns */
+	.resultCandidate {
+		grid-column: 1 / span 2;
+		display: grid;
+		grid-template-columns: 160px 320px;
+		column-gap: 24px;
+	}
+
+	.resultPhoto {
+		grid-column: 1;
+	}
+
+	.resultMeta {
+		grid-column: 2;
+	}
+
+	.issuesAligned {
+		grid-column: 3;
+		margin-top: 0;
+	}
+
+	.issuesHeading {
+		margin-top: 0;
+	}
+
+	.nameFirst,
+	.nameLast {
+		display: inline;
+	}
+
+	.resultName {
+		display: block;
+	}
+
+
+}
+
+/* Aligned issues chips */
+.issuesHeading {
+	margin-top: 14px;
+	margin-bottom: 8px;
+	font-size: 18px;
+	color: #3cff00;
+	letter-spacing: -4%;
+}
+
+
+
+.issueChips {
+	display: grid;
+	grid-template-columns: repeat(2, max-content);
+	justify-content: start;
+	row-gap: 12px;
+	column-gap: 14px;
+	width: 100%;
+	justify-items: start;
+	align-items: start;
+}
+
+.issueChip {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 26px;
+	padding: 0 14px;
+	border-radius: 999px;
+	background: #fff;
+	color: #003CFF;
+	border: 2px solid #fff;
+	font-size: 12px;
+	white-space: nowrap;
+	letter-spacing: -4%;
+	line-height: 150%;
+	font-weight: 500;
+}
+
+.issueChipSelected {
+	background: #3cff00;
+	color: #003CFF;
+	border-color: #3cff00;
+}

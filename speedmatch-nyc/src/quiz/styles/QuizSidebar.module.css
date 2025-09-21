@@ -1,0 +1,78 @@
+.sidebarNav {
+	position: relative;
+	display: block;
+	height: 100%;
+}
+
+.list {
+	list-style: none;
+	margin: 0;
+	padding: 12px 0px;
+	background: transparent;
+	color: inherit;
+}
+
+.item {
+	width: 100%;
+	text-align: left;
+	background: transparent;
+	color: white;
+	border: none;
+	padding: 10px 16px;
+	cursor: pointer;
+	display: grid;
+	gap: 4px;
+}
+
+.itemActive {
+	background: #3cff00;
+	color: #000;
+}
+
+.itemCompleted {
+	color: #949494;
+}
+
+.qNumber {
+	font-size: 12px;
+	opacity: 0.9;
+}
+
+.qTitle {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.05;
+}
+
+/* Ensure header wins over .item without !important */
+.item.sectionHeader {
+	background: #3cff00;
+	color: #000;
+	padding: 12px 16px;
+} 
+
+.metaRow {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 8px;
+}
+
+.completedTag {
+	font-size: 11px;
+	font-weight: 500;
+	color: #000;
+	border: 1px solid #949494;
+	border-radius: 999px;
+	padding: 2px 8px;
+}
+
+.itemCompleted .completedTag {
+	background: transparent;
+	color: #949494;
+}
+
+.itemActive .completedTag {
+	background: #000;
+	color: #3cff00;
+}

@@ -4,6 +4,9 @@
 		#003cff;
 	color: white;
 	--border-color: white;
+	display: grid;
+  grid-template-rows: auto 1fr auto;
+
 }
 
 .candidatesPage footer {
@@ -74,7 +77,7 @@
 
 @media (min-width: 560px) and (max-width: 767px) {
 	.candidates {
-		grid-template-columns: repeat(2, 216px);
+		grid-template-columns: repeat(2, 260px);
 		padding-left: 0;
 		padding-right: 0;
 
@@ -86,22 +89,37 @@
 		grid-template-columns: repeat(3, 216px);
 		padding-left: 40px;
 		padding-right: 40px;
-	
 	}
+
 }
 
 /* Desktop - 1024px and up */
 @media (min-width: 1024px) {
 	.candidates {
-		grid-template-columns: repeat(4, 216px);
+		grid-template-columns: repeat(3, 260px);
 		padding-left: 60px;
 		padding-right: 60px;
+	}
+
+	.candidateImage {
+		height: 260px;
+	}
+
+	.candidateCard {
+		height: 350px;
 	}
 }
 
 /* Large Desktop - 1280px and up */
 @media (min-width: 1280px) {
 	.candidates {
-		grid-template-columns: repeat(5, 216px);
+		grid-template-columns: repeat(3, 260px);
+	}
+
+	.candidateImage {
+		height: 260px;
+	}
+	.candidateCard {
+		height: 350px;
 	}
 }
