@@ -1,6 +1,10 @@
-import { FaSquareXTwitter, FaTiktok, FaInstagram, FaSquareFacebook, FaSquareEnvelope
- } from 'react-icons/fa6';
 import styles from '../styles/SocialMedia.module.css';
+import envelopeIcon from "../assets/envelop.svg";
+import twitterIcon from "../assets/twitter.svg";
+import tiktokIcon from "../assets/tiktok.svg";
+import insIcon from "../assets/ins.svg";
+import fbIcon from "../assets/fb.svg";
+
 
 type Variant = "hero" | "about" | "footer";
 
@@ -15,25 +19,25 @@ const baseLinks = [
   {
       platform: 'Twitter',
       url: 'https://x.com/speedmatchelect',
-      icon: <FaSquareXTwitter />,
+      icon: <img src={twitterIcon} alt="twitter" />,
       ariaLabel: 'Follow Speed Matching NYC on Twitter'
     },
     {
       platform: 'TikTok',
       url: 'https://www.tiktok.com/@speedmatchnyc',
-      icon: <FaTiktok />,
+      icon: <img src={tiktokIcon} alt="tiktok" />,
       ariaLabel: 'Follow Speed Matching NYC on TikTok'
     },
     {
       platform: 'Instagram',
       url: 'https://www.instagram.com/speedmatchnyc',
-      icon: <FaInstagram />,
+      icon: <img src={insIcon} alt="instagram" />,
       ariaLabel: 'Follow Speed Matching NYC on Instagram'
     },
     {
       platform: 'Facebook',
       url: 'https://www.facebook.com/people/Speed-Match-NYC/61578917033976/',
-      icon: <FaSquareFacebook />,
+      icon: <img src={fbIcon} alt="facebook" className={styles.iconFix} />,
       ariaLabel: 'Follow Speed Matching NYC on Facebook'
     },
 ];
@@ -51,7 +55,7 @@ const SocialMedia = ({
           {
             platform: "Email",
             url: "mailto:info@speedmatch.nyc",
-            icon: <FaSquareEnvelope />,
+            icon: <img src={envelopeIcon} alt="Email" />,
             ariaLabel: "Email Speed Matching NYC",
           },
         ]
