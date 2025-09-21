@@ -9,8 +9,10 @@ import StructuredData from '../components/StructuredData';
 import DonationSec from '../components/DonationSec';
 import starLogo from "../assets/Star.svg"
 import Footer from '../components/Footer';
+import { useScrollToTop } from '../useScrollToTop';
 
 function HomePage() {
+	useScrollToTop(); 
 	const [isDesktop, setIsDesktop] = useState(false);
 	const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false);
 
@@ -89,7 +91,7 @@ function HomePage() {
 					<section aria-label="Hero section">
 						{/* Hero Section */}
 						<HeroWrapper>
-							<p style={{ color: 'white' }}>Updated: Sep 19, 2025</p>
+							<p style={{ color: 'white' }}>Updated: Sep 21, 2025</p>
 							<SocialMedia
 								variant="hero"
 								showLabel={true}

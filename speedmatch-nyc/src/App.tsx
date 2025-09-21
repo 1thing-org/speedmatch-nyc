@@ -1,5 +1,5 @@
 import './App.css';
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 import HomePage from './pages/HomePage';
 import CandidatesPage from './pages/CandidatesPage';
 import Aboutpage from './pages/AboutPage';
@@ -27,18 +27,18 @@ const router = createBrowserRouter([
     path: "/quiz/*",
     element: <QuizRoutes />
   },
-  {
-    path: "/about/index.html",
-    element: <Navigate to="/about" replace />
-  },
-  {
-    path: "/explore/index.html",
-    element: <Navigate to="/explore" replace />
-  },
-  {
-    path: "/contact/index.html",
-    element: <Navigate to="/contact" replace />
-  }
+  // {
+  //   path: "/about/index.html",
+  //   element: <Navigate to="/about" replace />
+  // },
+  // {
+  //   path: "/explore/index.html",
+  //   element: <Navigate to="/explore" replace />
+  // },
+  // {
+  //   path: "/contact/index.html",
+  //   element: <Navigate to="/contact" replace />
+  // }
 ]);
 
 function App() {

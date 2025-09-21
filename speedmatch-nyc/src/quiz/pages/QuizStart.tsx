@@ -2,8 +2,10 @@ import PageHeader from "../../components/PageHeader";
 import styles from "../styles/QuizStart.module.css"
 import { Link } from "react-router";
 import Navbar from "../../components/Navbar";
+import { useScrollToTop } from '../../useScrollToTop';
 
 function QuizStart() {
+  useScrollToTop();
   return (
     <div className={styles.startPage}>
       <header>

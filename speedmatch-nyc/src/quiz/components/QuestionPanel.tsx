@@ -23,6 +23,7 @@ export default function QuestionPanel({
 }: Props) {
   const { q, order, selectedId, onSelect, idx, total, isFirst, isLast } = vm;
 
+  // Last question's button becomes Next: Pick Your Priorities, others: Next
   const nextLabel = primaryLabel ?? (isLast ? "Next: Pick Your Priorities" : "Next");
 
 
@@ -60,7 +61,8 @@ export default function QuestionPanel({
       </ul>
 
       {noticeText ? <div className={m.notice}>{noticeText}</div> : null}
-
+      
+      {/* No back button in first question*/}
       <div className={`${m.actions} ${isFirst ? m.actionsFirst : ''} ${isLast ? m.actionsLast : ''}`}>
         {!isFirst && (
           <button className={m.btnSecondary} onClick={onBack}>Back</button>

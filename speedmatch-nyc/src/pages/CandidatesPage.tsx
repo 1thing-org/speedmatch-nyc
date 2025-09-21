@@ -6,8 +6,10 @@ import Footer from '../components/Footer';
 import { candidates } from "../data/candidates";
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
+import { useScrollToTop } from '../useScrollToTop';
 
 function CandidatesPage() {
+	useScrollToTop();
 	// Generate structured data for all candidates
 	const candidatesSchema = {
 		"@context": "https://schema.org",

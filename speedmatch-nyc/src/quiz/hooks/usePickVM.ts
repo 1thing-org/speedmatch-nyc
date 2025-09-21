@@ -8,7 +8,7 @@ export function usePickVM(initialSelected?: PriorityId[]) {
   const { selectedPriorities, answers, lastQ8OptionId, q8UsedForPriorities } = useQuizState();
   const { setSelectedPriorities, setQ8UsedForPriorities } = useQuizActions();
 
-
+  // Based on q8's choice, show priorities in one of the three
   const filteredPriorities = useMemo(() => {
     const special = new Set<PriorityId>(["antisemitism", "equity", "efficiency"] as any);
     const q8 = fixedQuestions.find(q => q.id === "Q8");
@@ -27,12 +27,15 @@ export function usePickVM(initialSelected?: PriorityId[]) {
   );
 
 
-  useEffect(() => { setSelectedPriorities(selected); }, [selected, setSelectedPriorities]);
+  useEffect(() => { 
+    setSelectedPriorities(selected); 
+  }, [selected, setSelectedPriorities]);
 
 
   const [showNotice, setShowNotice] = useState(false);
   const [noticeText, setNoticeText] = useState("");
 
+  // If q8 answer changes, reset to choose priorities again
   useEffect(() => {
     const currentQ8 = lastQ8OptionId as any;
     const usedQ8 = q8UsedForPriorities as any;

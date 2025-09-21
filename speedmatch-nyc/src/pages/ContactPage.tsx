@@ -6,8 +6,10 @@ import SocialMedia from '../components/SocialMedia';
 import Footer from '../components/Footer';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
+import { useScrollToTop } from '../useScrollToTop';
 
 function ContactPage() {
+	useScrollToTop(); 
 	// Structured data for Contact page
 	const contactSchema = {
 		"@context": "https://schema.org",

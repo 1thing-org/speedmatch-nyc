@@ -6,8 +6,10 @@ import SocialMedia from '../components/SocialMedia';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
 import Footer from '../components/Footer';
+import { useScrollToTop } from '../useScrollToTop';
 
 function Aboutpage() {
+	useScrollToTop();
 	// Structured data for About page
 	const organizationSchema = {
 		"@context": "https://schema.org",

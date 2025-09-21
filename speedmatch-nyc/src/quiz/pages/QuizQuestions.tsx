@@ -9,6 +9,7 @@ import { fixedQuestions } from "../content/questions";
 import { candidates } from '../../data/candidates';
 import QuestionPanel from "../components/QuestionPanel";
 import { useQuestionVM } from "../hooks/useQuestionVM";
+import { useScrollToTop } from '../../useScrollToTop';
 
 function shuffleArray<T>(input: readonly T[]): T[] {
   const arr = input.slice() as T[];
@@ -30,7 +31,7 @@ function useIsLargeScreen() {
 }
 
 function QuizQuestions() {
-
+  useScrollToTop('smooth');
   const questions = fixedQuestions as readonly any[];
   const total = questions.length;
   const navigate = useNavigate();

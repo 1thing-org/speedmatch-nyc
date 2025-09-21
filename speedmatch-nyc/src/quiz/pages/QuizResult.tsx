@@ -12,8 +12,10 @@ import { addPointsFromAnswers, addPriorityScoresFromAnswersByRank, rankScores, D
 import { candidateById } from "../../data/candidates";
 import { PRIORITY_LABEL_BY_ID, type PriorityId } from "../content/priorities";
 import Calculation from "../components/Calculation";
+import { useScrollToTop } from '../../useScrollToTop';
 
 function QuizResult() {
+	useScrollToTop('smooth');
 	const location = useLocation() as any;
 	const rankedFive: PriorityId[] | undefined = location?.state?.rankedFive;
 	const { answers } = useQuizState();
