@@ -19,6 +19,18 @@
   object-fit: contain;
 }
 
+.headlineOnly {
+
+}
+
+.headlineAndBot {
+  display: flex;
+  flex-direction: column;
+}
+
+.headlineWithBot {
+
+}
 
 .headline {
   display: flex;
@@ -93,6 +105,50 @@
   border: 0;
 }
 
+.chatbotWrapper {
+  background-color: #3cff00 !important;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.chatbottTitle {
+  font-size: 24px;
+  color: #000;
+  font-weight: 400;
+  line-height: 100%;
+  text-align: left;
+  justify-self: center;
+  margin-bottom: 1rem;
+  letter-spacing: -4%;
+}
+
+.chatbotButton {
+  height: 61px;
+  background-color: #003CFF; /* Bright green */
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  gap: 0.5rem;  
+}
+
+.img {
+  margin-left: 1rem;
+}
+
 /* Tablet styles */
 @media (min-width: 744px) and (max-width: 1366px) and (min-height: 900px) and (orientation: portrait) {
   .coverImageWrapper {
@@ -130,6 +186,49 @@
   .takeQuizButton {
     font-size: 20px;
   }
+
+  /* with chatbot in 1 rwo */
+  .headlineAndBot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    max-width: 1280px;
+    margin: -1.4rem 0 -1rem;
+    padding: 1rem;
+  }
+  
+  .headlineWithBot {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    margin-top: 0;
+  }
+
+  .headlineWithBot h1 {
+    font-size: 30px;
+  }
+
+  .headlineWithBot .takeQuiz {
+    width: 100%;
+    align-self: center;
+  }
+
+
+  .headlineAndBot .chatbotWrapper {
+    height: 300px;
+    margin-right: -1rem;
+    gap: 2rem;
+  }
+
+  .headlineAndBot .chatbotWrapper .chatbottTitle {
+    font-size: 30px;
+}
+
+
 }
 
 /* Desktop styles */
@@ -178,6 +277,59 @@
     margin-top: 10px;
   }
 
+  /* with chatbot in 1 rwo */
+  .headlineAndBot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    max-width: 1280px;
+    margin: -1rem auto;
+    margin-bottom: -2rem;
+    padding: 1rem 2rem;
+    
+  }
+  
+  .headlineWithBot {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.4rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    margin-top: 0;
+  }
+
+  .headlineWithBot .headlineText {
+    text-align: left;
+    padding-left: 0;
+    letter-spacing: -6%;
+    width: 100%;
+  }
+
+  .headlineWithBot h1 {
+    font-size: 36px;
+  }
+
+  .headlineWithBot .takeQuiz {
+    width: 100%;
+    align-self: flex-start;
+    /* justify-self: center; */
+    padding-right: 0;
+    max-width: none;
+  }
+
+
+  .headlineAndBot .chatbotWrapper {
+    height: 290px;
+    margin-right: -0.5rem;
+    gap: 3rem;
+  }
+
+  .headlineAndBot .chatbotWrapper .chatbottTitle {
+    font-size: 36px;
+}
+
 }
 
 @media (min-width: 1280px) and (orientation: landscape) {
@@ -209,4 +361,7 @@
     width: 100%;
     max-width: none;
   }
+
+
+  
 }

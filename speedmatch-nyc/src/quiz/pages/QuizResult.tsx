@@ -4,7 +4,7 @@ import styles from "../styles/QuizResults.module.css";
 import Navbar from "../../components/Navbar";
 import ShareAndChatbot from "../components/ShareAndChatbot";
 import { useLocation } from "react-router";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useQuizState } from "../state/QuizContext";
 import { fixedQuestions } from "../content/questions";
 import { addPointsFromAnswers, addPriorityScoresFromAnswersByRank, rankScores, DefaultRankWeights } from "../scoring/scoreEngine";
@@ -16,6 +16,10 @@ function QuizResult() {
 	const location = useLocation() as any;
 	const rankedFive: PriorityId[] | undefined = location?.state?.rankedFive;
 	const { answers } = useQuizState();
+
+	useEffect(() => {
+		localStorage.setItem('quiz-completed', 'true');
+	}, []);
 
 	const results = useMemo(() => {
 		const base = addPointsFromAnswers(answers as any);

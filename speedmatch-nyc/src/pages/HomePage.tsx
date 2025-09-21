@@ -7,10 +7,19 @@ import HeroWrapper from '../components/HeroWrapper';
 import SEOHead from '../components/SEOHead';
 import StructuredData from '../components/StructuredData';
 import DonationSec from '../components/DonationSec';
+import starLogo from "../assets/Star.svg"
 import Footer from '../components/Footer';
 
 function HomePage() {
 	const [isDesktop, setIsDesktop] = useState(false);
+	const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false);
+
+	useEffect(() => {
+
+		const quizCompleted = localStorage.getItem('quiz-completed') === 'true';
+		setHasCompletedQuiz(quizCompleted);
+	}, []);
+
 
 	useEffect(() => {
 		const handleResize = () => setIsDesktop(window.innerWidth >= 768);
@@ -115,26 +124,40 @@ function HomePage() {
 						</div>
 					</section>
 
-					{/* Headline section */}
-					<section aria-label="Election information and signup">
-						<div className={styles.headline}>
-							<div className={styles.headlineText}>
-								<h1>
-									Spend <span className={styles.highlight}>8</span> minutes to find the candidate who best aligns with your values in the <span className={styles.highlight}>2025 NYC Mayoral General Election</span>.
-								</h1>
+					<div className={hasCompletedQuiz ? styles.headlineAndBot : styles.headlineOnly}>
+						{/* Headline section */}
+						<section aria-label="Election information and signup">
+							<div className={`${styles.headline} ${hasCompletedQuiz ? styles.headlineWithBot : ''}`}>
+								<div className={styles.headlineText}>
+									<h1>
+										Spend <span className={styles.highlight}>8</span> minutes to find the candidate who best aligns with your values in the <span className={styles.highlight}>2025 NYC Mayoral General Election</span>.
+									</h1>
+								</div>
+								<div className={styles.takeQuiz}>
+									<a href="/quiz" className={styles.takeQuizButton}>
+										Take Quiz
+									</a>
+								</div>
 							</div>
-							<div className={styles.takeQuiz}>
-								<a href="/quiz" className={styles.takeQuizButton}>
-									Take Quiz
-								</a>
-							</div>
-					
-						</div>
-					</section>
+						</section>
+
+						{/* nly show chatbot when complete quiz*/}
+						{hasCompletedQuiz && (
+							<section aria-label="Candidate information chatbot">
+								<div className={styles.chatbotWrapper}>
+									<h3 className={styles.chatbottTitle}>Have questions about the candidates? Ask our Chatbot.</h3>
+									<button className={styles.chatbotButton}>
+										Ask AI Chatbot
+										<img src={starLogo} alt="chatbotLogo" />
+									</button>
+								</div>
+							</section>
+						)}
+					</div>
 				</main>
 				<DonationSec />
 
-	
+
 				<footer>
 					<Footer />
 				</footer>
