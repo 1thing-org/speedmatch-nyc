@@ -157,9 +157,15 @@ function QuizResult() {
 											<div className={styles.issuesAligned}>
 												<div className={styles.issuesHeading}>Aligned With The Following Issues:</div>
 												<div className={styles.issueChips}>
-													{matches.map((m, i) => (
-														<span key={i} className={`${styles.issueChip} ${m.pid && rankedSet.has(m.pid) ? styles.issueChipSelected : ''}`}>{m.label}</span>
-													))}
+														{matches
+														.sort((a, b) => {
+															const aSelected = a.pid && rankedSet.has(a.pid) ? 1 : 0;
+															const bSelected = b.pid && rankedSet.has(b.pid) ? 1 : 0;
+															return bSelected - aSelected;
+														})
+														.map((m, i) => (
+															<span key={i} className={`${styles.issueChip} ${m.pid && rankedSet.has(m.pid) ? styles.issueChipSelected : ''}`}>{m.label}</span>
+														))}
 												</div>
 											</div>
 										</div>

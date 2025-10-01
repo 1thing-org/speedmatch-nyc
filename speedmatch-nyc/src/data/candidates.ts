@@ -3,14 +3,6 @@ import type { Candidate } from '../types/candidate';
 export const candidates: Candidate[] = [
   {
     id: 1,
-    name: "Eric Adams",
-    image: "/images/candidates/eric-adams.webp",
-    website: "https://eric2025.com/",
-    party: "Independent",
-    altText: "Black and white portrait of Eric Adams, smiling, wearing a light shirt."
-  },
-  {
-    id: 2,
     name: "Andrew Cuomo",
     image: "/images/candidates/andrew-cuomo.webp",
     website: "https://www.andrewcuomo.com/",
@@ -18,7 +10,7 @@ export const candidates: Candidate[] = [
     altText: "Black and white portrait of Andrew Cuomo in a suit, hands together, serious expression."
   },
   {
-    id: 3,
+    id: 2,
     name: "Irene Estrada", 
     image: "/images/candidates/irene-estrada.webp",
     website: "https://www.facebook.com/groups/ireneestrada/about",
@@ -26,7 +18,7 @@ export const candidates: Candidate[] = [
     altText: "Black and white portrait of Irene Estrada smiling with long curly hair."
   },
     {
-    id: 4,
+    id: 3,
     name: "Joseph Hernandez",
     image: "/images/candidates/joseph-hernandez.webp", 
     website: "https://www.hernandezfornyc.com/",
@@ -34,7 +26,7 @@ export const candidates: Candidate[] = [
     altText: "Black and white portrait of Joseph Hernandez smiling with a hat and suit."
   },
   {
-    id: 5,
+    id: 4,
     name: "Zohran Mamdani",
     image: "/images/candidates/zohran-mamdani.webp",
     website: "https://www.zohranfornyc.com/",
@@ -42,7 +34,7 @@ export const candidates: Candidate[] = [
     altText: "Black and white portrait of Zohran Mamdani with a beard, smiling slightly, wearing a light top."
   },
    {
-    id: 6,
+    id: 5,
     name: "Curtis Sliwa",
     image: "/images/candidates/curtis-sliwa.webp",
     website: "https://www.sliwafornyc.com/",
