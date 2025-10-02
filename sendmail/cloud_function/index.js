@@ -1,6 +1,34 @@
+import FormData from "form-data"; // form-data v4.0.1
+import Mailgun from "mailgun.js"; // mailgun.js v11.1.0
+
 const functions = require('@google-cloud/functions-framework');
 
 functions.http('helloHttp', (req, res) => {
-  res.set('Content-Type', 'text/plain');
-  res.send(`Hello ${req.query.name || req.body.name || 'World'}!`);
+  const mailgun = new Mailgun(FormData);
+
+  const mg = mailgun.client({
+    username: "api",
+    key: process.env.MAILGUN_API_KEY || "MAILGUN_API_KEY",
+    // When you have an EU-domain, you must specify the endpoint:
+    // url: "https://api.eu.mailgun.net"
+  });
+
+  try {
+    const data = await mg.messages.create("speedmatch.nyc", {
+      from: "Mailgun Sandbox <postmaster@speedmatch.nyc>",
+      to: ["Li Ma <lima@1thing.org>"],
+      subject: "Hello Li Ma from Mailgun.js",
+      template: "SpeedMatch NYC: Quiz result",
+      "h:X-Mailgun-Variables": JSON.stringify({
+        test: "test",
+        candidate_1: "Alice",
+        candidate_2: "Bob",
+        candidate_3: "Charlie",
+        candidate_4: "David",
+      }),
+    });
+    console.log(data); // logs response data
+  } catch (error) {
+    console.log(error); // logs any error
+  }
 });
