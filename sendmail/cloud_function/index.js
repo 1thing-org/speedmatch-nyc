@@ -13,22 +13,19 @@ functions.http('helloHttp', (req, res) => {
     // url: "https://api.eu.mailgun.net"
   });
 
-  try {
-    const data = await mg.messages.create("speedmatch.nyc", {
-      from: "Mailgun Sandbox <postmaster@speedmatch.nyc>",
-      to: ["Li Ma <lima@1thing.org>"],
-      subject: "Hello Li Ma from Mailgun.js",
-      template: "SpeedMatch NYC: Quiz result",
-      "h:X-Mailgun-Variables": JSON.stringify({
-        test: "test",
-        candidate_1: "Alice",
-        candidate_2: "Bob",
-        candidate_3: "Charlie",
-        candidate_4: "David",
-      }),
-    });
-    console.log(data); // logs response data
-  } catch (error) {
-    console.log(error); // logs any error
-  }
+  const data = mg.messages.create("speedmatch.nyc", {
+    from: "Mailgun Sandbox <postmaster@speedmatch.nyc>",
+    to: ["Li Ma <lima@1thing.org>"],
+    subject: "Hello Li Ma from Mailgun.js",
+    template: "SpeedMatch NYC: Quiz result",
+    "h:X-Mailgun-Variables": JSON.stringify({
+      test: "test",
+      candidate_1: "Alice",
+      candidate_2: "Bob",
+      candidate_3: "Charlie",
+      candidate_4: "David",
+    }),
+  }).then(msg => console.log(msg)) // logs response data;
+    .catch(err => console.log(err)); // logs any error
+
 });
