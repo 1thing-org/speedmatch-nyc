@@ -1,9 +1,7 @@
 import FormData from "form-data"; // form-data v4.0.1
 import Mailgun from "mailgun.js"; // mailgun.js v11.1.0
 
-const functions = require('@google-cloud/functions-framework');
-
-functions.http('helloHttp', (req, res) => {
+export const send_quiz_result = (req, res) => {
   const mailgun = new Mailgun(FormData);
 
   const mg = mailgun.client({
@@ -28,4 +26,4 @@ functions.http('helloHttp', (req, res) => {
   }).then(msg => console.log(msg)) // logs response data;
     .catch(err => console.log(err)); // logs any error
 
-});
+}; 
