@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.0.0",
+    "form-data": "v4.0.1",
+    "mailgun.js" : "^11.1.0"
+  }
+}
