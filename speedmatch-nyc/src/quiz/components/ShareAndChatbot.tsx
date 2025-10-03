@@ -48,6 +48,11 @@ function ShareAndChatbot( {shareData} : {shareData?: any}) {
         if (showValidation) setShowValidation(false); // Hide validation when user starts typing
     };
 
+    const handleChatbotClick = () => {
+		const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
+		if (dfMessengerBubble) dfMessengerBubble.openChat();
+	};
+
     return (
         <div className={styles.container}>
             <div className={styles.shareWrapper}>
@@ -91,12 +96,11 @@ function ShareAndChatbot( {shareData} : {shareData?: any}) {
 
             <div className={styles.chatbotWrapper}>
                 <h3 className={styles.chatbottTitle}>Want to know more about the candidates? Ask our Chatbot.</h3>
-                <button
+                <button 
+                onClick={handleChatbotClick}
                 className={styles.chatbotButton}>
-                    <>
                     Ask AI Chatbot
                     <img src={starLogo} alt="chatbotLogo" />
-                    </>
                     </button>
             </div>
         </div>

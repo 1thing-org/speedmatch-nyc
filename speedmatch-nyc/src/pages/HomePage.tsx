@@ -15,11 +15,13 @@ function HomePage() {
 	useScrollToTop(); 
 	const [isDesktop, setIsDesktop] = useState(false);
 	const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false);
-
+	const [dfMessengerBubble, setDfMessengerBubble] = useState<Element | null>(null);
 	useEffect(() => {
 
 		const quizCompleted = localStorage.getItem('quiz-completed') === 'true';
 		setHasCompletedQuiz(quizCompleted);
+
+		setDfMessengerBubble(document.querySelector('df-messenger-chat-bubble'));
 	}, []);
 
 
@@ -29,6 +31,12 @@ function HomePage() {
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
+
+	useEffect(() => {
+		if (dfMessengerBubble) {
+			dfMessengerBubble.setAttribute('style', hasCompletedQuiz ? 'display: block;' : 'display: none;');
+		}
+	}, [dfMessengerBubble, hasCompletedQuiz]);
 
 	const websiteSchema = {
 		"@context": "https://schema.org",
@@ -52,6 +60,10 @@ function HomePage() {
 			"addressRegion": "NY",
 			"addressCountry": "US"
 		}
+	};
+
+	const handleChatbotClick = () => {
+		if (dfMessengerBubble) dfMessengerBubble.openChat();
 	};
 
 	return (
@@ -143,18 +155,20 @@ function HomePage() {
 							</div>
 						</section>
 
-						{/* nly show chatbot when complete quiz*/}
-						{hasCompletedQuiz && (
+						{/*Only show chatbot when complete quiz*/}
+						{hasCompletedQuiz ? (
 							<section aria-label="Candidate information chatbot">
 								<div className={styles.chatbotWrapper}>
 									<h3 className={styles.chatbottTitle}>Have questions about the candidates? Ask our Chatbot.</h3>
-									<button className={styles.chatbotButton}>
+									<button className={styles.chatbotButton}
+									onClick={handleChatbotClick}
+									>
 										Ask AI Chatbot
 										<img src={starLogo} alt="chatbotLogo" />
 									</button>
 								</div>
 							</section>
-						)}
+						) : null}
 					</div>
 				</main>
 				<DonationSec />
