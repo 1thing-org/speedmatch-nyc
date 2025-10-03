@@ -29,27 +29,24 @@ async function shareViaWebAPI(
   e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   url: string,
   description?: string
-) {
+): Promise<boolean> {
+  const canWebShare =
+    isMobileDevice() && typeof navigator !== 'undefined' && 'share' in navigator;
 
-  if (isMobileDevice() && typeof navigator !== 'undefined' && 'share' in navigator) {
+  if (canWebShare) {
+
     e.preventDefault();
     try {
-
       await (navigator as any).share({
         title: 'Speed Match NYC',
         text: description || '',
         url,
       });
-      return;
     } catch (err) {
-
     }
+    return true;
   }
-
-  const href = encodeURIComponent(url);
-  const quote = encodeURIComponent(description || '');
-
-  window.open(`https://www.facebook.com/sharer/sharer.php?u=${href}&quote=${quote}`, '_blank', 'noopener,noreferrer');
+  return false;
 }
 
 
