@@ -24,9 +24,6 @@ function QuizStart() {
               This quiz consists of <strong>8</strong> questions and takes approximately <strong>5–8</strong> minutes to complete.
             </li>
             <li>
-              Each answer option is drawn directly from a candidate’s official campaign proposals. Please select the option you most agree with.
-            </li>
-            <li>
               The quiz uses only <strong>candidates’ official campaign websites</strong> its source of information.
             </li>
             <li>
@@ -40,6 +37,7 @@ function QuizStart() {
             </li>
           </ul>
           <div className={styles.startQuiz}>
+            <p>Your progress will be lost if you quit the quiz</p>
           <Link to="/quiz/questions" className={styles.startButton}>Start The Quiz</Link>
         </div>
         </section>

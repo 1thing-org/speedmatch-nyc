@@ -35,7 +35,7 @@ function Aboutpage() {
 				keywords="about speed match, NYC election project, political neutrality, voter education"
 				canonical="https://speedmatch.nyc/about"
 				ogImages={{
-					twitter: "/images/OG/OG_Twitter.jpg",
+					twitter: "/images/OG/OG_Twitter_v2.jpg",
 					linkedin: "/images/OG/OG_Linkedin.jpg",
 					facebook: "/images/OG/OG_Facebook.jpg"
 				}}

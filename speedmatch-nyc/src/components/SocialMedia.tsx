@@ -18,6 +18,38 @@ interface SocialMediaProps {
   };
 }
 
+function isMobileDevice() {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent || '';
+  return /Android|iPhone|iPad|iPod/i.test(ua);
+}
+
+
+async function shareViaWebAPI(
+  e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  url: string,
+  description?: string
+): Promise<boolean> {
+  const canWebShare =
+    isMobileDevice() && typeof navigator !== 'undefined' && 'share' in navigator;
+
+  if (canWebShare) {
+
+    e.preventDefault();
+    try {
+      await (navigator as any).share({
+        title: 'Speed Match NYC',
+        text: description || '',
+        url,
+      });
+    } catch (err) {
+    }
+    return true;
+  }
+  return false;
+}
+
+
 const baseLinks = [
   {
     platform: 'Twitter',
@@ -56,15 +88,14 @@ const SocialMedia = ({
   const getLinks = () => {
     // For results variant with shareData, create share links
     if (variant === "results" && shareData) {
-      const { title, description, url } = shareData;
+      const { description, url } = shareData;
       const encodedUrl = encodeURIComponent(url);
       const encodedDescription = encodeURIComponent(description);
-      const encodedText = encodeURIComponent(`${title} ${url}`);
 
       return [
         {
           platform: 'Twitter',
-          url: `https://twitter.com/intent/tweet?text=${encodedText}`,
+          url: `https://twitter.com/intent/tweet?text=${encodedDescription}&url=${encodedUrl}`,
           icon: <FaSquareXTwitter />,
           ariaLabel: 'Share your Speed Match NYC results on Twitter'
         },
@@ -135,6 +166,13 @@ const SocialMedia = ({
             aria-label={ariaLabel}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => {
+              if (variant === 'results' && shareData) {
+                if (platform === 'Facebook' || platform === 'Instagram') {
+                  void shareViaWebAPI(e, shareData.url, shareData.description);
+                }
+              }
+            }}
           >
             {icon}
           </a>
