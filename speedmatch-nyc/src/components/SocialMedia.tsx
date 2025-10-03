@@ -18,6 +18,41 @@ interface SocialMediaProps {
   };
 }
 
+function isMobileDevice() {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent || '';
+  return /Android|iPhone|iPad|iPod/i.test(ua);
+}
+
+
+async function shareViaWebAPI(
+  e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  url: string,
+  description?: string
+) {
+
+  if (isMobileDevice() && typeof navigator !== 'undefined' && 'share' in navigator) {
+    e.preventDefault();
+    try {
+
+      await (navigator as any).share({
+        title: 'Speed Match NYC',
+        text: description || '',
+        url,
+      });
+      return;
+    } catch (err) {
+
+    }
+  }
+
+  const href = encodeURIComponent(url);
+  const quote = encodeURIComponent(description || '');
+
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${href}&quote=${quote}`, '_blank', 'noopener,noreferrer');
+}
+
+
 const baseLinks = [
   {
     platform: 'Twitter',
@@ -134,6 +169,13 @@ const SocialMedia = ({
             aria-label={ariaLabel}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => {
+              if (variant === 'results' && shareData) {
+                if (platform === 'Facebook' || platform === 'Instagram') {
+                  void shareViaWebAPI(e, shareData.url, shareData.description);
+                }
+              }
+            }}
           >
             {icon}
           </a>
