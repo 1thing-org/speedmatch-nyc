@@ -6,7 +6,10 @@ function ShareAndChatbot( {shareData} : {shareData?: any}) {
 
     const handleChatbotClick = () => {
 		const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
-		if (dfMessengerBubble) (dfMessengerBubble as any).openChat();
+		if (dfMessengerBubble) {
+			dfMessengerBubble.setAttribute('style', 'display: block;');
+			(dfMessengerBubble as any).openChat();
+		}
 	};
 
     return (

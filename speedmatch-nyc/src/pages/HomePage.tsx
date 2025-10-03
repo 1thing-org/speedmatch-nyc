@@ -63,7 +63,10 @@ function HomePage() {
 	};
 
 	const handleChatbotClick = () => {
-		if (dfMessengerBubble) (dfMessengerBubble as any).openChat();
+		if (dfMessengerBubble) {
+			dfMessengerBubble.setAttribute('style', 'display: block;');
+			(dfMessengerBubble as any).openChat();
+		}
 	};
 
 	return (
