@@ -63,7 +63,7 @@ const SocialMedia = ({
       return [
         {
           platform: 'Twitter',
-          url: `https://twitter.com/intent/tweet?text=${encodedDescription}`,
+          url: `https://twitter.com/intent/tweet?text=${encodedDescription}&url=${encodedUrl}`,
           icon: <FaSquareXTwitter />,
           ariaLabel: 'Share your Speed Match NYC results on Twitter'
         },
