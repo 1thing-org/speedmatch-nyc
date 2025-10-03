@@ -56,15 +56,14 @@ const SocialMedia = ({
   const getLinks = () => {
     // For results variant with shareData, create share links
     if (variant === "results" && shareData) {
-      const { title, description, url } = shareData;
+      const { description, url } = shareData;
       const encodedUrl = encodeURIComponent(url);
       const encodedDescription = encodeURIComponent(description);
-      const encodedText = encodeURIComponent(`${title} ${url}`);
 
       return [
         {
           platform: 'Twitter',
-          url: `https://twitter.com/intent/tweet?text=${encodedText}`,
+          url: `https://twitter.com/intent/tweet?text=${encodedDescription}`,
           icon: <FaSquareXTwitter />,
           ariaLabel: 'Share your Speed Match NYC results on Twitter'
         },
