@@ -56,7 +56,7 @@ function ShareAndChatbot( {shareData} : {shareData?: any}) {
     return (
         <div className={styles.container}>
             <div className={styles.shareWrapper}>
-                <div className={styles.sendEmail}>
+                {/* <div className={styles.sendEmail}>
                     <h3 className={styles.title}>Email my result to:</h3>
                     <div className={styles.form}>
                         <div className={styles.inputWrapper}>
@@ -87,7 +87,7 @@ function ShareAndChatbot( {shareData} : {shareData?: any}) {
                             ) : 'Send My Result'}
                         </button>
                     </div>
-                </div>
+                </div> */}
                 <div className={styles.shareSocial}>
                     <h3 className={styles.title}>Share this website on Social Media:</h3>
                     <SocialMedia variant="results" shareData={shareData}/>
