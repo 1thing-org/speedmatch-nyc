@@ -49,7 +49,7 @@ function CandidatesPage() {
 				keywords="NYC mayoral candidates 2025, Eric Adams, Andrew Cuomo, Jean Anglade, Irene Estrada, NYC election candidates, mayoral race"
 				canonical="https://speedmatch.nyc/explore"
 				ogImages={{
-					twitter: "/images/OG/OG_Twitter.jpg",
+					twitter: "/images/OG/OG_Twitter_v2.jpg",
 					linkedin: "/images/OG/OG_Linkedin.jpg",
 					facebook: "/images/OG/OG_Facebook.jpg"
 				}}

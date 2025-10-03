@@ -77,7 +77,7 @@ function HomePage() {
 				keywords="NYC mayor 2025, mayoral election, candidate matching, NYC politics, political quiz, voter guide, New York City election"
 				canonical="https://speedmatch.nyc/"
 				ogImages={{
-					twitter: "/images/OG/OG_Twitter.jpg",
+					twitter: "/images/OG/OG_Twitter_v2.jpg",
 					linkedin: "/images/OG/OG_Linkedin.jpg",
 					facebook: "/images/OG/OG_Facebook.jpg"
 				}}

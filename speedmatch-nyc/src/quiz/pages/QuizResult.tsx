@@ -117,7 +117,7 @@ function QuizResult() {
 				ogImages={{
 					// Need to change to official domain if test is ok
 					facebook: "https://test.speedmatch.nyc/images/OG/OG_Facebook.jpg",
-					twitter: "https://test.speedmatch.nyc/images/OG/OG_Twitter.jpg",
+					twitter: "https://test.speedmatch.nyc/images/OG/OG_Twitter_v2.jpg",
 					linkedin: "https://test.speedmatch.nyc/images/OG/OG_Linkedin.jpg"
 				}}
 			/>
