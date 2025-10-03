@@ -1,56 +1,12 @@
-import { useState } from 'react';
 import styles from "../styles/ShareAndChatbot.module.css"
-import { FaRegCircleCheck } from 'react-icons/fa6';
 import SocialMedia from '../../components/SocialMedia';
 import starLogo from "../../assets/Star.svg";
 
 function ShareAndChatbot( {shareData} : {shareData?: any}) {
-    const [email, setEmail] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [showValidation, setShowValidation] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const handleSubmit = async (): Promise<void> => {
-        if (!email) {
-            setShowValidation(true);
-            setTimeout(() => setShowValidation(false), 3000); // Hide after 3 seconds
-            return;
-        }
-
-        if (isSubmitting) return;
-
-        setIsSubmitting(true);
-
-        // Your email submission logic here
-        try {
-        
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            // Show success state
-            setIsSuccess(true);
-            setEmail(''); // Clear the email
-
-            // Reset success state after 3 seconds
-            setTimeout(() => {
-                setIsSuccess(false);
-            }, 3000);
-
-        } catch (error) {
-            console.error('Submission error:', error);
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setEmail(e.target.value);
-        if (showValidation) setShowValidation(false); // Hide validation when user starts typing
-    };
 
     const handleChatbotClick = () => {
 		const dfMessengerBubble = document.querySelector('df-messenger-chat-bubble');
-		if (dfMessengerBubble) dfMessengerBubble.openChat();
+		if (dfMessengerBubble) (dfMessengerBubble as any).openChat();
 	};
 
     return (
