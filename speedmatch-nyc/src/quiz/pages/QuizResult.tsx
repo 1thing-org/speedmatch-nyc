@@ -103,8 +103,8 @@ function QuizResult() {
 			description: `I took the Speed Match NYC quiz and my top match is ${candidate?.name}! Take the quiz to find your match.`,
 			// For testing, also need to build and deploy to this domain to see open graph shared
 			// Need to change to official domain if test is ok
-			url: 'https://test.speedmatch.nyc',
-			image: 'https://test.speedmatch.nyc/images/OG/OG_Facebook.jpg'
+			url: 'https://www.speedmatch.nyc',
+			image: 'https://www.speedmatch.nyc/images/OG/OG_Facebook.jpg'
 		};
 	}, [list]);
 
@@ -113,12 +113,12 @@ function QuizResult() {
 			<SEOHead
 				title={shareData?.title || "Your Matching Results"}
 				description={shareData?.description || "See your Speed Match NYC quiz results and find your ideal 2025 NYC Mayoral candidate."}
-				canonical="https://test.speedmatch.nyc/quiz/result"
+				canonical="https://www.speedmatch.nyc/quiz/result"
 				ogImages={{
 					// Need to change to official domain if test is ok
-					facebook: "https://test.speedmatch.nyc/images/OG/OG_Facebook.jpg",
-					twitter: "https://test.speedmatch.nyc/images/OG/OG_Twitter_v2.jpg",
-					linkedin: "https://test.speedmatch.nyc/images/OG/OG_Linkedin.jpg"
+					facebook: "https://www.speedmatch.nyc/images/OG/OG_Facebook.jpg",
+					twitter: "https://www.speedmatch.nyc/images/OG/OG_Twitter_v2.jpg",
+					linkedin: "https://www.speedmatch.nyc/images/OG/OG_Linkedin.jpg"
 				}}
 			/>
 
