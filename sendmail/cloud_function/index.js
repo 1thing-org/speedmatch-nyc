@@ -1,6 +1,22 @@
 import FormData from "form-data"; // form-data v4.0.1
 import Mailgun from "mailgun.js"; // mailgun.js v11.1.0
 
+/*
+Body: {
+  "email":"email address to send to",
+  "candidates": Candidate[],
+}
+
+Candidate: {
+  name: string,
+  photoUrl: string,
+  website: string, //candidate's website
+  matchLabel: string, //top match, 2nd match, etc
+  party: string,
+  alignedIssues: string[], // "* policies" or "policies"
+}
+*/
+
 export const send_quiz_result = (req, res) => {
   const mailgun = new Mailgun(FormData);
 
@@ -12,16 +28,12 @@ export const send_quiz_result = (req, res) => {
   });
 
   const data = mg.messages.create("speedmatch.nyc", {
-    from: "Mailgun Sandbox <postmaster@speedmatch.nyc>",
-    to: ["Li Ma <lima@1thing.org>"],
-    subject: "Hello Li Ma from Mailgun.js",
+    from: "Speed Match NYC <info@speedmatch.nyc>",
+    to: ["{res.body.email}"],
+    subject: "Your SpeedMatch NYC Candidate Matching Results",
     template: "SpeedMatch NYC: Quiz result",
     "h:X-Mailgun-Variables": JSON.stringify({
-      test: "test",
-      candidate_1: "Alice",
-      candidate_2: "Bob",
-      candidate_3: "Charlie",
-      candidate_4: "David",
+      candidates: "{req.body.candidates}"
     }),
   }).then(msg => console.log(msg)) // logs response data;
     .catch(err => console.log(err)); // logs any error
