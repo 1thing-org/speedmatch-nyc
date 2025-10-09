@@ -3,7 +3,6 @@ import Footer from "../../components/Footer";
 import styles from "../styles/QuizResults.module.css";
 import Navbar from "../../components/Navbar";
 import ShareAndChatbot from "../components/ShareAndChatbot";
-import SEOHead from '../../components/SEOHead';
 import { useLocation } from "react-router";
 import { useMemo, useEffect } from "react";
 import { useQuizState } from "../state/QuizContext";
@@ -13,6 +12,7 @@ import { candidateById } from "../../data/candidates";
 import { PRIORITY_LABEL_BY_ID, type PriorityId } from "../content/priorities";
 import Calculation from "../components/Calculation";
 import { useScrollToTop } from '../../useScrollToTop';
+import type { MatchCandidate } from "../../types/MatchCandidate";
 
 function QuizResult() {
 	useScrollToTop('smooth');
@@ -91,37 +91,35 @@ function QuizResult() {
 
 	const rankedSet = new Set(Array.isArray(rankedFive) ? rankedFive : []);
 
+	//Top candidates that matches user's answers, which will be sent in the email
+	const topCandidates = useMemo(() => {
+		if (list.length === 0) return [];
+		const result: MatchCandidate[] = [];
+		list.map((r, idx) => {
+			const c = candidateById[r.id];
+			const label = getRankLabel(idx);
+			const matches = getMatchesForCandidate(r.id);
+			result.push({
+				name: c?.name || '',
+				photoUrl: c?.image ? "https://www.speedmatch.nyc" + c?.image : '',
+				website: c?.website || '',
+				matchLabel: label,
+				party: c?.party || '',
+				alignedIssues: matches
+					.sort((a, b) => {
+						const aSelected = a.pid && rankedSet.has(a.pid) ? 1 : 0;
+						const bSelected = b.pid && rankedSet.has(b.pid) ? 1 : 0;
+						return bSelected - aSelected;
+					})
+					.map((m) => ((m.pid && rankedSet.has(m.pid) ? "*" : "") + m.label))
 
-	const shareData = useMemo(() => {
-		if (list.length === 0) return null;
-
-		const topMatch = list[0];
-		const candidate = candidateById[topMatch.id];
-
-		return {
-			title: "My Speed Match NYC Result",
-			description: `I took the Speed Match NYC quiz and my top match is ${candidate?.name}! Take the quiz to find your match.`,
-			// For testing, also need to build and deploy to this domain to see open graph shared
-			// Need to change to official domain if test is ok
-			url: 'https://www.speedmatch.nyc',
-			image: 'https://www.speedmatch.nyc/images/OG/OG_Facebook.jpg'
-		};
-	}, [list]);
+			})
+		});
+		return result;
+	}, [list, rankedSet]);
 
 	return (
 		<>
-			<SEOHead
-				title={shareData?.title || "Your Matching Results"}
-				description={shareData?.description || "See your Speed Match NYC quiz results and find your ideal 2025 NYC Mayoral candidate."}
-				canonical="https://www.speedmatch.nyc/quiz/result"
-				ogImages={{
-					// Need to change to official domain if test is ok
-					facebook: "https://www.speedmatch.nyc/images/OG/OG_Facebook.jpg",
-					twitter: "https://www.speedmatch.nyc/images/OG/OG_Twitter_v2.jpg",
-					linkedin: "https://www.speedmatch.nyc/images/OG/OG_Linkedin.jpg"
-				}}
-			/>
-
 			<div className={styles.resultPage}>
 				<header>
 					<Navbar forceHamburger />
@@ -157,7 +155,7 @@ function QuizResult() {
 											<div className={styles.issuesAligned}>
 												<div className={styles.issuesHeading}>Aligned With The Following Issues:</div>
 												<div className={styles.issueChips}>
-														{matches
+													{matches
 														.sort((a, b) => {
 															const aSelected = a.pid && rankedSet.has(a.pid) ? 1 : 0;
 															const bSelected = b.pid && rankedSet.has(b.pid) ? 1 : 0;
@@ -179,7 +177,7 @@ function QuizResult() {
 					{/* Mobile explainer under list */}
 					<Calculation className={styles.calcBottom} />
 					<div className={styles.shareWrapper}>
-						<ShareAndChatbot shareData={shareData} />
+						<ShareAndChatbot candidates={topCandidates} />
 					</div>
 					<footer>
 						<Footer />
