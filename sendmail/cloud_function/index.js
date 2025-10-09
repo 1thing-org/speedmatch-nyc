@@ -27,7 +27,6 @@ export const send_quiz_result = (req, res) => {
     // url: "https://api.eu.mailgun.net"
   });
 
-  console.log("Request", req);
   console.log("Sending email to", req.body.email);
   console.log("With candidates", req.body.candidates);
   const data = mg.messages.create("speedmatch.nyc", {
@@ -38,7 +37,13 @@ export const send_quiz_result = (req, res) => {
     "h:X-Mailgun-Variables": JSON.stringify({
       candidates: req.body.candidates
     }),
-  }).then(msg => console.log(msg)) // logs response data;
-    .catch(err => console.log(err)); // logs any error
+  }).then(msg => {
+      console.log(msg); // logs response data
+      res.status(200).send('Email sent successfully.');
+    }) 
+    .catch(err => {
+      console.error(err); // logs any error
+      res.status(500).send('Failed to send email.');
+    });
 
-}; 
+};
