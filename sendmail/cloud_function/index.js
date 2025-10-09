@@ -18,6 +18,22 @@ Candidate: {
 */
 
 export const send_quiz_result = (req, res) => {
+  // Set CORS headers for all responses
+  // Use '*' to allow any domain, or replace with a specific domain:
+  // e.g., 'https://my-frontend-app.com'
+  res.set('Access-Control-Allow-Origin', '*'); 
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    // Customize these headers based on what your client needs
+    res.set('Access-Control-Allow-Methods', 'POST'); 
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.set('Access-Control-Max-Age', '3600');
+    // Send 204 status to indicate the preflight request succeeded
+    res.status(204).send(''); 
+    return;
+  }
+  
   const mailgun = new Mailgun(FormData);
 
   const mg = mailgun.client({
