@@ -68,7 +68,7 @@ Use https://premailer.dialect.ca/ to inline CSS
 
 Generated template:
 ```
-<body style="font-family: Arial, sans-serif; font-size:13; line-height: 1.6; color: #333;">
+<div style="font-family: Arial, sans-serif; font-size:12; line-height: 1.6; color: #333; margin:20px;">
 {{#each candidates}}
   <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid;">
     <p style="font-size: 1.1em; font-weight: bold;">{{matchLabel}}</p>
@@ -77,12 +77,12 @@ Generated template:
     <p>{{party}}</p>
     <p><a href="{{website}}">{{website}}</a></p>
     <p><strong>Aligned Issues:</strong></p>
-    <ul style="padding-left: 20px;">
       {{#each alignedIssues}}
-      <li>{{this}}</li>
+      <p style="padding-left: 20px;">
+      {{this}}
+      </p>
       {{/each}}
-    </ul>
   </div>
 {{/each}}
-</body>
+</div>
 ```
