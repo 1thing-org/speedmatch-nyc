@@ -27,13 +27,16 @@ export const send_quiz_result = (req, res) => {
     // url: "https://api.eu.mailgun.net"
   });
 
+  console.log("Request", req);
+  console.log("Sending email to", req.body.email);
+  console.log("With candidates", req.body.candidates);
   const data = mg.messages.create("speedmatch.nyc", {
     from: "Speed Match NYC <info@speedmatch.nyc>",
-    to: ["{res.body.email}"],
+    to: [req.body.email],
     subject: "Your SpeedMatch NYC Candidate Matching Results",
     template: "SpeedMatch NYC: Quiz result",
     "h:X-Mailgun-Variables": JSON.stringify({
-      candidates: "{req.body.candidates}"
+      candidates: req.body.candidates
     }),
   }).then(msg => console.log(msg)) // logs response data;
     .catch(err => console.log(err)); // logs any error
