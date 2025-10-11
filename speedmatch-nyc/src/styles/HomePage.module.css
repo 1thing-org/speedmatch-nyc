@@ -49,7 +49,7 @@
   text-align: left;
   color: white;
   font-weight: 400;
-  letter-spacing: -4%;
+  letter-spacing: -0.04em;
 }
 
 .highlight {
@@ -67,7 +67,6 @@
   font-size: 24px;
   font-weight: 500;
   border: none;
-  border-radius: 4px;
   padding: 0.8rem 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -114,11 +113,11 @@
   text-align: left;
   justify-self: center;
   margin-bottom: 1rem;
-  letter-spacing: -4%;
+  letter-spacing: -0.04em;
 }
 
 .chatbotButton {
-  height: 61px;
+  height: 58px;
   background-color: #003CFF; /* Bright green */
   color: white;
   font-size: 1.25rem;
@@ -165,7 +164,7 @@
 
   .headline h1 {
     font-size: 36px;
-    letter-spacing: -6%;
+    letter-spacing: -0.06em;;
   }
 
   .takeQuiz {
@@ -213,7 +212,9 @@
   .headlineAndBot .chatbotWrapper {
     height: 300px;
     margin-right: -1rem;
-    gap: 2rem;
+    gap: 3rem;
+    
+
   }
 
   .headlineAndBot .chatbotWrapper .chatbottTitle {
@@ -247,7 +248,7 @@
 
   .headlineText {
     text-align: left;
-    letter-spacing: -6%;
+    letter-spacing: -0.06em;;
     padding-left: 2rem;
   }
 
@@ -273,12 +274,12 @@
   .headlineAndBot {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
     align-items: start;
     max-width: 1280px;
     margin: -1rem auto;
     margin-bottom: -2rem;
     padding: 1rem 2rem;
+    max-height: 330px;
     
   }
   
@@ -288,14 +289,16 @@
     gap: 1.4rem;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding-top: 2rem;
+    padding-right: 1rem;
     margin-top: 0;
+    margin-left: -1rem;
   }
 
   .headlineWithBot .headlineText {
     text-align: left;
     padding-left: 0;
-    letter-spacing: -6%;
+    letter-spacing: -0.06em;;
     width: 100%;
   }
 
@@ -309,13 +312,16 @@
     /* justify-self: center; */
     padding-right: 0;
     max-width: none;
+    margin-top: -0.5rem;
   }
 
 
   .headlineAndBot .chatbotWrapper {
-    height: 290px;
-    margin-right: -0.5rem;
-    gap: 3rem;
+    max-height: 320px;
+    min-height: 299px;
+    margin-right: -2rem;
+    gap: 5rem;
+    
   }
 
   .headlineAndBot .chatbotWrapper .chatbottTitle {
@@ -352,6 +358,21 @@
   .headline h1 {
     width: 100%;
     max-width: none;
+  }
+
+  .headlineAndBot {
+    max-height: 285px;
+    height: 285px;
+    overflow: hidden;
+    margin-bottom: -1rem;
+  }
+
+  .headlineAndBot .chatbotWrapper {
+  max-height: none;
+
+  margin-right: -2rem;
+  gap: 2.9rem;
+    
   }
 
 

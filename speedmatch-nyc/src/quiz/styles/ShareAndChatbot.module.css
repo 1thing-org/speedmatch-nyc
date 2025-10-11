@@ -97,7 +97,7 @@
 }
 
 .chatbotButton {
-  height: 61px;
+  height: 57px;
   background-color: #003CFF; /* Bright green */
   color: white;
   font-size: 1.25rem;
@@ -137,13 +137,14 @@
     gap: 1rem;
     align-items: start;
     padding: 0;
-    border-bottom: 1px solid white
+    border-bottom: 1px solid white;
+    border-top:1px solid white;
   }
   
   .chatbotWrapper {
     order: -1; 
     height: 300px;
-    gap:4rem;
+    gap:2rem;
     padding: 2.5rem ;
   }
 
@@ -154,5 +155,12 @@
   .shareWrapper {
     order: 1;
     padding: 1rem 1.2rem 1rem 1rem;
+  }
+}
+
+@media (min-width: 975px) {
+    .chatbotWrapper {
+    gap:4rem;
+
   }
 }

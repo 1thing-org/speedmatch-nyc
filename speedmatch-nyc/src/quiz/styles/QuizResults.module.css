@@ -8,7 +8,7 @@
 }
 
 .resultContent {
-	padding: 1.5rem 1.2rem 2.5rem 1.2rem;
+	padding: 0.5rem 1.2rem 2.5rem 1.2rem;
 }
 
 
@@ -52,7 +52,7 @@
 
 .resultCard {
 	border-bottom: 1px solid #fff;
-	padding-bottom: 32px;
+	padding-bottom: 27px;
 }
 
 /* Remove bottom border for the last displayed candidate only */
@@ -74,7 +74,7 @@
 .resultScore {
 	color: #3cff00;
 	font-size: 32px;
-	letter-spacing: -8%;
+	letter-spacing: -0.8px;
 	line-height: 100%;
 }
 
@@ -96,7 +96,7 @@
 	font-weight: 400;
 	color: #fff;
 	line-height: 87%;
-	letter-spacing: -4%;
+	letter-spacing: -0.4px;
 }
 
 /* default: first and last inline */
@@ -213,7 +213,7 @@
 	display: grid;
 	grid-template-columns: repeat(2, max-content);
 	justify-content: start;
-	row-gap: 12px;
+	row-gap: 8px;
 	column-gap: 14px;
 	width: 100%;
 	justify-items: start;
@@ -230,7 +230,7 @@
 	background: #fff;
 	color: #003CFF;
 	border: 2px solid #fff;
-	font-size: 12px;
+	font-size: 14px;
 	white-space: nowrap;
 	letter-spacing: -4%;
 	line-height: 150%;
