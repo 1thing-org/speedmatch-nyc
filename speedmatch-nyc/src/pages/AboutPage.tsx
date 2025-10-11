@@ -87,22 +87,13 @@ function Aboutpage() {
 									<div className={styles.divider}></div>
 								</section>
 
-								{/* Thank You For Visiting */}
+								{/* Information come from */}
 								<section className={`${styles.section} ${styles.thanksSection}`}>
-									<h2 className={styles.sectionTitle}>Thank You For Visiting Our Website</h2>
+									<h2 className={styles.sectionTitle}>Where The Information Comes From</h2>
 									<p className={styles.sectionText}>
-										Our team is currently updating the website for the upcoming November General Election. In the
-										meantime, you can view information from the recent Primary Election on our website.
+										All candidate information is taken directly from their official campaign websites. This is the only source we use.
 									</p>
-									<a
-										href="https://speedmatchnyc.github.io/index/index.html"
-										className={styles.githubButton}
-										target="_blank"
-										rel="noopener noreferrer"
-										aria-label="View Speed Matching NYC's previous project for the primary election"
-									>
-										View Our Previous Project
-									</a>
+									
 									<div className={styles.divider}></div>
 								</section>
 
