@@ -18,8 +18,9 @@ function HomePage() {
 	const [dfMessengerBubble, setDfMessengerBubble] = useState<Element | null>(null);
 	useEffect(() => {
 
-		const quizCompleted = localStorage.getItem('quiz-completed') === 'true';
-		setHasCompletedQuiz(quizCompleted);
+		// const quizCompleted = localStorage.getItem('quiz-completed') === 'true';
+		// Always set to true to show chatbot.
+		setHasCompletedQuiz(true);//quizCompleted);
 
 		setDfMessengerBubble(document.querySelector('df-messenger-chat-bubble'));
 	}, []);
