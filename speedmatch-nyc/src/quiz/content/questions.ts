@@ -5,10 +5,10 @@ export const fixedQuestions = [
     priorityId: 'affordability',
     prompt: 'How can NYC protect affordability in both housing and everyday living costs?',
     options: [
-      { id: '1', label: 'Build more housing across all income levels. Leverage public land for housing development. Improve the quality of life in NYCHA Housing. Protect renters and keep families in their homes.', candidateId: 1 },
-      { id: '2', label: 'Boost NYC’s housing supply by adding 132,000 units in two years through unlocking vacant rent-stabilized apartments, converting unused offices into affordable housing, and expediting new construction to raise vacancy rates and reduce rents.', candidateId: 3 },
-      { id: '3', label: 'Freeze rents, expand affordable union-built housing, crack down on negligent landlords, protect homeowners from deed theft and unfair taxes, create city-owned nonprofit grocery stores to lower food costs, and fund these measures by taxing corporations and the wealthy while reforming procurement and strengthening tax enforcement.', candidateId: 4 },
-      { id: '4', label: 'Prioritize affordable housing and fairness by restoring vacant units, expanding options for seniors and families, reform property taxes, convert commercial spaces, curb luxury displacement, and give communities more control over zoning.', candidateId: 5 },
+      { id: '1', label: 'Build more housing for all income levels', body: 'Speed up construction, use public land, and boost overall supply to lower rents.', candidateId: 1 },
+      { id: '2', label: 'Unlock and repurpose existing spaces.', body: 'Turn vacant apartments and offices into affordable homes and streamline building approvals.', candidateId: 3 },
+      { id: '3', label: 'Freeze rents and tax big corporations.', body: 'Protect tenants, fund affordable housing and grocery access by raising taxes on the wealthy.', candidateId: 4 },
+      { id: '4', label: 'Empower communities and reform zoning.', body: 'Restore vacant units, ensure fairness in property taxes, and give neighborhoods more say in development.', candidateId: 5 },
     ],
   },
   {
@@ -17,9 +17,9 @@ export const fixedQuestions = [
     priorityId: 'economic',
     prompt: 'Which strategy should New York prioritize to strengthen its economy?',
     options: [
-      { id: '1', label: 'Boost incomes and economic growth by cutting taxes for working families, creating jobs with training and protections, supporting at-risk young men, investing in infrastructure, and making NYC a leader in AI through its hospitals and tech sector.', candidateId: 1 },
-      { id: '2', label: 'Protect working-class New Yorkers by banning corporate abuses, raise the minimum wage to $30/hour with cost-of-living increases, strengthen protections for delivery workers, and help small businesses thrive through reduced fines, streamlined permits, expanded support, and a dedicated Mom-and-Pop Czar.', candidateId: 4 },
-      { id: '3', label: 'Cut corporate taxes, reduce fees and red tape, and redirect incentives to small businesses while revitalizing outer-borough districts with cultural and commercial investment to spread opportunity citywide.', candidateId: 5 },
+      { id: '1', label: 'Invest in innovation and jobs.',  body: 'Invest in AI, jobs, and workforce development.', candidateId: 1 },
+      { id: '2', label: 'Put workers first.', body: 'Raise wages, crack down on corporate abuse, protect workers.', candidateId: 4 },
+      { id: '3', label: 'Support small business and local growth.', body: 'Cut corporate taxes, reduce red tape, support small biz and neighborhoods.', candidateId: 5 },
     ],
   },
 
@@ -29,10 +29,10 @@ export const fixedQuestions = [
     priorityId: 'safety',
     prompt: 'Which approach do you believe would make New York City safer?',
     options: [
-      { id: '1', label: 'Increase the size of the NYPD, Offer bonuses and incentives to active and recently retired police officers, Deploy police officers based on data, Crack down on nuisance and quality of life crimes, Increase accountability for e-bike and moped violations.', candidateId: 1 },
-      { id: '2', label: 'Boost safety with 10,000 new officers, federal crime-fighting partnerships, AI-driven 911 tech, and a citywide platform to cut crime and response times.', candidateId: 3 },
-      { id: '3', label: 'Establish a Department of Community Safety to shift from over-reliance on police toward preventive measures, expand mental health and crisis response services, gun violence prevention, and hate violence prevention programs to ensure safer streets, subways, and communities.', candidateId: 4 },
-      { id: '4', label: 'Strengthen the NYPD with more officers, fair pay, and restored proactive units, fix broken laws and oversight, support prosecutors, and crack down on gangs, drugs, theft, and scams to restore safety citywide. Keep Rikers Island Jail open, restore order, protect officers, and improve jail safety.', candidateId: 5 },
+      { id: '1', label: 'Strengthen neighborhood policing.', body: 'Hire more officers, focus on quality-of-life issues, and improve enforcement on everyday safety concerns.', candidateId: 1 },
+      { id: '2', label: 'Use technology and coordination.', body: 'Expand the force, partner with federal agencies, and use AI-driven tools to reduce crime and response times.', candidateId: 3 },
+      { id: '3', label: 'Invest in prevention and community safety.', body: 'Create mental health and crisis response teams, violence prevention programs, and alternatives to over-policing.', candidateId: 4 },
+      { id: '4', label: 'Take a tough-on-crime approach.', body: 'Restore proactive policing units, support prosecutors, tackle gangs and theft, and keep Rikers open to ensure accountability.', candidateId: 5 },
     ],
   },
 
@@ -42,9 +42,24 @@ export const fixedQuestions = [
     priorityId: 'health',
     prompt: 'What do you think is the most effective way to improve health and well-being?',
     options: [
-      { id: '1', label: 'Expand access to physical, behavioral, and specialty care, strengthen safety-net hospitals, reduce disparities, restructure psychiatric capacity with enforced commitment laws, and improve public health and homelessness outcomes through community partnerships, school and housing-based services, and stronger pandemic preparedness.', candidateId: 1 },
-      { id: '2', label: 'Create compassionate, recovery-focused mental health care by building transitional units with housing pathways, expanding long-term care partnerships, and prioritizing community support over incarceration.', candidateId: 3 },
-      { id: '3', label: 'Create outreach workers to help New Yorkers navigate insurance and reproductive care, increase funding for public hospitals to prevent closures, strengthen preparedness for future health emergencies, and partner with unions to reject privatized Medicare schemes and lower costs across the system.', candidateId: 4 },
+      {
+      id: '1',
+      label: 'Expand access and strengthen care systems.',
+      body: 'Improve hospitals, mental health services, and public health readiness through stronger partnerships and reforms.',
+      candidateId: 1,
+    },
+    {
+      id: '2',
+      label: 'Prioritize mental health and recovery.',
+      body: 'Focus on treatment, housing, and community support instead of incarceration.',
+      candidateId: 3,
+    },
+    {
+      id: '3',
+      label: 'Protect public healthcare and equity.',
+      body: 'Fund public hospitals, improve reproductive care access, and lower costs by keeping healthcare public.',
+      candidateId: 4,
+    },
     ],
   },
 
@@ -54,10 +69,30 @@ export const fixedQuestions = [
     priorityId: 'transport',
     prompt: 'What’s the best way to improve public transportation?',
     options: [
-      { id: '1', label: 'Expand discounted access to buses and significantly increase Fair Fares programs for which they are eligible. Increase permanent presence of NYPD and MTA officers. Prevent unlawful entry through better infrastructure.', candidateId: 1 },
-      { id: '2', label: 'Ease traffic congestion by 25% and improve traffic flow through data-driven traffic management and smart infrastructure monitoring.', candidateId: 3 },
-      { id: '3', label: 'Make all city buses free and faster by expanding priority lanes, bus signals, and loading zones, building on his successful fare-free pilot to ensure reliable, safe, and accessible transit for all New Yorkers.', candidateId: 4 },
-      { id: '4', label: 'End the subway homeless and crime crisis by expanding mental health outreach, reinstating NYPD homeless units, strengthening transit policing with patrols and a crime task force, enforcing fare laws, improving station safety and surveillance, and auditing nonprofits to ensure effective care and accountability.', candidateId: 5 },
+      {
+      id: '1',
+      label: 'Make transit more affordable and secure.',
+      body: 'Expand discounted fares, add more officers, and improve infrastructure to prevent fare evasion.',
+      candidateId: 1,
+    },
+    {
+      id: '2',
+      label: 'Use smart technology to ease congestion.',
+      body: 'Cut traffic by managing flow with data and modern infrastructure tools.',
+      candidateId: 3,
+    },
+    {
+      id: '3',
+      label: 'Make buses free and faster.',
+      body: 'Expand bus lanes and priority signals to create reliable, fare-free transit for everyone.',
+      candidateId: 4,
+    },
+    {
+      id: '4',
+      label: 'Restore safety and order in the system.',
+      body: 'Expand mental health outreach, strengthen transit policing, and improve station security and oversight.',
+      candidateId: 5,
+    },
     ],
   },
 
@@ -67,10 +102,30 @@ export const fixedQuestions = [
     priorityId: 'education',
     prompt: 'Which investment would most improve opportunities for children and families?',
     options: [
-      { id: '1', label: 'Reduce class sizes, expand 3-K and after-school programs, strengthen career and technical education (CTE), address chronic absenteeism. Expand access to affordable healthcare. Assist New Yorkers who are denied coverage by their insurance plan. Guarantee universal 3-K and increase childcare options.', candidateId: 1 },
-      { id: '2', label: 'Reform education by boosting teacher pay, cutting bureaucracy, expanding school choice, ensuring educator quality, and integrating AI to modernize learning and job readiness.', candidateId: 3 },
-      { id: '3', label: 'Provide free childcare for all children under 5, baby baskets with essential supplies for every newborn, fully funded and equitable K-12 schools with safer streets and strong supports, and major investment in CUNY to make it tuition-free and accessible.', candidateId: 4 },
-      { id: '4', label: 'Reform NYC schools by cutting waste, raising standards, expanding choice, improving special education, and funding classrooms directly, while creating university-employer pipelines and offering tax credits to companies that hire and retain local graduates.', candidateId: 5 },
+      {
+      id: '1',
+      label: 'Expand early education and child care.',
+      body: 'Guarantee universal 3-K, smaller classes, and more affordable options for working families.',
+      candidateId: 1,
+    },
+    {
+      id: '2',
+      label: 'Modernize and innovate schools.',
+      body: 'Raise teacher pay, cut red tape, and use technology and AI to prepare students for future jobs.',
+      candidateId: 3,
+    },
+    {
+      id: '3',
+      label: 'Invest in universal access and equity.',
+      body: 'Make childcare and CUNY free, fully fund K-12 schools, and support families from birth onward.',
+      candidateId: 4,
+    },
+    {
+      id: '4',
+      label: 'Raise standards and improve efficiency.',
+      body: 'Expand school choice, reform special education, and link universities with local employers.',
+      candidateId: 5,
+    },
     ],
   },
 
@@ -80,10 +135,30 @@ export const fixedQuestions = [
     priorityId: 'environment',
     prompt: 'How should New York best prepare for the future?',
     options: [
-      { id: '1', label: 'End open air drug markets and use. Curb the overuse of scaffolding. Improve curbside composting. Reform the outdoor dining permit process.', candidateId: 1 },
-      { id: '2', label: 'Improve trash collection and neighborhood cleanliness by using real-time data to optimize collection routes and resource allocation in every borough.', candidateId: 3 },
-      { id: '3', label: 'Modernize 500 schools with renewable energy, turn 500 asphalt yards into green spaces, create 15,000 union jobs, build 50 resilience hubs to boost climate readiness and community safety, and guarantee 0.5% of NYC’s budget for libraries to end cuts and ensure thriving, well-staffed community hubs.', candidateId: 4 },
-      { id: '4', label: 'Improve livability by investing in sanitation, public spaces, arts, nightlife, transit, parks, and broadband while tackling cleanliness through faster 311 response, rat control, expanded street cleaning, and beautification.', candidateId: 5 },
+      {
+      id: '1',
+      label: 'Clean up and streamline city life.',
+      body: 'Reduce open-air drug use, remove excess scaffolding, improve composting, and reform outdoor dining rules.',
+      candidateId: 1,
+    },
+    {
+      id: '2',
+      label: 'Use data to improve cleanliness.',
+      body: 'Optimize trash collection and resource use across all boroughs for a cleaner, more efficient city.',
+      candidateId: 3,
+    },
+    {
+      id: '3',
+      label: 'Invest in green infrastructure and climate jobs.',
+      body: 'Modernize schools with renewable energy, add green spaces, and build climate-ready community hubs.',
+      candidateId: 4,
+    },
+    {
+      id: '4',
+      label: 'Enhance livability and public spaces.',
+      body: 'Improve sanitation, parks, arts, and transit while tackling cleanliness and street maintenance.',
+      candidateId: 5,
+    },
     ],
   },
 
@@ -93,9 +168,27 @@ export const fixedQuestions = [
     prompt: 'Some candidates also pledged to focus on Equity, Antisemitism, and Government Accountability. Which should New York prioritize?',
     kind: 'special',
     options: [
-      { id: '1', label: 'Ensure that those who threaten, harass, or destroy property in the name of antisemitism are held accountable. Adopt the International Holocaust Remembrance Association (IHRA) definition of antisemitism.', candidateId: 1, priorityId: 'antisemitism' },
-      { id: '2', label: 'Strengthen sanctuary city policies to defend immigrants, safeguard reproductive and worker rights, and ensure full protections for LGBTQIA+ New Yorkers by expanding gender-affirming care, creating an Office of LGBTQIA+ Affairs, and combating discrimination.', candidateId: 4, priorityId: 'equity' },
-      { id: '3', label: 'Overhaul city government by cutting waste, ending corruption, auditing agencies, and modernizing operations with tech-savvy, data-driven, transparent, and efficient services.', candidateId: 5, priorityId: 'efficiency' },
+      {
+      id: '1',
+      label: 'Combat antisemitism and hate.',
+      body: 'Hold offenders accountable and adopt clear definitions to strengthen citywide protections.',
+      candidateId: 1,
+      priorityId: 'antisemitism',
+    },
+    {
+      id: '2',
+      label: 'Advance equity and inclusion.',
+      body: 'Defend immigrant, reproductive, and LGBTQIA+ rights through stronger protections and expanded services.',
+      candidateId: 4,
+      priorityId: 'equity',
+    },
+    {
+      id: '3',
+      label: 'Reform city government.',
+      body: 'Cut waste, fight corruption, and make city services more transparent, data-driven, and efficient.',
+      candidateId: 5,
+      priorityId: 'efficiency',
+    },
     ],
   },
 

@@ -107,7 +107,7 @@ function HomePage() {
 					<section aria-label="Hero section">
 						{/* Hero Section */}
 						<HeroWrapper>
-							<p style={{ color: 'white' }}>Updated: Oct 11, 2025</p>
+							<p style={{ color: 'white' }}>Updated: Oct 20, 2025</p>
 							<SocialMedia
 								variant="hero"
 								showLabel={true}
