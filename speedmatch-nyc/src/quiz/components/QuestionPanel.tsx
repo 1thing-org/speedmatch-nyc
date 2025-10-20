@@ -27,7 +27,7 @@ export default function QuestionPanel({
   const nextLabel = primaryLabel ?? (isLast ? "Next: Pick Your Priorities" : "Next");
 
 
-   return (
+  return (
     <div className={m.qSection} id={`q-${idx + 1}`}>
       <div className={m.qMeta}>Question {idx + 1}/{total}</div>
 
@@ -53,7 +53,10 @@ export default function QuestionPanel({
                 className={`${m.option} ${selected ? m.optionSelected : ""}`}
               >
                 <span className={m.optIndex}>{displayIndex + 1}.</span>
-                <span className={m.optLabel}>{opt.label}</span>
+                <span className={m.optContent}>
+                  <span className={m.optLabel}>{opt.label}</span>
+                  <span className={m.optBody}>{opt.body}</span>
+                </span>
               </button>
             </li>
           );
@@ -61,7 +64,7 @@ export default function QuestionPanel({
       </ul>
 
       {noticeText ? <div className={m.notice}>{noticeText}</div> : null}
-      
+
       {/* No back button in first question*/}
       <div className={`${m.actions} ${isFirst ? m.actionsFirst : ''} ${isLast ? m.actionsLast : ''}`}>
         {!isFirst && (
