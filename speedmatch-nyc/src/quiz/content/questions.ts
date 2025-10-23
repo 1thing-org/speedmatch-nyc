@@ -5,7 +5,7 @@ export const fixedQuestions = [
     priorityId: 'affordability',
     prompt: 'How can NYC protect affordability in both housing and everyday living costs?',
     options: [
-      { id: '1', label: 'Build more housing for all income levels', body: 'Speed up construction, use public land, and boost overall supply to lower rents.', candidateId: 1 },
+      { id: '1', label: 'Build more housing for all income levels.', body: 'Speed up construction, use public land, and boost overall supply to lower rents.', candidateId: 1 },
       { id: '2', label: 'Unlock and repurpose existing spaces.', body: 'Turn vacant apartments and offices into affordable homes and streamline building approvals.', candidateId: 3 },
       { id: '3', label: 'Freeze rents and tax big corporations.', body: 'Protect tenants, fund affordable housing and grocery access by raising taxes on the wealthy.', candidateId: 4 },
       { id: '4', label: 'Empower communities and reform zoning.', body: 'Restore vacant units, ensure fairness in property taxes, and give neighborhoods more say in development.', candidateId: 5 },
